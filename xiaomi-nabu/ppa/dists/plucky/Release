@@ -1,3 +1,9 @@
+Origin: themojoman
+Label: xiaomi-nabu
+Suite: stable
+Codename: plucky
+Architectures: arm64
+Components: main
 Date: Wed, 28 May 2025 05:56:54 +0000
 MD5Sum:
  12430d0ecd6099d78b084eccee772b77               38 Release
