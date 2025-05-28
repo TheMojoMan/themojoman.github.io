@@ -1,17 +1,18 @@
-Date: Wed, 28 May 2025 14:33:32 +0000
+Codename: plucky
+Date: Wed, 28 May 2025 14:58:54 +0000
 MD5Sum:
  0ee6054a883a6e76e1e3528489da279e             1201 Packages
- a4270c13f024d466a3c3a0ded901ec58              608 Packages.gz
- 6a47a2b5736bed0d9b4e59868644156b               38 Release
+ 6631cc36b9832cbd55aa58bc0e5179ac              608 Packages.gz
+ abd543fb028da53eed73b6eff2b34594               55 Release
 SHA1:
  450e5fd4ea96864ad5883f400ac352917f85bc43             1201 Packages
- 1694dbdaa3c5ecff00d350a2660a6d60b6ca9929              608 Packages.gz
- 1d514133faa022d17e6da3a4c935616fdbd4afe2               38 Release
+ 90a98ce2d29e8c1a8eb4e23838de14ed82deb53c              608 Packages.gz
+ 33e6b7da722296a970dcab19ab041e8567442fda               55 Release
 SHA256:
  a56fa4f7e1d880484887954b881295dfedc0a51943aa57d81bddee5e3b68f7c8             1201 Packages
- 40f4a58064cf303bb04ae10186b2f35d69e68c02beae141de10d1c4674cc58ca              608 Packages.gz
- a25e3b459366a6ead564f9e2787ecab5cb05319412bb37b7dd17c04ab21723c4               38 Release
+ 582d01492f8f2f59da70e8f82b40aa364a296114ee1a4d392534a0d0117de942              608 Packages.gz
+ 79030ddb787db93e5ca50a59e6a35d1714c549bd5fe18ec12ae044f01ae94377               55 Release
 SHA512:
  9fe9269773ca59993957ba80dee2b5c23a1be4e9632813744d93e5c1b3b29459f5d2ea6efc48938ada6ce82d413168633838cf5bf69f2d802679d6a60da819ec             1201 Packages
- 4712dab9b78109b9a96fd9166c035a02c8a962744cf3d3cfd0441c48dfac55e898fe0ef0d928624a93843981514fd9415b566e309ca3c8c5abb6c7b0348d3c79              608 Packages.gz
- c596ee24000a17e2c38f8983dbb02ed708ce947763b87ad0d04c6dbbb0629b6220c3b964deff9a46bc8445e30827ef95ddfc5434a09cdf31742f5f2677ebd762               38 Release
+ 0e11af6872042769001971fbe5b27b5e138bfe902b33a36a75012238c8573fe0ab24b7ae2626663a5682bcb8842b6258a6995ceee56b9961a6e8ae1fdc1775b3              608 Packages.gz
+ 66a587ee6563865c079c96fd6b1638a794e6acf3f1befbb63eab0b1ef97685268ccb5f5ef395f06a7bb34d2dcf79293b295dd04002c4ec9cdeaa6cf85af31562               55 Release
