@@ -1,1 +1,0 @@
-deb [arch=arm64 signed-by=/etc/apt/trusted.gpg.d/themojoman.gpg] https://themojoman.github.io/xiaomi-nabu/ppa/ubuntu-plucky plucky main
