@@ -1,33 +1,35 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Origin: themojoman
-Label: xiaomi-nabu
-Suite: stable
-Codename: plucky
-Architectures: arm64
-Components: main
-Date: Wed, 28 May 2025 05:56:54 +0000
+Date: Wed, 28 May 2025 09:23:13 +0000
 MD5Sum:
- 12430d0ecd6099d78b084eccee772b77               38 Release
+ 1d306f01114528142ee51e00868ddfe8             1255 Packages
+ 4fefd4cbf85338d8af48d2670a8cc92e              620 Packages.gz
+ b24399ffeb64c89923bfb9da7fc8fecf               38 Release
  0ee6054a883a6e76e1e3528489da279e             1201 main/binary-arm64/Packages
  36654d3ff56642b80a97328ed98bfd8c              608 main/binary-arm64/Packages.gz
 SHA1:
- 1d831935e3d6756b2314f1511239d8083ae57194               38 Release
+ 63742f945e8393ff46000193d6aa4e07af849d24             1255 Packages
+ 1acd0a78fe6433279c343dc528e3cebff8965a49              620 Packages.gz
+ 15af1390fea0aa831e845bfaff9615cfcf184351               38 Release
  450e5fd4ea96864ad5883f400ac352917f85bc43             1201 main/binary-arm64/Packages
  ac7f474d247a09f32502d6cc913071e0419aee58              608 main/binary-arm64/Packages.gz
 SHA256:
- fd53b1fd544e0c604367dc52bc4ca75197a40b00f7d4f07e9aa6f6641e3e0dd1               38 Release
+ 0e01b4f7d5a6c35c5ac766384974e1806b133355a86c9050069037f289356e9b             1255 Packages
+ 8ee2d08a55ca85aa0ef019af994dca20fa385389505ff514bd7711d8bdb40b94              620 Packages.gz
+ c4262b457a750244f5e6b0f7160a1cf87953703e473016abb5a225a4cb823c7f               38 Release
  a56fa4f7e1d880484887954b881295dfedc0a51943aa57d81bddee5e3b68f7c8             1201 main/binary-arm64/Packages
  6a0fba24bd06ae0a16f6e2bdec4ede682ddcfb2e7861c49ac477a74ef08e26ea              608 main/binary-arm64/Packages.gz
 SHA512:
- e1250263dc66702f90e52b5bd7167b15b4f4eb263ec9bd290dc1513305d11cfc101690862e4029218c99bcc2447788479c0542a21b431086277279f0813c1988               38 Release
+ 0c0991387b9fe68dce5fb1f5b533b17feca7304ba621465d9dce1034118d8a704fbfcd2916311dd2a774ece3005af38218622041f2f4ebca943afda7e47c13d1             1255 Packages
+ 0c45faca324cf88b098deb198cde8f58397b8d1e9b5196a8efb678c93bd2856c6d438d7daea6351e02b68e2d9171ab57860c27b409c7b624253416ca960feaf2              620 Packages.gz
+ 041a8641796faf2dcf24b2a3a5c25050490cf9183aa415fc9d10b036bf786d0a7ea4c1d04b0881df4e2e229318abf0be775b20fd608a66d5fc451b360bd6de44               38 Release
  9fe9269773ca59993957ba80dee2b5c23a1be4e9632813744d93e5c1b3b29459f5d2ea6efc48938ada6ce82d413168633838cf5bf69f2d802679d6a60da819ec             1201 main/binary-arm64/Packages
  0956c83349c76a463562117dcb5ac8cb064189b97a8b107129058835474a7f3c3014eb7305bcefc3d30413fdabd8e78cc7abdc798a25b0e2a3eb669b91ec818b              608 main/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaDapDQAKCRD6BFS1l3c3
-bZgsAPwMLHGhWYX3AojnW1uNweZTKuU74dnU3tQbuELorLNu2QD/V+fglVjRifXF
-4HdaDWcmuE51KXreI2OXnBynMv//GQ8=
-=blro
+iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaDbWAxMcdGhlbW9qb21h
+bkBnbXgubmV0AAoJEPoEVLWXdzdtAwYBAPHzfFwzlYf6X03ycAg2yScky2coPioQ
+7qAkb8P7H2w2AP4542XnEee148pRQyyL8R9ADkBi7MoU8XK/hSvj/anzAA==
+=orz5
 -----END PGP SIGNATURE-----
