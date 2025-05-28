@@ -3,7 +3,7 @@ Version: 1.0
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: alsa-ucm-conf
-Filename: ./xiaomi-nabu-alsa.deb
+Filename: ./dists/plucky/main/binary-arm64/xiaomi-nabu-alsa.deb
 Size: 1446
 MD5sum: 6d5c7000722f96a1a812ae43653a4fab
 SHA1: bb15d60abdacb48115d10e2d44dcbedbe733a2ba
@@ -16,7 +16,7 @@ Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Conflicts: linux-firmware
 Replaces: linux-firmware
-Filename: ./xiaomi-nabu-firmware.deb
+Filename: ./dists/plucky/main/binary-arm64/xiaomi-nabu-firmware.deb
 Size: 17982252
 MD5sum: adf17c268f27598062568a7dc70955f7
 SHA1: 75bfd62a81b1f85d99e718bbd2dcc959ce38c23b
@@ -27,7 +27,7 @@ Package: xiaomi-nabu-linux
 Version: 6.14.0
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
-Filename: ./xiaomi-nabu-linux.deb
+Filename: ./dists/plucky/main/binary-arm64/xiaomi-nabu-linux.deb
 Size: 50366048
 MD5sum: acf9b9dc696b3354c259be5fb07d7782
 SHA1: c3349ebad4e0f998c6dcb80b5c179427b0da1138
