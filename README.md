@@ -1,1 +1,1 @@
-PPA for Ubuntu Plucky for the Xiaomi Pad 5 tablet (codename: nabu)
+Personal package archives (PPAs) for the Xiaomi Pad 5 tablet (codename: nabu)
