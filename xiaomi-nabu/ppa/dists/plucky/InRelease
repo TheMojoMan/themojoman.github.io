@@ -1,39 +1,42 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
+Codename: plucky
+Suite: stable
+Components: main
+Architectures: arm64
 Origin: themojoman
 Label: xiaomi-nabu
-Suite: stable
-Codename: plucky
-Date: Wed, 28 May 2025 09:34:17 +0000
+Description: Custom PPA for the Xiaomi Pad 5 tablet (codename: nabu)
+Date: Wed, 28 May 2025 09:39:20 +0000
 MD5Sum:
  1d306f01114528142ee51e00868ddfe8             1255 Packages
- 0936a3f689d3fa8b2979158be8a0f4b4              620 Packages.gz
- 0031d35cf15c16a56672404977dcdd29             2181 Release
+ 56149f71bc61e45d929f66c012e8ea1b              620 Packages.gz
+ bdca7974bc2abee607eea2a2c271f742             2181 Release
  0ee6054a883a6e76e1e3528489da279e             1201 main/binary-arm64/Packages
  36654d3ff56642b80a97328ed98bfd8c              608 main/binary-arm64/Packages.gz
 SHA1:
  63742f945e8393ff46000193d6aa4e07af849d24             1255 Packages
- e5291234e8b55e0696f8b0d29357ac728fd6c65d              620 Packages.gz
- 86d2eed3e56fe6ba2a92b07e40fb0b9652640f2e             2181 Release
+ 0bdbf90659433298c3be0de641005488b274bb6a              620 Packages.gz
+ ce2a0a666212be4ae3f26ec6a8bed8fe1e71cf43             2181 Release
  450e5fd4ea96864ad5883f400ac352917f85bc43             1201 main/binary-arm64/Packages
  ac7f474d247a09f32502d6cc913071e0419aee58              608 main/binary-arm64/Packages.gz
 SHA256:
  0e01b4f7d5a6c35c5ac766384974e1806b133355a86c9050069037f289356e9b             1255 Packages
- 573fe15b5dae206a2dfea97fc204823991ea8b3cf4beba6b6e6431ec83267c51              620 Packages.gz
- 8375932328dfd141851ff01a639871e769e407cca086c0692a6bfc3f93400a32             2181 Release
+ 277ae72fe6c3b3075bcb806bb261ce0aa7b9b9dfa29d935b235fc25e1aedc445              620 Packages.gz
+ 97c9a8939b11f8699defca9e70a988f620ee7049d585ea2e731d23a50b522db5             2181 Release
  a56fa4f7e1d880484887954b881295dfedc0a51943aa57d81bddee5e3b68f7c8             1201 main/binary-arm64/Packages
  6a0fba24bd06ae0a16f6e2bdec4ede682ddcfb2e7861c49ac477a74ef08e26ea              608 main/binary-arm64/Packages.gz
 SHA512:
  0c0991387b9fe68dce5fb1f5b533b17feca7304ba621465d9dce1034118d8a704fbfcd2916311dd2a774ece3005af38218622041f2f4ebca943afda7e47c13d1             1255 Packages
- 037266a576b4c01aa2ad2a16655d0d215643daf9689a170c82c6a433bf6ee02647eb0f857e81c8b90335750619a0285568e93520fdd7ad0b28963421f2944ca9              620 Packages.gz
- 835e18f5757b13b37d95201af6d4dc9ed6b2b9ace6b0d95f0d65cb6bc0e548f3006ae1f487262e67c4c7976d7d56f9872496c8695b464a770b17a594a2ac8166             2181 Release
+ 964ca22794a2e3767c564571ad5a9d9ddb100aac9af2f6e86435387188b4196660c6895a8268fab55904c8eb0731d0f052c67bd9737b9fbb3139f9d36aab13b1              620 Packages.gz
+ 8b64b415d1375f38961ccd9818129b1d3a8270db0a6fe6a0940bce933e67f8db0c9326b79dc4a0b46e564395882d4975e7b66b907737e4d2467c59f4b6211785             2181 Release
  9fe9269773ca59993957ba80dee2b5c23a1be4e9632813744d93e5c1b3b29459f5d2ea6efc48938ada6ce82d413168633838cf5bf69f2d802679d6a60da819ec             1201 main/binary-arm64/Packages
  0956c83349c76a463562117dcb5ac8cb064189b97a8b107129058835474a7f3c3014eb7305bcefc3d30413fdabd8e78cc7abdc798a25b0e2a3eb669b91ec818b              608 main/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaDbYmRMcdGhlbW9qb21h
-bkBnbXgubmV0AAoJEPoEVLWXdzdtSh8A/jH4RQ+r998/9l0UZnIgGcTZU5kLeBi3
-Gbkz2h2iiSrVAP0Y5/K3+W00W71cCxnZfgzQwpy3gbkaxchuretOr8f8CQ==
-=Uhng
+iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaDbZyBMcdGhlbW9qb21h
+bkBnbXgubmV0AAoJEPoEVLWXdzdtcdEBAKjVFj8N7BLJicJygM7aPfDjxmj4jykj
+k5gEv2Rwj1wvAP0cpwFtg1MnBKsh4U19C0dabrSVwmtlWegeB7LtUqWVBQ==
+=jwGQ
 -----END PGP SIGNATURE-----
