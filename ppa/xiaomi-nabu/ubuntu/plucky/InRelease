@@ -1,28 +1,11 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Codename: plucky
-Date: Mon, 02 Jun 2025 06:22:12 +0000
-MD5Sum:
- f6fb8a098a0c92b460ffd0bb66377e73             1201 Packages
- f892716de48246232af43eceaaffdb33              606 Packages.gz
- c189bfd0890f01176356a8d846ebb9c5               55 Release
-SHA1:
- 8afcf81aef70bac84acbda48cbeac82fb27f6ec7             1201 Packages
- 999b1c1d1b823cffc62cfc50fb7c24b397191ade              606 Packages.gz
- e626da710cb3ae86a6afd36f217debc1d1129747               55 Release
-SHA256:
- b00f81372456bb87212bbaf78e83e945f9dc46984bae4c6698c264398328d532             1201 Packages
- 7953acb19b01eeecf9b58d4b1bf296a35dc230ee8d3e9eb8ace8000652c16d43              606 Packages.gz
- 6d5ee5cbc19ba44e80e5de30c614da42cd2931afcc20662aeaf1a9a729fe7ae3               55 Release
-SHA512:
- 6b0cc808d30e18e05f7a32eabc9f0633207f8e01ad82fae66725ec11d54ff6975e6ebcb31f9c607c39420bf091c6d8c33335f654c7dc042d00260fa8008feaa7             1201 Packages
- 058af092254870a399daca9fb4883ea533f0a7a4794217a3b940a6bff50f987e49df66bd4aa55ff0d1436ef4e5af7254f6ee98960c5f6a04cc148a06756cadac              606 Packages.gz
- a8abe086ad194b65d36a9b8aab15861962a809274769a10e8e6bd4aec902559c142a264d7e750f06f5d1ade1e8df06fd32dda4717e639ee04172ec2c0793612d               55 Release
+
 -----BEGIN PGP SIGNATURE-----
 
-iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaD1DFRMcdGhlbW9qb21h
-bkBnbXgubmV0AAoJEPoEVLWXdzdtvwMA/iLjzgjSHLn0nTAUyXxHpHfwfCh6dgH+
-gbys3SLQY1OzAQC4qr2c/NaNW2cxlFrZ+fwhT1F/9R2aLwWErG0JFkj5Cw==
-=XeYH
+iIkEARYKADEWIQQLYnoNaTCTKkkPWCiScnT8wN7qYQUCaD2wKxMcdGhlbW9qb21h
+bkBnbXgubmV0AAoJEJJydPzA3uphjIgBAJ2DbBXSbWr9SLVt5rTna8qBl6TLoVCd
+ZGBQ02pn0dLqAQDNFUp5It0NfWwKbFRV4OHm+a7g4SM94PBDu2gHdQfqAw==
+=YZKs
 -----END PGP SIGNATURE-----
