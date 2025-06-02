@@ -2,27 +2,27 @@
 Hash: SHA512
 
 Codename: plucky
-Date: Wed, 28 May 2025 15:07:11 +0000
+Date: Mon, 02 Jun 2025 06:22:12 +0000
 MD5Sum:
- 0ee6054a883a6e76e1e3528489da279e             1201 Packages
- 00354dbf521b7a6e82f66e6a4518d985              608 Packages.gz
- 2d4604382424e921a7092c7ee0be9eb0               55 Release
+ f6fb8a098a0c92b460ffd0bb66377e73             1201 Packages
+ f892716de48246232af43eceaaffdb33              606 Packages.gz
+ c189bfd0890f01176356a8d846ebb9c5               55 Release
 SHA1:
- 450e5fd4ea96864ad5883f400ac352917f85bc43             1201 Packages
- 9ac7d2f6a16a9ab4a4796280c7d9175cc2e38a86              608 Packages.gz
- ec5759c8715eef51e0fadffb981472741451acc6               55 Release
+ 8afcf81aef70bac84acbda48cbeac82fb27f6ec7             1201 Packages
+ 999b1c1d1b823cffc62cfc50fb7c24b397191ade              606 Packages.gz
+ e626da710cb3ae86a6afd36f217debc1d1129747               55 Release
 SHA256:
- a56fa4f7e1d880484887954b881295dfedc0a51943aa57d81bddee5e3b68f7c8             1201 Packages
- 751429212f86a6436520ae61af19d251a84d1d2e516a30d9e35ab2799159302f              608 Packages.gz
- c01624f4656e08a452e4a8c68497a76b2c2d3093fb3fc30864e6053e17844bdc               55 Release
+ b00f81372456bb87212bbaf78e83e945f9dc46984bae4c6698c264398328d532             1201 Packages
+ 7953acb19b01eeecf9b58d4b1bf296a35dc230ee8d3e9eb8ace8000652c16d43              606 Packages.gz
+ 6d5ee5cbc19ba44e80e5de30c614da42cd2931afcc20662aeaf1a9a729fe7ae3               55 Release
 SHA512:
- 9fe9269773ca59993957ba80dee2b5c23a1be4e9632813744d93e5c1b3b29459f5d2ea6efc48938ada6ce82d413168633838cf5bf69f2d802679d6a60da819ec             1201 Packages
- 5e3e514c18084bff9f4350d1a539d684c026fec2f4fa8bd33efb341d6cf1c370f6ccb30c07f6c750170c0bfc10825d4789e9fecc5ab9ae113e4abd6616c12223              608 Packages.gz
- 96302afed6473e3f2c11853f303cf866ef6c2a3a48dff46f4c214eb4633097f62c8a1fad80fec47d7bbdcb177b13fe68d94baf54bf4b8b051ac60f7b11981cd5               55 Release
+ 6b0cc808d30e18e05f7a32eabc9f0633207f8e01ad82fae66725ec11d54ff6975e6ebcb31f9c607c39420bf091c6d8c33335f654c7dc042d00260fa8008feaa7             1201 Packages
+ 058af092254870a399daca9fb4883ea533f0a7a4794217a3b940a6bff50f987e49df66bd4aa55ff0d1436ef4e5af7254f6ee98960c5f6a04cc148a06756cadac              606 Packages.gz
+ a8abe086ad194b65d36a9b8aab15861962a809274769a10e8e6bd4aec902559c142a264d7e750f06f5d1ade1e8df06fd32dda4717e639ee04172ec2c0793612d               55 Release
 -----BEGIN PGP SIGNATURE-----
 
-iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaDcmoBMcdGhlbW9qb21h
-bkBnbXgubmV0AAoJEPoEVLWXdzdtG0MBAPlcrkE9VAOPWHrXfVfD4fhXprj2aR8E
-av82yBEWyqOBAQDbcfXh5IJzQYODxPELKkasphj3oFprIEkiCELRBi65BA==
-=KlX3
+iIkEARYKADEWIQQA7nNUyhTId6UNXEL6BFS1l3c3bQUCaD1DFRMcdGhlbW9qb21h
+bkBnbXgubmV0AAoJEPoEVLWXdzdtvwMA/iLjzgjSHLn0nTAUyXxHpHfwfCh6dgH+
+gbys3SLQY1OzAQC4qr2c/NaNW2cxlFrZ+fwhT1F/9R2aLwWErG0JFkj5Cw==
+=XeYH
 -----END PGP SIGNATURE-----

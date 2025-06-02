@@ -28,10 +28,10 @@ Version: 6.14.0
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Filename: ./xiaomi-nabu-linux.deb
-Size: 50366048
-MD5sum: acf9b9dc696b3354c259be5fb07d7782
-SHA1: c3349ebad4e0f998c6dcb80b5c179427b0da1138
-SHA256: 9d81da6da374d0ee035f5587d83d89cb4a6957011d41357ede31100cf61a358d
+Size: 50110498
+MD5sum: 0d42cb36bd05d7497de2734888de78a3
+SHA1: 049480f2a353b5b7668dde3d1ec62cd4b335316e
+SHA256: bb3402294f30e467e230b46550287491420226ea65d588a8c3ba2e3144e81fab
 Section: kernel
 Description: Kernel and modules for Xiaomi Pad 5 (nabu)
 
