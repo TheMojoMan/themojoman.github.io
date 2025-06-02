@@ -1,0 +1,27 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Date: Mon, 02 Jun 2025 14:40:18 +0000
+MD5Sum:
+ f6fb8a098a0c92b460ffd0bb66377e73             1201 Packages
+ 78df5675bef20624a06f1ada379a16a6              606 Packages.gz
+ 7291e423d2997352aafad7cc81eaf9bd               38 Release
+SHA1:
+ 8afcf81aef70bac84acbda48cbeac82fb27f6ec7             1201 Packages
+ ac1fd11ca75ed66c74edd22053ba8f43ecaeac8d              606 Packages.gz
+ ffaaee63305a4deefc578e55be499bed58a35f5f               38 Release
+SHA256:
+ b00f81372456bb87212bbaf78e83e945f9dc46984bae4c6698c264398328d532             1201 Packages
+ 57ea87d8abef084d78df42b2b27a993853083dbf2e38dcdbe639c8db5c4a817d              606 Packages.gz
+ 70431a40d6ca9428a420019784f372a5de2360fb1aa3dcd17c1b477f7eec7b84               38 Release
+SHA512:
+ 6b0cc808d30e18e05f7a32eabc9f0633207f8e01ad82fae66725ec11d54ff6975e6ebcb31f9c607c39420bf091c6d8c33335f654c7dc042d00260fa8008feaa7             1201 Packages
+ 1d9fe2c88065f50b293159263d564b5c83e5fde55cdabe1b9776125006be66603e1222c159b01788ecb0d62bd0104fb7b1444b7a31830f519cdcc12174f9750f              606 Packages.gz
+ 59c13536764352c70daf9bc2d79a35f26d6bad1caf95fd519ceef077baeab6ba018e5dc337bd149395ffb19ea01980d92f454cf9c5502fcc6157eb67b9a0ccd4               38 Release
+-----BEGIN PGP SIGNATURE-----
+
+iIkEARYKADEWIQQLYnoNaTCTKkkPWCiScnT8wN7qYQUCaD230xMcdGhlbW9qb21h
+bkBnbXgubmV0AAoJEJJydPzA3uph+AYBAOpPb3qoSXDConqZx6GaWUXBmIYKHLaa
+F2vODHz1+I1LAPsFRXKrOiKt+6TRIMij8wL8Jkkxwsq74vZwzJV+j2zyBg==
+=mDzw
+-----END PGP SIGNATURE-----
