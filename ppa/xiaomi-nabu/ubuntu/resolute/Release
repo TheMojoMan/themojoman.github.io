@@ -4,15 +4,14 @@ Suite: resolute
 Codename: resolute
 Version: 1.0
 Architectures: arm64
-Components: main
 Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
-Date: Tue, 07 Apr 2026 15:26:39 +0000
+Date: Tue, 07 Apr 2026 16:02:21 +0000
 MD5Sum:
  d41d8cd98f00b204e9800998ecf8427e 0 Packages
- 4fcdcc9e10aedab5fd2bf59b38dd70cc 29 Packages.gz
+ 8dc4df41bb238729f5c38305ed8237c7 29 Packages.gz
 SHA1:
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 Packages
- 076f5514ed68ed805602c05d58c22eb6712df785 29 Packages.gz
+ 2d4808ae64f440a791ac96fad645bd78172bffd9 29 Packages.gz
 SHA256:
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 Packages
- b45c635ee6b84abcb55f4f4d2b1b0a438c45169cc91f225a115b10bad22a5faf 29 Packages.gz
+ d177918dbd47b42c3494a58c4cec0da7b59e4f1d2cb2a7bf56492da40aad6d4f 29 Packages.gz
