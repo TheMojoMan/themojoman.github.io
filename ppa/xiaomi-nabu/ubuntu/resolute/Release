@@ -6,13 +6,13 @@ Version: 1.0
 Architectures: arm64
 Components: main
 Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
-Date: Tue, 07 Apr 2026 15:13:59 +0000
+Date: Tue, 07 Apr 2026 15:26:39 +0000
 MD5Sum:
  d41d8cd98f00b204e9800998ecf8427e 0 Packages
- 9f4851538fc120137e86a628851560c1 29 Packages.gz
+ 4fcdcc9e10aedab5fd2bf59b38dd70cc 29 Packages.gz
 SHA1:
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 Packages
- 4c6cab667863a2d36236d151db2a588e6f0ea82b 29 Packages.gz
+ 076f5514ed68ed805602c05d58c22eb6712df785 29 Packages.gz
 SHA256:
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 Packages
- 16437fb1925cf485dc677d6082f65b8372135c0554645d8153323c85123a2485 29 Packages.gz
+ b45c635ee6b84abcb55f4f4d2b1b0a438c45169cc91f225a115b10bad22a5faf 29 Packages.gz
