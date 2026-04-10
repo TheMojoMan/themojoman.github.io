@@ -36,27 +36,15 @@ Section: kernel
 Description: Kernel and modules for Xiaomi Pad 5 (nabu)
 
 Package: xiaomi-nabu-linux-6.17
-Version: 6.17.0-xiaomi-nabu-tmm+
-Architecture: arm64
-Maintainer: TheMojoMan <themojoman@gmx.net>
-Filename: ./xiaomi-nabu-linux-6.17.0.deb
-Size: 44089972
-MD5sum: fded94281215a7831bad1e4c73a956a5
-SHA1: 913dd1fc48f0ab28619213cf6e6acb475e9ab9b1
-SHA256: 753166f6c3d8fd72c118077ddcbf43a53370b3ed22e9bba12638e1adb033cf40
-Section: kernel
-Description: Kernel and modules for Xiaomi Pad 5 (nabu)
-
-Package: xiaomi-nabu-linux-6.17
 Version: 6.17.0-xiaomi-nabu-tmm-UFS-slowdown+
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, util-linux, coreutils, mount
 Filename: ./xiaomi-nabu-linux-6.17.0-UFS-slowdown.deb
-Size: 45101210
-MD5sum: d6c83bfb35f25fc3a95c55c58815f70e
-SHA1: b439020558d6ad46f4f88e5f73b8c3f034c653ab
-SHA256: 655dc38182ea9804017e760520be408e8cc02ffaea42ee3b9f6e92d9cda89aa0
+Size: 45103076
+MD5sum: fff87e2bcefbff62c3111aac6e465d01
+SHA1: 29abc6013a997e69de0a3a87968cab9e24ae64a8
+SHA256: 7246e689140b24bc355a5717c5647f87921d38acedf7bb2b9c716438b8817db4
 Section: kernel
 Description: Kernel and modules for Xiaomi Pad 5 (nabu)
 
