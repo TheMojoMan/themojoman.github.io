@@ -41,10 +41,10 @@ Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, util-linux, coreutils, mount
 Filename: ./xiaomi-nabu-linux-6.17.0-UFS-slowdown.deb
-Size: 45100888
-MD5sum: 7d6db4b61de80e5f20e1eb298596d388
-SHA1: da751186b3ec72dd9dc9b2ac2fe3c6259840c484
-SHA256: 743c95036a662832273c6a772c49f4d8c6ea67d0481b13e972f53ff2432b0b58
+Size: 45102144
+MD5sum: 40108f509dd78e6888f7c9fba9ed9680
+SHA1: c2fe5061f1ac9e978fb669cd0d40bd1602245605
+SHA256: 1aa23dcf57b886760c24e7ea6bd9e58395129f1b4c9c58bd1cf491ad1c280a93
 Section: kernel
 Description: Kernel and modules for Xiaomi Pad 5 (nabu)
 
