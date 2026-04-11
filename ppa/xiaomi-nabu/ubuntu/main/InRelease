@@ -1,0 +1,35 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: TheMojoMan Xiaomi-nabu PPA
+Label: TheMojoMan Xiaomi-nabu PPA
+Suite: main
+Codename: main
+Date: Sat, 11 Apr 2026 08:47:29 +0000
+Architectures: arm64
+Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
+MD5Sum:
+ 833edc1d71e40455f7a97b50c2f6a291 912 Packages
+ 09d2bba05a18759e5daa1013a0823cc1 505 Packages.gz
+SHA1:
+ 226602590301890f0cb90cd62978fbb207708a29 912 Packages
+ 5d2904adac2ea8ee9b989ac6b1ca01708200816b 505 Packages.gz
+SHA256:
+ 7439bcd7a307d47784b95f3c3475215ce15de0dede7caefa61ba9ea38e50c60e 912 Packages
+ c6751a6146fc31957e25dee60abca4fc5abb98d4372d25c2e43535d60913b264 505 Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmnaCqEACgkQZtHcLLi+
+FAoIaw/7BO2776OJlsiJcej8U5X97jXrN8WeoUpNG/5tR4R0Gh8CPnfxZwQh+HFM
+/46byFypTt22H/UcadTjoCZRrWIV+ZttHOaK6zE0NkkOScZ3Sh25ZjKxDd0ccT3+
+R6oxt6XWz6YAIEpEb5wLZY9XQn69Xc8FoAhv6uXRT6AQ/n9NSW8wAryqwm53phlX
+2yr5+7hf1m8lY5NjmUG7cVy/VaMVLymG/DudfAPf/bUciY5oYMTuW64dRqZvXyP7
+s0weeEWno+a0d20qbw6NuD0hWJ5TvTshKx/5N5pDMSd3AOY1lfm/2DcHnfXj0q9I
+lt9ZpZd31CEqgdmT7Fsr93v1DBIrLnqZZbdkwWOAerItiJl67brdUBdVmOEnNg5q
+pJXXNjOSFT0g/Bz2QhknPFfF4mJaeBhu9P/tl77/pDMCBWxuZTjz4hhKK+hxo0Rb
+94MV1XmlcPnNnOxZQ475wN3ozSatjWwfF+t9d1yo1r5aoCS647i5MLVxQS6tJzBc
+SRq8g9s7Zw8HSgXYE+ppPxQ7dzdN9w3EnXDFVoZDQSc4G4FlwXDF1TAN5ktUp+XN
+zURwNIPYcla/nPex/KvaumbH4irC14NDj1icb8KbFu0X+LIGlIxSH2rS/Hoavwd9
+7VbhciZgVjJmCE5gp7DbL5QCvDMR6wLKnE/oDzZq5VQbsfC3UYQ=
+=VAGd
+-----END PGP SIGNATURE-----
