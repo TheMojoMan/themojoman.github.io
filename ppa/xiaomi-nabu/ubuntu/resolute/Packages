@@ -1,0 +1,18 @@
+Package: neothesia
+Version: 0.4.0
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Filename: ./neothesia.deb
+Size: 11800980
+MD5sum: 1c4f9a80a05daf502504baef52a68c54
+SHA1: 3351e4c35bfacd39a736ab32b015b565f0563366
+SHA256: 6c059ada403f41454262e96006ebb907f17de10cb4799ff9abf3a3e21b080aad
+Section: sound
+Priority: optional
+Homepage: https://polymeilex.github.io/Neothesia/
+Description: A high-performance MIDI visualizer.
+ Neothesia is a cross-platform MIDI visualizer.
+ It helps people to quickly learn how to play piano.
+ It takes music notes from a MIDI file as an input and displays
+ them as colorful falling blocks on a virtual piano.
+
