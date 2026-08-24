@@ -1,0 +1,35 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
+Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
+Suite: main
+Codename: main
+Date: Mon, 24 Aug 2026 17:26:26 +0000
+Architectures: arm64
+Description: Unofficial PPA for OnePlus Pad 3 (erhai)
+MD5Sum:
+ fbab17100ede941b28e7c28f75e9e6ff 10166 Packages
+ b958ab246a6cbf0fed1e172c2b33c658 4643 Packages.gz
+SHA1:
+ c0877822a08316e454e9256d1d3b8f1fd13839d4 10166 Packages
+ 1908f1243447fec599cbd888b3255347a4a2d691 4643 Packages.gz
+SHA256:
+ e1b1c50366acb9ba80d54615936c60586756e83079b2c9bb9723bae46f171969 10166 Packages
+ f406237f1b9e765e6aed2f1013654850e5d334d4de0dc95a5c63bf648dc0f2ba 4643 Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEOEgGFR8ldiY67P7qNX8+AJVma6MFAmqMfsIACgkQNX8+AJVm
+a6M5ww//SW17FX6Xus+D/P3g56ftytUFP0W7tq3J+kaxeeXOkACn9nujbxU0t7k8
+h8/FCfam9CWfPN+5Ic0qlw2o2VeIyUIP6E0Ohk/FSkOw474Qi47roXKCx9H55sv4
+FEDxGGNle3/xL2nCqh0SD7DiX79log8Eh/ESz3p4T7iexKaF07UFYI55JwQbxxyy
+ql40GzMyFEj9+8Ye0Omfd+syex3c16aW8oiSZ1C6QdSX+cKeNgif+MKZ4nkw8KKx
+qI6ohGa88VK5j9tUomvXuUPmyklOXJFv5maCudfoujY+t2dZ6hfRiaKbX9WyxLh5
+Tl6conGcvecsWWCZQu5GU8z940CRYFyIJ4NXHPLD8wflUSQLCMbMh3K+1JfxRAC3
+h7U84kQWskGfV2j/kuTs/FksbAmsqVB+tPdMQR4SW7pyznJbuRKGWP9ungpzhNx2
+HpGiyBSGXPEqQx/Wri8RgB2nJleRARehUP59xMxgL/gZZoyvijSI04FyOCYvMQtS
+Fr2gsLiW5Vncr98BDVok/rD+HEti3B97UiOnQ91HQfAvrbR0Y9xq1S+K0RU7lFaU
+Cd7pZieuJTnDTSt0+rga1xfkSij7mqmwYNAc3iL7bdI58Wcllq7XlBF+p0n4vJnE
+VpQc51CiGQG7gzO0cNlTksHcEQPgLZbtoHBudeY6ikpw+KOD5to=
+=Jdr8
+-----END PGP SIGNATURE-----
