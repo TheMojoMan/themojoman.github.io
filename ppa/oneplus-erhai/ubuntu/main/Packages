@@ -121,20 +121,20 @@ SHA256: a40e05ef940e1746aff7b443107d91b000fd759eaf1b7ce2318f9eeb6323ca0a
 Description: Firmware blobs for OnePlus Pad 3 (erhai)
 
 Package: oneplus-erhai-linux-7.2
-Version: 7.2.0-rc4-sm8750-themojoman
+Version: 7.2.0-sm8750-themojoman
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
-Filename: ./oneplus-erhai-linux-7.2_7.2.0-rc4-sm8750-themojoman_arm64.deb
-Size: 26693874
-MD5sum: dfe91c9c40f604632cc0b58443a59bf1
-SHA1: 94b0e4d50309e8cb864ee789a1a773cd0b710c9c
-SHA256: 5706d96844293fd6daaad035b24b257a3eeec52ed8d7ec348689d29fd7a97ab6
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
+Size: 26680224
+MD5sum: a08abcf02c526b1eec008ef491e49ec6
+SHA1: 685f4178cdf8b81388eec59936124b16f15b5aa5
+SHA256: ef97e7012babedf77e1c3195b45613a6dc9ef7745ec9efdc375fb0444632d18f
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
- Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ Mainline Linux 7.2 with the erhai port on top: dual-DSI 4-DSC
  display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
  USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
  NT36536 touchscreen, the cameras and the iris3 video codec.
