@@ -89,10 +89,31 @@ Architecture: all
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: bluez
 Filename: ./oneplus-erhai-bluetooth_1.3_all.deb
-Size: 4214
-MD5sum: 36a783827d9b5ae6cf8146888dfd5852
-SHA1: 24c9c584e14e68407bfc10d7738b0bde39f16efe
-SHA256: 381f519a8ec46da684c47e4558dc2229ce85fda5f87b94fa04ceec56de481b49
+Size: 4004
+MD5sum: 5fef68646234b195fe83005de2763ce4
+SHA1: 19efac3865e7d4b8c118348a6952150752f07c59
+SHA256: 107479d5c4e3f3536cfdf41b09d8000e039075b265383af8b301f67ff0d9151c
+Section: net
+Priority: optional
+Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
+ The WCN7880 bluetooth node in the shipped DTB carries a fixed local-bd-address,
+ so every device would announce the same address (C0:FF:EE:13:1E:1A). This
+ package generates a random locally-administered BD address exactly once per
+ device (package postinst on a running system, or first boot for image-built
+ installs), persists it in /var/lib/erhai/bt-address and programs it into hci0
+ via btmgmt public-addr at every boot (erhai-bt-addr.service), replacing the
+ shared DTB address.
+
+Package: oneplus-erhai-bluetooth
+Version: 1.4
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_1.4_all.deb
+Size: 4004
+MD5sum: 90762d22d342e34c33394eafd71efd5a
+SHA1: 007f3df4c10f9aa53579d6b78d57d779b55b4b51
+SHA256: 998e3872020255ff2118fa0f9ecf03bf784e7b7c22cb24f2188b4a279b65c20d
 Section: net
 Priority: optional
 Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
@@ -111,10 +132,31 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: i2c-tools
 Recommends: gnome-shell
 Filename: ./oneplus-erhai-camera_1.0_all.deb
-Size: 6778
-MD5sum: 83557cef3f61779561030310f0a5179c
-SHA1: 67a01d11f8c3e049e6d2bbbe60ed0766c682e2a1
-SHA256: c81aba0e7c913cb0e46737b5377d74542e56b74946638d594e1ef3d1926e43c8
+Size: 6970
+MD5sum: 0c6ed697ebe10628c3234c934d85a918
+SHA1: 20a00cdf08f9548ad3f6d37a6b8f5261f50c82f8
+SHA256: d3f169975313ba505339c5e011ec9fd83d12695275ef246a6c660c0f1619ae78
+Section: utils
+Priority: optional
+Description: Camera bring-up for the OnePlus Pad 3 (erhai)
+ Arms the CCI CSR and both camera sensors at boot (erhai-cam-arm.service +
+ erhai-cam-arm.sh) and ships the manual VCM focus / exposure helpers for the
+ SC1320CS rear camera (i2c-10 slaves 0x0c / 0x36), used by the
+ erhai-cam-focus@erhai.local GNOME Shell extension (also included). VCM rails
+ are only powered while a preview is streaming; i2c access is granted to the
+ desktop user via the included udev uaccess rule.
+
+Package: oneplus-erhai-camera
+Version: 1.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: i2c-tools
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-camera_1.1_all.deb
+Size: 6972
+MD5sum: 3601173553c28a4bc89bf8b7c50df833
+SHA1: 45aee5b8e2dc7cddbc32947b76e0efd165641954
+SHA256: c4dcba7bd028cea2bd7c3066c560dad3fc0993130429781c45a98715c8e29e74
 Section: utils
 Priority: optional
 Description: Camera bring-up for the OnePlus Pad 3 (erhai)
