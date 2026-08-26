@@ -238,9 +238,9 @@ Depends: i2c-tools
 Recommends: gnome-shell
 Filename: ./oneplus-erhai-camera_1.5_all.deb
 Size: 8154
-MD5sum: cb284eaa78e63a73c8d7f944523e8b9a
-SHA1: 473faf0716a3148d2779f817ecdb05a87af21a3c
-SHA256: dc914fb0a72055aee8ebba5e669b9cf695de873065a249db1baa91cdb6afd953
+MD5sum: b4b79182c647a0d851e3a52189083231
+SHA1: ea346d787e177767f32b275cb74feab461a71111
+SHA256: 525c1aec0fe69e693e35916fbacce904a7a0f1974378f699b3119fcb37a3c6b0
 Section: utils
 Priority: optional
 Description: Camera bring-up for the OnePlus Pad 3 (erhai)
@@ -262,6 +262,30 @@ Size: 11720
 MD5sum: 858db3448f2e9b8f49a77e0160bcf4f4
 SHA1: e5497cf5b8f9f1f74b1c9621da07abfefe8e5e3c
 SHA256: a0f771900d2663ff48e8843d1155e23e2c86697806c65245dfda3fceed772238
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: GPU pinning of
+ the Adreno 830 GMU before session start (erhai-gpu-pin), boot-time GL
+ environment selection (erhai-desktop-gl), power-key backlight toggle
+ (erhai-power-toggle + erhai-power-watch.py + logind powerkey conf),
+ ktz8868 backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
+Package: oneplus-erhai-desktop
+Version: 1.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli
+Filename: ./oneplus-erhai-desktop_1.1_all.deb
+Size: 11738
+MD5sum: 947d315d296b02a1cfc4539adb442732
+SHA1: 18d27b683b8d62aa3271726eefde7f16b167f1a2
+SHA256: 62ce8e5cce2d08b36d0be0c48cb0e4003e18fb672077c491a5ccbe5d11ccb35b
 Section: utils
 Priority: optional
 Description: Desktop glue for the OnePlus Pad 3 (erhai)
