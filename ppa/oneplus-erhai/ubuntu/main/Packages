@@ -238,9 +238,9 @@ Depends: i2c-tools
 Recommends: gnome-shell
 Filename: ./oneplus-erhai-camera_1.5_all.deb
 Size: 8154
-MD5sum: 6a17696d3a9911b75bdde0fa5ce04135
-SHA1: 27ea3b63c53979e5b6915adfe3e64f223f96fe93
-SHA256: c1e1ec50907898c3abf7f9853f78865a2c22ab6c2768d5c133cadffb1057fadb
+MD5sum: cb284eaa78e63a73c8d7f944523e8b9a
+SHA1: 473faf0716a3148d2779f817ecdb05a87af21a3c
+SHA256: dc914fb0a72055aee8ebba5e669b9cf695de873065a249db1baa91cdb6afd953
 Section: utils
 Priority: optional
 Description: Camera bring-up for the OnePlus Pad 3 (erhai)
