@@ -283,9 +283,9 @@ Depends: python3
 Recommends: gnome-shell, dconf-cli
 Filename: ./oneplus-erhai-desktop_1.1_all.deb
 Size: 11738
-MD5sum: 947d315d296b02a1cfc4539adb442732
-SHA1: 18d27b683b8d62aa3271726eefde7f16b167f1a2
-SHA256: 62ce8e5cce2d08b36d0be0c48cb0e4003e18fb672077c491a5ccbe5d11ccb35b
+MD5sum: 7826ba928f28d1acc7bbb91e196e2d8c
+SHA1: abbe27d134ef305798ccf06f4f75ce65f124beb7
+SHA256: e9031ff817735cb99045567cf96d7a3bfd85d8f2c7a255d5950606d68894f76a
 Section: utils
 Priority: optional
 Description: Desktop glue for the OnePlus Pad 3 (erhai)
@@ -366,9 +366,9 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Recommends: gnome-shell, polkitd
 Filename: ./oneplus-erhai-thermal_1.0_all.deb
 Size: 7150
-MD5sum: 145e7f7d4b0f6254a95b42e9f18b146b
-SHA1: 110ff5929f5dfa071e8a1a2cbad2270ff1b8050f
-SHA256: ad238bf3f00d3986025cea089e4372803eed91ddb0943cf40520fba64ddcfd35
+MD5sum: 073140ebb7f3c1561a6db6f6817314f3
+SHA1: 7e646326ee58e55b8292391e22d81b98e395287a
+SHA256: 4751da91934160fb400ed6ca622aa044bc633bbb46b9fc0aef520a12bfe6ba19
 Section: utils
 Priority: optional
 Description: Switchable CPU+GPU thermal profiles for the OnePlus Pad 3 (erhai)
