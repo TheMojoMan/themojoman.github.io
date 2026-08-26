@@ -209,6 +209,27 @@ Description: Camera bring-up for the OnePlus Pad 3 (erhai)
  are only powered while a preview is streaming; i2c access is granted to the
  desktop user via the included udev uaccess rule.
 
+Package: oneplus-erhai-camera
+Version: 1.4
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: i2c-tools
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-camera_1.4_all.deb
+Size: 8006
+MD5sum: 2bbca6b34f451c56450ed547b2034845
+SHA1: 5d7502571f45daf3e4a85a2ca49295dad8936448
+SHA256: 62dd4e349be9770cd8aeb290a6bf3af858606955b6079bff250bda7ab550c2d8
+Section: utils
+Priority: optional
+Description: Camera bring-up for the OnePlus Pad 3 (erhai)
+ Arms the CCI CSR and both camera sensors at boot (erhai-cam-arm.service +
+ erhai-cam-arm.sh) and ships the manual VCM focus / exposure helpers for the
+ SC1320CS rear camera (i2c-10 slaves 0x0c / 0x36), used by the
+ erhai-cam-focus@erhai.local GNOME Shell extension (also included). VCM rails
+ are only powered while a preview is streaming; i2c access is granted to the
+ desktop user via the included udev uaccess rule.
+
 Package: oneplus-erhai-desktop
 Version: 1.0
 Architecture: all
