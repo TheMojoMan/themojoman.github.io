@@ -410,32 +410,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
 Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
-Size: 26765116
-MD5sum: bf61d47acb784addd494ad5b5fb200cd
-SHA1: 0d604d2951f5abe163ae998e7d2a9f76ed22198f
-SHA256: 45a31753336f09f303deaf5ad51d352d70f499a2cb1fd59b9a95fb15f9895667
-Section: kernel
-Priority: optional
-Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
- Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
- display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
- USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
- NT36536 touchscreen, the cameras and the iris3 video codec.
- .
- The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
- and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
-
-Package: oneplus-erhai-linux-7.2
-Version: 7.2.0-sm8750-themojoman-dirty
-Architecture: arm64
-Maintainer: TheMojoMan <themojoman@gmx.net>
-Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
-Recommends: oneplus-erhai-firmware
-Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman-dirty_arm64.deb
-Size: 26770952
-MD5sum: c0914308cb2c0a1c992b46be49e565ed
-SHA1: 9a4feb647e03c6bea71283864d3bdffba66dcf1f
-SHA256: 6f69c63e00eb0b5e25873e41cc5e4f6c74bd72bbbc2d33dbd915bd2c548c9fa0
+Size: 26765794
+MD5sum: f80c2c2e7128f3e7b7bfdaa2f48c6284
+SHA1: 9cb601f87df8c410054cd99798eeca9d5c5279e2
+SHA256: c1ac33fff189ff4e90079e3ac174f84510054e92ebf20c9ef58662fbad3f8e71
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
