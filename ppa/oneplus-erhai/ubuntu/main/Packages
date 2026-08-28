@@ -410,10 +410,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
 Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
-Size: 26691800
-MD5sum: cdb11d2796155e17dce481975e9946c1
-SHA1: 153819d853385988b107cdc144a3fac3c15e5431
-SHA256: 7748f17066b42b77bb7f6f51ad3951d3966debdc43ab356b0c268e954b7296d3
+Size: 26690082
+MD5sum: fb4bbe7aef54a5b8c328c8dc084f1951
+SHA1: 473d36489b153904809e204e5ca62c5dc5a980cb
+SHA256: 63f5f6caebe221a99173355dfc7097ccb3c8befd68d7837b1cc403990cc65d1a
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
