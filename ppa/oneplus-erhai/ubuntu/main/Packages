@@ -410,10 +410,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
 Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
-Size: 26772174
-MD5sum: 51e49d6699e7927cc4be153a74e2ee7d
-SHA1: 40b348bfd438216e1c2c01370f5cb9a2aa67bd03
-SHA256: 0b1c2e7f4a420201e3acc69c161e1236e9dd6db2b47f61ffb7af2788a119aada
+Size: 26765822
+MD5sum: 5c862ee3d1dbffaae9245598fbf6caf7
+SHA1: 064d3f1ca9c45caad403bdfed38e379430d2f7db
+SHA256: 7f63386fdcef94ed0366041c54fb3280f7134846bd43bc0dada5ffe94b9a221a
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
@@ -451,14 +451,14 @@ Description: Mesa 26.3.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
  Nothing is activated by installing this package.
 
 Package: oneplus-erhai-otg
-Version: 1.0
+Version: 1.1
 Architecture: all
 Maintainer: TheMojoMan <themojoman@gmx.net>
-Filename: ./oneplus-erhai-otg_1.0_all.deb
-Size: 2264
-MD5sum: c2f91d792ed0d017c6d763c9b2f2f89a
-SHA1: e465bc17c237672ca11a8c301c047120cef25381
-SHA256: 8aaa2960246ea99bfe20b715f42e015fd2f72c52bffa67760b29e3f3c66c4ef0
+Filename: ./oneplus-erhai-otg_1.1_all.deb
+Size: 2516
+MD5sum: 20342ca76004743c4fbd8fc6bb03e789
+SHA1: 17b0bf890b9a8c0cde91124c4f25f3bce0b1ebd4
+SHA256: 589b01317e07d70fccfaca610f6198f9c949b06249abe9332ec0710297c6d933
 Section: utils
 Priority: optional
 Description: ADSP OTG session re-arm for the OnePlus Pad 3 (erhai)
