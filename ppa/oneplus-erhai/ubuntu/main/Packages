@@ -403,6 +403,28 @@ SHA1: 21fd8ef81b9ec4abe87998868df13b3a19ebf33c
 SHA256: a40e05ef940e1746aff7b443107d91b000fd759eaf1b7ce2318f9eeb6323ca0a
 Description: Firmware blobs for OnePlus Pad 3 (erhai)
 
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
+Size: 26766370
+MD5sum: d8a403ed2d0fa7b3643b9ff8e22110c4
+SHA1: 96a80836ddbd520d28bcef4ece6e9e8bda367387
+SHA256: a03e98d50d261f68ca48b5a33cc458eeb8a178e7fbe1a8a83d626cf73002adfe
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
 Package: oneplus-erhai-mesa
 Version: 26.3.0~devel.git681ce7c2b8e-1erhai1
 Architecture: arm64
