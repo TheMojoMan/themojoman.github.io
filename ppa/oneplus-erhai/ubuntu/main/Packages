@@ -450,6 +450,28 @@ Description: Mesa 26.3.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
  .
  Nothing is activated by installing this package.
 
+Package: oneplus-erhai-otg
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Filename: ./oneplus-erhai-otg_1.0_all.deb
+Size: 2264
+MD5sum: c2f91d792ed0d017c6d763c9b2f2f89a
+SHA1: e465bc17c237672ca11a8c301c047120cef25381
+SHA256: 8aaa2960246ea99bfe20b715f42e015fd2f72c52bffa67760b29e3f3c66c4ef0
+Section: utils
+Priority: optional
+Description: ADSP OTG session re-arm for the OnePlus Pad 3 (erhai)
+ On every USB-C detach the kernel driver erhai_otg_glink disarms the ADSP
+ OTG session to keep the dwc3 island alive; on this ADSP firmware a
+ disarmed session after a DP-altmode-capable partner leaves the Type-C CC
+ attach detection dead (replugs are invisible until reboot). This package
+ ships /usr/local/sbin/erhai-otg-rearm.sh, which re-arms the session over
+ pmic_glink via the erhai_otg debugfs cmd knob (USB_OTG_AP_ENABLE=17,
+ USB_OTG_SWITCH=18), a oneshot systemd unit, and a udev rule triggering it
+ on Type-C port change / partner removal so every detach self-heals.
+ Requires the erhai kernel (erhai_otg_glink + debugfs).
+
 Package: oneplus-erhai-thermal
 Version: 1.0
 Architecture: all
