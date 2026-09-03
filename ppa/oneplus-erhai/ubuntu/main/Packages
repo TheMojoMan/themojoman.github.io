@@ -93,9 +93,9 @@ Depends: python3
 Recommends: gnome-shell, dconf-cli
 Filename: ./oneplus-erhai-desktop_1.0_all.deb
 Size: 11738
-MD5sum: a24d075978cb57361df0703c628a9a44
-SHA1: 5b94ae1077fa568c57b2caaddbbb24c7c57d17a7
-SHA256: 48930fcc63deb482a13cbcbf32245e27d4e12cfc0f49e50e687520b46146f340
+MD5sum: 5b1258dd381277423a8f828181fad4bb
+SHA1: b65ffcde0c768ffff34af25d39d8ce67e9685e32
+SHA256: 191e8af983d7ea430991a14c3ee6f88da118fc3d9e1241eadad9c14a1de6a9a4
 Section: utils
 Priority: optional
 Description: Desktop glue for the OnePlus Pad 3 (erhai)
@@ -157,15 +157,15 @@ Depends: libc6, libdrm2, libexpat1, libgcc-s1, libstdc++6,
 Recommends: libvulkan1
 Suggests: vulkan-tools, mesa-utils
 Filename: ./oneplus-erhai-mesa_26.3.0~devel.git063a4640270-1erhai1_arm64.deb
-Size: 11353268
-MD5sum: 0f1ae8052904cc245412c4544eb7dd29
-SHA1: ab1b208d33cef5627f2b47366032572cfe1c3abb
-SHA256: 2cd369ed3a3ff87ccfccb54a5cf860bb5d0a3cde8bcfb2989f53c1490b1e28d2
+Size: 11352430
+MD5sum: c55128cea1afb9a77ac7874e118a6474
+SHA1: 7ac82db4093e062019e4ea6aaec108c960f1165c
+SHA256: 7cc3d655929322b450aaa0987618f96df9eba14b672c33a9e2f560139c739f12
 Section: libs
 Priority: optional
 Description: Mesa 26.3.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
  Out-of-tree Mesa build for the Adreno 830 (gen8_0_1) in the OnePlus Pad 3,
- installed under /opt/turnip26 so it never shadows the system Mesa.
+ installed under /opt/mesa so it never shadows the system Mesa.
  .
  Ubuntu's Mesa is too old for gen8: its freedreno gallium driver refuses the
  chip ("failed to create dri2 screen") and its turnip does not recognise the
