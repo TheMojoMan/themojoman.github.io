@@ -1,0 +1,199 @@
+Package: oneplus-erhai-audio
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: alsa-ucm-conf
+Filename: ./oneplus-erhai-audio_1.0_all.deb
+Size: 8726
+MD5sum: eb887f8ac3e5f1caefaafbdd0b71b87f
+SHA1: 91628b3a9c917351644b475ad776608db15553ce
+SHA256: 551c148f7fa93dea5e537ed2dbd1e6fb96e4153dcb141a5798409691eff6d5af
+Section: sound
+Priority: optional
+Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
+ ALSA Use Case Manager profile for the q6apm/AudioReach sound card of the
+ OnePlus Pad 3 (card "OnePlus-Pad3-erhai-24976", driver sm8750).
+ .
+ The HiFi verb wires the MultiMedia front-ends to their back-ends
+ (MM1 -> SECONDARY_MI2S_RX speaker TDM, MM2 -> DisplayPort, MM3 -> headset
+ mic via TX_CODEC_DMA_TX_3, MM4 -> internal DMICs via VA_CODEC_DMA_TX_0) and
+ un-mutes the six AW88261 speaker amps.
+ .
+ Installing this package is all audio needs on the erhai image: PipeWire /
+ WirePlumber's ACP layer resolves the profile through
+ /usr/share/alsa/ucm2/conf.d/sm8750/ and applies the HiFi verb (and its
+ EnableSequence mixer writes) automatically when the desktop session starts.
+ .
+ A USB-C monitor that carries audio gets a selectable "DisplayPort" output
+ via the jack-gated UCM device; erhai-dp-audio-sync.service (triggered by a
+ udev rule on DRM connector changes) bounces WirePlumber when a monitor is
+ attached after boot, so the DP output appears without a manual restart.
+ .
+ The LPASS audio devices (lpass-lpi-pinctrl@7760000, rx/tx/va macros, both
+ SoundWire masters) can end up never probed when their kernel modules load
+ after the platform devices are created (late udev coldplug), which leaves
+ the snd-sc8280xp machine driver without its codec components and no sound
+ card at all. This package therefore also ships
+ erhai-audio-bringup.service (oneshot at boot): it binds the LPI pinctrl,
+ re-runs the ASoC module probe chain if needed, waits for card0 and applies
+ the HiFi verb.
+ .
+ WirePlumber's ACP opens the UCM with the ALSA card ID ("OnePlusPad3") rather
+ than "hw:0"; ALSA's UCM resolver does not match the card ID against the
+ card's driver/name/longname fields, so the conf.d/ lookup misses and no ctl
+ is opened (leaving ${CardId} undefined and the verb's mixer writes without a
+ cdev). This package therefore also ships a legacy-path fallback
+ (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
+ hardcodes card 0 and opens its own control device via "cdev hw:0".
+
+Package: oneplus-erhai-bluetooth
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_1.0_all.deb
+Size: 1204
+MD5sum: 9a661aa097abc289a299503db5ca9580
+SHA1: 7d7dc710421ae1ab8ae6a395bae6d6c6a1ecc515
+SHA256: d24d23b99d847daffd0ac190d1873e1f9fc7d8cdd921e1da9dabf79af6a769c7
+Section: net
+Priority: optional
+Description: Bluetooth support package for the OnePlus Pad 3 (erhai)
+ Since 2.2 this package no longer ships per-device address machinery. The
+ shared DTB address (C0:FF:EE:13:1E:1A) is used for all devices; BT comes up
+ instantly via stock bluetooth.service. The former erhai-bt-addr /
+ erhai-bt-up services and scripts are retired by the postinst.
+
+Package: oneplus-erhai-camera
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: i2c-tools
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-camera_1.0_all.deb
+Size: 8156
+MD5sum: 4bad6a677feb4879ec4aa1e530961515
+SHA1: d817121da7a519a5dbe423ff5d0dae9e8144c804
+SHA256: d2c5e3317afb75fbcc92e7bebb2e9ca3425017602870305ccaa1cfffa830561a
+Section: utils
+Priority: optional
+Description: Camera bring-up for the OnePlus Pad 3 (erhai)
+ Arms the CCI CSR and both camera sensors at boot (erhai-cam-arm.service +
+ erhai-cam-arm.sh) and ships the manual VCM focus / exposure helpers for the
+ SC1320CS rear camera (i2c-10 slaves 0x0c / 0x36), used by the
+ erhai-cam-focus@erhai.local GNOME Shell extension (also included). VCM rails
+ are only powered while a preview is streaming; i2c access is granted to the
+ desktop user via the included udev uaccess rule.
+
+Package: oneplus-erhai-desktop
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli
+Filename: ./oneplus-erhai-desktop_1.0_all.deb
+Size: 11738
+MD5sum: a24d075978cb57361df0703c628a9a44
+SHA1: 5b94ae1077fa568c57b2caaddbbb24c7c57d17a7
+SHA256: 48930fcc63deb482a13cbcbf32245e27d4e12cfc0f49e50e687520b46146f340
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: GPU pinning of
+ the Adreno 830 GMU before session start (erhai-gpu-pin), boot-time GL
+ environment selection (erhai-desktop-gl), power-key backlight toggle
+ (erhai-power-toggle + erhai-power-watch.py + logind powerkey conf),
+ ktz8868 backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
+Package: oneplus-erhai-firmware
+Version: 1.0
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Filename: ./oneplus-erhai-firmware_1.0_all.deb
+Size: 32767826
+MD5sum: 397740cf53f4f45f64e527a5962e58df
+SHA1: 43f0b3dae82011ebba0c82f540740fae0fa98ddb
+SHA256: 10eb25b3487d23aa825d8bb52894ab074d00eee311a8fd923c077328d82e9c87
+Description: Firmware blobs for OnePlus Pad 3 (erhai)
+
+Package: oneplus-erhai-otg
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Filename: ./oneplus-erhai-otg_1.0_all.deb
+Size: 2356
+MD5sum: 951bf67cbf4a13c800a59a25141cb05c
+SHA1: 810189015dadc8c11604faaa8e6651b44277aca2
+SHA256: c0e2fec65c0bc96accc51ee1902830a459857f0fd3805e88f3be9f8e13d2b0f3
+Section: utils
+Priority: optional
+Description: ADSP OTG session re-arm for the OnePlus Pad 3 (erhai)
+ On every USB-C detach the kernel driver erhai_otg_glink disarms the ADSP
+ OTG session to keep the dwc3 island alive; on this ADSP firmware a
+ disarmed session after a DP-altmode-capable partner leaves the Type-C CC
+ attach detection dead (replugs are invisible until reboot). This package
+ ships /usr/local/sbin/erhai-otg-rearm.sh, which re-arms the session over
+ pmic_glink via the erhai_otg debugfs cmd knob (USB_OTG_AP_ENABLE=17,
+ USB_OTG_SWITCH=18), a oneshot systemd unit, and a udev rule triggering it
+ on Type-C port change / partner removal so every detach self-heals.
+ Requires the erhai kernel (erhai_otg_glink + debugfs).
+
+Package: oneplus-erhai-thermal
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Recommends: gnome-shell, polkitd
+Filename: ./oneplus-erhai-thermal_1.0_all.deb
+Size: 7150
+MD5sum: 067562f162f36ac9872b64b302bfc7ba
+SHA1: 053fd9f3fe936c63050be9cf809137b42057200f
+SHA256: 1d22443afc53e828fa63c85bb8fbd92cc94d86371ac6154a19e24698cd36143d
+Section: utils
+Priority: optional
+Description: Switchable CPU+GPU thermal profiles for the OnePlus Pad 3 (erhai)
+ erhai-thermal.sh applies die-temperature ceilings to both the CPU and GPU
+ thermal planes (profile selected via /etc/default/erhai-thermal), with a
+ template unit (erhai-thermal@.service) for per-profile instances and a polkit
+ ruleset so the desktop user can switch profiles without a password. The
+ erhai-thermal@erhai.local GNOME Shell extension exposes profile switching in
+ the quick settings.
+
+Package: oneplus-erhai-wifi
+Version: 1.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: network-manager, iw, iproute2
+Recommends: kmod
+Filename: ./oneplus-erhai-wifi_1.0_all.deb
+Size: 299614
+MD5sum: 01de3904c08d163aa347b494a05bb7f2
+SHA1: 99389a902689d03007c30690181850db38481b2c
+SHA256: bf8a2929f0393650bf874b8eacbceacff9e698846f9d8a273499f66cafbabb5d
+Section: net
+Priority: optional
+Description: WCN7880 WiFi bring-up for the OnePlus Pad 3 (erhai)
+ Everything the internal WCN7880 (WCN7850-family) WiFi needs on the erhai
+ image: modprobe.d policy (blacklist ath12k, no cnss2 auto-load), the
+ erhai-wcn-holdfloor / erhai-wcn-devcd / erhai-wcn-wifi systemd units and
+ their scripts (erhai-wcn-wifi.sh, save-wcn-devcd.sh, wl_drvcmd), and the
+ qcacld config INI (scan_mode_6ghz=0 so 5GHz networks show at cold boot).
+ .
+ erhai-wcn-wifi.service (oneshot at boot, after NetworkManager) brings the
+ station up: wait for the PCIe endpoint, modprobe cnss2 until fs_ready
+ appears, trigger the cold-boot calibration, settle, modprobe wlan
+ (qcacld-3.0 mission driver from the kernel deb's extra/), detect the
+ managed-type netdev, set the country via wl_drvcmd and hand the interface
+ to NetworkManager for last-used autoconnect.
+ .
+ erhai-wifi-discover.service runs erhai-wifi-discover.sh: while the internal
+ station is disconnected it fires small-channel-list active scans every 30s
+ because the qcacld firmware never probes UNII-1 (ch36-48) in disconnected
+ full-band scans — without this, 5GHz APs on UNII-1 are found only by
+ passive beacon luck or after connecting on 2.4GHz first.
+
