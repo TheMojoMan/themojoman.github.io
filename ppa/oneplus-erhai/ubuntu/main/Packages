@@ -4,10 +4,10 @@ Architecture: all
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: alsa-ucm-conf
 Filename: ./oneplus-erhai-audio_1.0_all.deb
-Size: 10122
-MD5sum: d6035c156ba659ee74130628f0c910ac
-SHA1: 1310eac2589503dca9b07942081628e7a434ac8b
-SHA256: b31da1f26d816000f4f9cf0773314bc87b89b4c18539458dd2fcca07382a3ea1
+Size: 10452
+MD5sum: b2ee0f1dec919d5c7969c0a78ee4a763
+SHA1: 6e865f2f3bb7e90c0ae40994c2b03af09af20e7e
+SHA256: d4d490213b9efb54fceba190f7c7c7b1a803034994d5661c14570accfb2cd8b2
 Section: sound
 Priority: optional
 Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
