@@ -144,6 +144,43 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
+Package: oneplus-erhai-mesa
+Version: 26.3.0~devel.git063a4640270-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 56488
+Depends: libc6, libdrm2, libexpat1, libgcc-s1, libstdc++6,
+ libwayland-client0, libx11-6, libx11-xcb1, libxext6, libxxf86vm1,
+ libxcb1, libxcb-dri3-0, libxcb-glx0, libxcb-keysyms1, libxcb-present0,
+ libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0,
+ libxshmfence1, zlib1g, libzstd1
+Recommends: libvulkan1
+Suggests: vulkan-tools, mesa-utils
+Filename: ./oneplus-erhai-mesa_26.3.0~devel.git063a4640270-1erhai1_arm64.deb
+Size: 11353272
+MD5sum: 38391dda1c11f7f652dd81eec214e6f2
+SHA1: 7c0912bea962eca8b9fa03f7c13e580f78740475
+SHA256: 69e9c95c5d722c6056594814a89caf7e9e520d84d6b03200238a2f553c59e8e8
+Section: libs
+Priority: optional
+Description: Mesa 26.2.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
+ Out-of-tree Mesa build for the Adreno 830 (gen8_0_1) in the OnePlus Pad 3,
+ installed under /opt/turnip26 so it never shadows the system Mesa.
+ .
+ Ubuntu's Mesa is too old for gen8: its freedreno gallium driver refuses the
+ chip ("failed to create dri2 screen") and its turnip does not recognise the
+ chip id, so GL falls back to llvmpipe and every hardware-accelerated Vulkan
+ client fails. This build supports the part both ways -- native freedreno
+ gallium (GL_RENDERER=FD830) and Vulkan 1.4 turnip, with zink on top of it as
+ the alternative GL path.
+ .
+ Nothing is activated by installing this package. The desktop session opts in
+ through environment variables (VK_DRIVER_FILES, LD_LIBRARY_PATH,
+ __EGL_VENDOR_LIBRARY_FILENAMES); a ready-made drop-in is shipped at
+ /usr/share/oneplus-erhai-mesa/10-desktop.conf.gpu, which is what
+ erhai-desktop-gl.service installs into the user's environment.d when the
+ kernel has the GPU enabled.
+
 Package: oneplus-erhai-otg
 Version: 1.0
 Architecture: all
