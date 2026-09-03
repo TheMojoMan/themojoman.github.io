@@ -1,3 +1,77 @@
+Package: bluez
+Version: 5.85-4ubuntu0.1erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 5642
+Depends: default-dbus-system-bus | dbus-system-bus, kmod, udev, systemd | systemd-standalone-sysusers | systemd-sysusers, libasound2t64 (>= 1.0.17), libc6 (>= 2.42), libdbus-1-3 (>= 1.10), libdw1t64 (>= 0.127), libglib2.0-0t64 (>= 2.76.0), libreadline8t64 (>= 7.0~rc1), libudev1 (>= 196)
+Suggests: pulseaudio-module-bluetooth
+Filename: ./bluez_5.85-4ubuntu0.1erhai1_arm64.deb
+Size: 1492104
+MD5sum: 3da105ec13e7e7e0de8e2c5b6bd5e139
+SHA1: 8f770903f0c51a5c9c12284b751ae9515e0af56b
+SHA256: e74255e8b04a1f801e73eb60551796cf1633079ed2078f3637d90b0d7ff0b8bb
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.bluez.org
+Description: Bluetooth tools and daemons
+ This package contains tools and system daemons for using Bluetooth devices.
+ .
+ BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
+ project distributed under GNU General Public License (GPL).
+Original-Maintainer: Debian Bluetooth Maintainers <team+pkg-bluetooth@tracker.debian.org>
+
+Package: bluez-obexd
+Source: bluez
+Version: 5.85-4ubuntu0.1erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 827
+Depends: libc6 (>= 2.38), libdbus-1-3 (>= 1.10), libebook-1.2-21t64 (>= 3.17), libebook-contacts-1.2-4t64 (>= 3.16.2), libedataserver-1.2-27t64 (>= 3.17), libglib2.0-0t64 (>= 2.78.0), libsystemd0
+Recommends: dbus-user-session
+Suggests: evolution-data-server
+Filename: ./bluez-obexd_5.85-4ubuntu0.1erhai1_arm64.deb
+Size: 247394
+MD5sum: f5856fb0ea6dff9b2ed1ed1efbd3975b
+SHA1: ac9c301c7db67652a663b0c6c3a98d98439f2f65
+SHA256: 2cf54c60c7ea08261bbcbb67fc38f28c5163eb27440f06d5f03dc22c79ed5d25
+Section: admin
+Priority: optional
+Homepage: http://www.bluez.org
+Description: bluez obex daemon
+ This package contains a OBEX(OBject EXchange) daemon.
+ .
+ OBEX is communication protocol to facilitate the exchange of the binary
+ object between the devices.
+ .
+ This was the software that is independent as obexd, but this has been
+ integrated into BlueZ from BlueZ 5.0.
+ .
+ BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
+ project distributed under GNU General Public License (GPL).
+Original-Maintainer: Debian Bluetooth Maintainers <team+pkg-bluetooth@tracker.debian.org>
+
+Package: libbluetooth3
+Source: bluez
+Version: 5.85-4ubuntu0.1erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 307
+Depends: libc6 (>= 2.38)
+Filename: ./libbluetooth3_5.85-4ubuntu0.1erhai1_arm64.deb
+Size: 84934
+MD5sum: 370a96b6044de2d8b64e2ad537c31043
+SHA1: 14e64755454fe1c39ac3dbf3cd6740b4b61230ad
+SHA256: 311f7f92cb0c43dcbb7e713a3bf162b3fbc3daa9ef78231661ee5cd0afa1d4d1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.bluez.org
+Description: Library to use the BlueZ Linux Bluetooth stack
+ BlueZ is the official Linux Bluetooth protocol stack. It is an Open Source
+ project distributed under GNU General Public License (GPL).
+Original-Maintainer: Debian Bluetooth Maintainers <team+pkg-bluetooth@tracker.debian.org>
+
 Package: oneplus-erhai-audio
 Version: 1.7
 Architecture: all
@@ -205,6 +279,27 @@ Size: 4004
 MD5sum: 90762d22d342e34c33394eafd71efd5a
 SHA1: 007f3df4c10f9aa53579d6b78d57d779b55b4b51
 SHA256: 998e3872020255ff2118fa0f9ecf03bf784e7b7c22cb24f2188b4a279b65c20d
+Section: net
+Priority: optional
+Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
+ The WCN7880 bluetooth node in the shipped DTB carries a fixed local-bd-address,
+ so every device would announce the same address (C0:FF:EE:13:1E:1A). This
+ package generates a random locally-administered BD address exactly once per
+ device (package postinst on a running system, or first boot for image-built
+ installs), persists it in /var/lib/erhai/bt-address and programs it into hci0
+ via btmgmt public-addr at every boot (erhai-bt-addr.service), replacing the
+ shared DTB address.
+
+Package: oneplus-erhai-bluetooth
+Version: 1.5
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_1.5_all.deb
+Size: 4088
+MD5sum: 0fe3524c8c3aa3cedc02283676eb3b3f
+SHA1: 569e507f6ac33fe9f2caec8bf3737e2cfe36224f
+SHA256: 3c676c7b52f3251703039ef9364aa76bf360b64e5ce9ebf3140d577c8af1a58b
 Section: net
 Priority: optional
 Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
