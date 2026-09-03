@@ -157,13 +157,13 @@ Depends: libc6, libdrm2, libexpat1, libgcc-s1, libstdc++6,
 Recommends: libvulkan1
 Suggests: vulkan-tools, mesa-utils
 Filename: ./oneplus-erhai-mesa_26.3.0~devel.git063a4640270-1erhai1_arm64.deb
-Size: 11353272
-MD5sum: 38391dda1c11f7f652dd81eec214e6f2
-SHA1: 7c0912bea962eca8b9fa03f7c13e580f78740475
-SHA256: 69e9c95c5d722c6056594814a89caf7e9e520d84d6b03200238a2f553c59e8e8
+Size: 11353268
+MD5sum: 0f1ae8052904cc245412c4544eb7dd29
+SHA1: ab1b208d33cef5627f2b47366032572cfe1c3abb
+SHA256: 2cd369ed3a3ff87ccfccb54a5cf860bb5d0a3cde8bcfb2989f53c1490b1e28d2
 Section: libs
 Priority: optional
-Description: Mesa 26.2.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
+Description: Mesa 26.3.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
  Out-of-tree Mesa build for the Adreno 830 (gen8_0_1) in the OnePlus Pad 3,
  installed under /opt/turnip26 so it never shadows the system Mesa.
  .
