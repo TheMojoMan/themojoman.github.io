@@ -353,6 +353,27 @@ Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
  via btmgmt public-addr at every boot (erhai-bt-addr.service), replacing the
  shared DTB address.
 
+Package: oneplus-erhai-bluetooth
+Version: 2.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_2.0_all.deb
+Size: 5394
+MD5sum: 4cc181b8aa8e5fe5f69ae083e4ed485e
+SHA1: 64558fda1c792851c14cc3ee295bbda0252ec7b2
+SHA256: 48681d5ce00af8363e408c8a8f356ddd08b01066430b114e43e85c858e6bdff0
+Section: net
+Priority: optional
+Description: Per-device Bluetooth identity for the OnePlus Pad 3 (erhai)
+ The WCN7880 bluetooth node in the shipped DTB carries a fixed local-bd-address,
+ so every device would announce the same address (C0:FF:EE:13:1E:1A). This
+ package generates a random locally-administered BD address exactly once per
+ device (package postinst on a running system, or first boot for image-built
+ installs), persists it in /var/lib/erhai/bt-address and programs it into hci0
+ via btmgmt public-addr at every boot (erhai-bt-addr.service), replacing the
+ shared DTB address.
+
 Package: oneplus-erhai-camera
 Version: 1.0
 Architecture: all
