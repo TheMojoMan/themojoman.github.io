@@ -92,10 +92,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: python3
 Recommends: gnome-shell, dconf-cli
 Filename: ./oneplus-erhai-desktop_1.0_all.deb
-Size: 11738
-MD5sum: 5b1258dd381277423a8f828181fad4bb
-SHA1: b65ffcde0c768ffff34af25d39d8ce67e9685e32
-SHA256: 191e8af983d7ea430991a14c3ee6f88da118fc3d9e1241eadad9c14a1de6a9a4
+Size: 11928
+MD5sum: 1c025c5e71043fe86252238d9f76fd19
+SHA1: 126b5c7ae75ef7c483f6a34de00ad54fd8157708
+SHA256: 6f35ff0190fb1076fc7f8dda32af2b16880c9f4eb2c43f15abbe7438ad7fadb9
 Section: utils
 Priority: optional
 Description: Desktop glue for the OnePlus Pad 3 (erhai)
@@ -129,10 +129,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
 Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
-Size: 26680232
-MD5sum: c098d080edc513732ff638cfe42f4fcf
-SHA1: f4b669c4b564fbffd80fda9fa952ce3a2880c203
-SHA256: af978df86dea5f5c7db7c25e80bfb7926f5cad0019ed5ef98e910f6386c2794a
+Size: 53903764
+MD5sum: 8d31881cb808970b4e7513f0818046c6
+SHA1: cfdc8b6f9cc4fef29531c1cc466161708b095913
+SHA256: 7f1fff5dfca6fab8c4d1df3af38da5e83be1f5e524435082151b53460d6e4851
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
