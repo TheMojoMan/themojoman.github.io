@@ -1,14 +1,32 @@
+Package: oneplus-erhai-bluetooth
+Version: 2.2
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_2.2_all.deb
+Size: 1212
+MD5sum: 557d093cb85ff09b0f88339d4e495a00
+SHA1: ee3e46d256cefd8b4cf2b9a246b12c25684c0a31
+SHA256: 4ef1e21ce3a4212551ed381f1b8e5cb6b53bf222ca6b6f3d7be5ef711688ce6e
+Section: net
+Priority: optional
+Description: Bluetooth support package for the OnePlus Pad 3 (erhai)
+ Since 2.2 this package no longer ships per-device address machinery. The
+ shared DTB address (C0:FF:EE:13:1E:1A) is used for all devices; BT comes up
+ instantly via stock bluetooth.service. The former erhai-bt-addr /
+ erhai-bt-up services and scripts are retired by the postinst.
+
 Package: oneplus-erhai-linux-7.2
-Version: 7.2.0-sm8750-themojoman
+Version: 7.2.0-sm8750-themojoman+b1
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
-Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman_arm64.deb
-Size: 27164238
-MD5sum: 5b9988777bbf467c0bb6d8352a8c05d1
-SHA1: c15e2c99e9d7cd9ba87cffd87ba4c74d07c8e37e
-SHA256: 91279d88a8f85c0cb7dd4ee141146c51178199bde0988100d5cd818dd0c1423a
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b1_arm64.deb
+Size: 27163032
+MD5sum: a4c5f6e7048e6cee5569bdd706967617
+SHA1: 31271b6ea72ea676013120a9abbb334a5f4e764b
+SHA256: f7f5f954de07e5bc5e44542c58175dc32f79462a42da9852f0ba8727a6c84b5b
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
