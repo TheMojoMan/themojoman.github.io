@@ -16,6 +16,72 @@ Description: Bluetooth support package for the OnePlus Pad 3 (erhai)
  instantly via stock bluetooth.service. The former erhai-bt-addr /
  erhai-bt-up services and scripts are retired by the postinst.
 
+Package: oneplus-erhai-cam
+Version: 1.0
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good
+Recommends: iio-sensor-proxy, gstreamer1.0-plugins-bad
+Filename: ./oneplus-erhai-cam_1.0_arm64.deb
+Size: 380734
+MD5sum: 38f1dafc5ef80819a5fab8950751a5f0
+SHA1: 496d16d66d0070b83b21c3f42ce247b05edb0749
+SHA256: 8b7019bd1f8083d18934232d7afd530bb90b193aecf59981081d520524220068
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with built-in contrast autofocus (Tenengrad sweep
+ driving the kernel cn3927 lens subdev, tap-to-focus, refocus on sharpness
+ drop), photo capture into ~/Pictures/ErhaiCam, video recording
+ (v4l2h264enc/mp4mux with vp8/webm fallback), front/rear camera switching
+ (front streams once its Phase-B driver work lands) and accelerometer
+ orientation handling (upright preview + upright snapshots).
+ Video recording is experimental; photos and autofocus are the focus.
+
+Package: oneplus-erhai-cam
+Version: 1.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good
+Recommends: iio-sensor-proxy, gstreamer1.0-plugins-bad
+Filename: ./oneplus-erhai-cam_1.1_arm64.deb
+Size: 382914
+MD5sum: 45a8fcc0e44bd4ad220ddf70485d4843
+SHA1: e60d0c93ba1a55e43dfb1ac8b145f5f5b942e5c9
+SHA256: 2b639055ea2470b5aa1bf34d7af44fdb67a3ac6f34066d98478be5e28301e678
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with built-in contrast autofocus (Tenengrad sweep
+ driving the kernel cn3927 lens subdev, tap-to-focus, refocus on sharpness
+ drop), photo capture into ~/Pictures/ErhaiCam, video recording
+ (v4l2h264enc/mp4mux with vp8/webm fallback), front/rear camera switching
+ (front streams once its Phase-B driver work lands) and accelerometer
+ orientation handling (upright preview + upright snapshots).
+ Video recording is experimental; photos and autofocus are the focus.
+
+Package: oneplus-erhai-cam
+Version: 1.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good
+Recommends: iio-sensor-proxy, gstreamer1.0-plugins-bad
+Filename: ./oneplus-erhai-cam_1.2_arm64.deb
+Size: 382300
+MD5sum: bc6d192af7412bfb655433557610412f
+SHA1: 71e0938f317acd093f7b23579b64e9e8519195c7
+SHA256: 270c6e301bc58c869bd0f51eee09d627ded284e8af716934ddb40a1249b396ce
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with built-in contrast autofocus (Tenengrad sweep
+ driving the kernel cn3927 lens subdev, tap-to-focus, refocus on sharpness
+ drop), photo capture into ~/Pictures/ErhaiCam, video recording
+ (v4l2h264enc/mp4mux with vp8/webm fallback), front/rear camera switching
+ (front streams once its Phase-B driver work lands) and accelerometer
+ orientation handling (upright preview + upright snapshots).
+ Video recording is experimental; photos and autofocus are the focus.
+
 Package: oneplus-erhai-camera
 Version: 1.1
 Architecture: arm64
@@ -139,6 +205,28 @@ Size: 27145644
 MD5sum: 8f9e89d554ef4f9f50f0178a0f35fc88
 SHA1: 618188407c874524b2c43e6e450f36b6353ee566
 SHA256: fc78cfe53c45a602f11f5a74830a0558eddbd02afcff5ffb4e4665b472ccdf63
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman+b7
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b7_arm64.deb
+Size: 27145772
+MD5sum: a0d0edcc20e329ba684512ae6cc8822b
+SHA1: ac35ac91baa8f0c34b8b96d771c78b1a08369ad0
+SHA256: f35a4f4ab521704b99be2488a884b16f64d99f1a5a94b65b958f3e2b511f9f53
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
