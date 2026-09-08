@@ -5,31 +5,31 @@ Origin: TheMojoMan Xiaomi-nabu PPA
 Label: TheMojoMan Xiaomi-nabu PPA
 Suite: resolute
 Codename: resolute
-Date: Tue, 08 Sep 2026 12:00:41 +0000
+Date: Tue, 08 Sep 2026 12:06:29 +0000
 Architectures: arm64
 Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
 MD5Sum:
  4683f72c17dabac4b409abf6fd816274 652 Packages
- b36f9a371ba7a3b691c2cc555db6bfce 471 Packages.gz
+ 7bf138bc2793b6874fdf2ad034208695 471 Packages.gz
 SHA1:
  1882c1a1d224aaf59f8f51a2ae614ddc49885688 652 Packages
- a8c2a92c9b4101ffdadd5d00bd54b386d0226bdc 471 Packages.gz
+ 504d3cf8237b78049cfda1f4765019a83a067a5b 471 Packages.gz
 SHA256:
  9f0702d976f86b52a10c6dc8e5ba7df53a6fc9fb32e56f908769ae8a1b001591 652 Packages
- 1860888f000eea3a46847cb709b99a193f56e7e789a6ab25c5863a4f3049c712 471 Packages.gz
+ 265b78752ecd68c0ec87a6d4ff37400981cd2c853bdd442fec1c5585ce5f6f98 471 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmqf+OkACgkQZtHcLLi+
-FAqgOA/9HYoCMhQiOVqfxl7rYP8ktly7HBRHKp92WYUrJsvhfWgsyiBm9yKUO4xQ
-9TXctYtCECrTvgLxkNzUCCzYIl1hZaewry8jehDVQnBr7k6ZskJDpVSlIRh1/uoU
-3FQXSYoIIwW/xfPeyq0KfkOQHnsJd2bkhFUPN9xlDXjt0VQqixO6/VLejIEqqbiw
-/AJANN1va6pYvM9OdGMDzOiJ2AqO2j9/RLG7kDsnm7qOPzOTcB8z4wJEuu0xgeZs
-7LcICMy5iuwRA+fOjdm453qTRwq8oUnJeitIFbMh0fUrkh0CS1pPj7BG/XAZcU5B
-auZxVSacFA2bj6i+PncLM7Oj+tJq7gb6DjzD+a6D4AAYuhsaxK4/H8MM6WdYTJ25
-H+31Kl60qBndfsIML2k84yd4xdclI6lfQGoqzvwoHCpyjgVWKtUgLbaul4Icn1gv
-KFr2QFP+HfNg8urzkxk84TRB/bFeQd4C8MckpSwwyjDVNaOvLZnkcCVsr5zY8I3E
-fvsTvYeOZ21xdELzJLuVl3s2Pc2QiOzuXyJ591UtIX+RnTjMBIH8bgigmbNZFfdq
-1vVCB0lRD1PK6sxvsAwLhI1I3uiUENyucVF4Txb0eB6ahQvYVrRYxbUFlv4kYrTc
-r3fqwgbyWJVWKsClSQFt3SCaEEaW02g9gSPcMr97m0ABC2e2eeo=
-=JU0S
+iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmqf+kUACgkQZtHcLLi+
+FAqK7g//YA36RaDxlpQBCM40qQS6gOEtgFDgggksMTXYTx/Ql6vR/cygAJrlzDn6
+vmvbKSL8l5OPdWomjiqFeBwsEPmxBeI4f1f5n9cj5HF5WM4xajnnbzH4dD4w23lQ
+ax2yxdFThqWiTxnsz4TB9ri4c8WckMmIYoqsmXqs1NaTdkZm02TO7zvUxhA9zu7v
+meEQrjQ46AF+xv/+0i95oYN4CLWTtq0qgO45S8l7yH2ObFjGL6ziGdWuEtAUdILH
+NWhrkW9HS004FlNYBQq/F5pW/jwFL73WYXnAnL/+9ri0M/FqoI5zlVQ1nzu7WKS2
+sbDEB+ohNNFraoyU/4yxpUsjM23pDe7VjZNkdqardaO0CQR1HH/W1r7bGF92ITEb
+Nd2S9GSe4SOQYJM96kZuQ1bfVWw5YBlWGv3hYqEmYqhDCjpfv9+NgrHRreyuh09a
+i9yCuhLKyCWtQoNyxXhHSnIhsT77/ob3vkbehMiyOtmRinBoiyWCyZpZVzHSVSd9
+ZChelBqtpFJGpgOsPHgF9Ig2uqmP9kPp4bQ72cmPoQs1yvvvDELhbfwR3yzSSemz
+TCL2VICHU1cMxJfb95L8SgbSzGEbMPj4lfq18HKA0SrItec1Rci5FQ3H6Y6f9ckP
+VvHpUhLbBUL3sd2O5Nc25lcArG2ODPrF8kjb3twVw/Lr+TvYQmA=
+=0YH4
 -----END PGP SIGNATURE-----
