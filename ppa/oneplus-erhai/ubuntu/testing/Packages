@@ -83,16 +83,16 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  Video recording is experimental; photos and autofocus are the focus.
 
 Package: oneplus-erhai-camera
-Version: 1.1
+Version: 1.2
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: i2c-tools, libgtk-4-1, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base
 Recommends: gnome-shell
-Filename: ./oneplus-erhai-camera_1.1_arm64.deb
-Size: 225154
-MD5sum: 5ca3e6fc9e4fef25212c4ff675903b33
-SHA1: 66b71d8c0f5e82e7cb6b80cdf65140814ea7734d
-SHA256: ef0e30857dbc1a65f16d6ba0be8b4def07725f610643f21d0e9ddabb09a083a5
+Filename: ./oneplus-erhai-camera_1.2_arm64.deb
+Size: 225462
+MD5sum: beba1a84d79c60d3d225583d121e541e
+SHA1: 7eb6ecc99764f8a20aacd7450a79f635555fda03
+SHA256: 2415c417d6b8ce2ca0868173b3bd8fae60d4c6227fb680b88dd3aed38259be85
 Section: utils
 Priority: optional
 Description: Camera bring-up for the OnePlus Pad 3 (erhai)
@@ -305,16 +305,16 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
 Package: oneplus-erhai-sensors
-Version: 1.1
+Version: 1.2
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
 Recommends: gnome-shell
-Filename: ./oneplus-erhai-sensors_1.1_arm64.deb
-Size: 3079274
-MD5sum: 2342c1979a339119a1a72605ede5e471
-SHA1: 410eba8181b9dd2dd9b14dbacdc653422d3e1cc8
-SHA256: 7d8d0ad674a3e04f45abd0984496eb026298573f832b11f34b2d8119daa6253d
+Filename: ./oneplus-erhai-sensors_1.2_arm64.deb
+Size: 3079538
+MD5sum: c1116e2b14b38c153ffb57401f8eb199
+SHA1: e6fd82f6c3cb46e4e0ff2601d83c33d923efebb2
+SHA256: 3b40913f0fd794f6008cd75b4bf1b6fd6492f13249a547c853597a7f56b1ef62
 Section: utils
 Priority: optional
 Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
@@ -341,6 +341,26 @@ Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
     toggle)
  The source patches for the binary builds ship under
  /usr/share/doc/oneplus-erhai-sensors/patches/.
+
+Package: oneplus-erhai-thermal
+Version: 1.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Recommends: gnome-shell, polkitd
+Filename: ./oneplus-erhai-thermal_1.1_all.deb
+Size: 7450
+MD5sum: 3ed5345c643817f346db8cae3edf7214
+SHA1: 1cc9b730d11e8a3a9d8489ee58938037e6ea290a
+SHA256: 3ed79796f463c0fc3e4d76f123461108a1ed066b6a18b9254821c1ebfc2939f3
+Section: utils
+Priority: optional
+Description: Switchable CPU+GPU thermal profiles for the OnePlus Pad 3 (erhai)
+ erhai-thermal.sh applies die-temperature ceilings to both the CPU and GPU
+ thermal planes (profile selected via /etc/default/erhai-thermal), with a
+ template unit (erhai-thermal@.service) for per-profile instances and a polkit
+ ruleset so the desktop user can switch profiles without a password. The
+ erhai-thermal@erhai.local GNOME Shell extension exposes profile switching in
+ the quick settings.
 
 Package: oneplus-erhai-video
 Version: 0.1
