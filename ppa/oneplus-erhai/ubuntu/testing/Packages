@@ -572,6 +572,44 @@ Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
  The source patches for the binary builds ship under
  /usr/share/doc/oneplus-erhai-sensors/patches/.
 
+Package: oneplus-erhai-sensors
+Version: 1.7
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-sensors_1.7_arm64.deb
+Size: 3091246
+MD5sum: 9a00f6bb7a7278002d505aa4330959b2
+SHA1: 0dee88bf86addc49e3b7e5c6bd2762204e303a3e
+SHA256: bc5b91efc3c592f31c5b0689350b485d1816eae862b1421879798eda3d943494
+Section: utils
+Priority: optional
+Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
+ Brings the ADSP SSC sensors (BMI3x0 accelerometer, ambient light) up to
+ iio-sensor-proxy and the GNOME desktop:
+  - patched iio-sensor-proxy 3.9 with SSC support + startup-claim-race fix
+    (/usr/local/libexec/iio-sensor-proxy), monitor-sensor and ssccli helpers
+  - libssc 0.4.4 (/usr/local/lib/aarch64-linux-gnu/libssc.so.2)
+  - hexagonrpcd 0.4.0 with odm-sensor-config + nonfatal-dispatch patches
+    (/usr/local/bin/hexagonrpcd-erhai), a hexagonrpcd.service drop-in that
+    points at it, and the complete /var/lib/hexagonfs-erhai remotefs tree
+    (acdb, fastrpc_shell_0 + libsns_* DSP libs, vendor sensor configs,
+    odm json_list). The tree must be complete BEFORE hexagonrpcd first
+    attaches: the ADSP sensor PD loads its configs exactly once.
+  - udev rule 90-erhai-ssc-sensors.rules: SSC sensor types + ACCEL_MOUNT_MATRIX
+    (rotated -90 deg so natural landscape classifies as "normal") on
+    fastrpc-adsp-secure, SYSTEMD_WANTS=iio-sensor-proxy.service
+  - iio-sensor-proxy.service drop-in redirecting ExecStart to the SSC build
+  - erhai-sensors@erhai.local GNOME Shell quick-settings extension
+    (auto-brightness toggle; auto-rotate toggle whose value is saved and
+    turned OFF when the pogo keyboard is attached and recovered on detach
+    (save persists across sessions) — the toggle itself stays enabled at
+    all times — plus suppression of the shell's built-in duplicate rotation
+    toggle)
+ The source patches for the binary builds ship under
+ /usr/share/doc/oneplus-erhai-sensors/patches/.
+
 Package: oneplus-erhai-thermal
 Version: 1.1
 Architecture: all
