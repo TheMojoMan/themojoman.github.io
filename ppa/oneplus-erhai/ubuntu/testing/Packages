@@ -106,6 +106,30 @@ Description: Camera bring-up for the OnePlus Pad 3 (erhai)
  VCM writes are granted to the desktop user via the included udev uaccess
  rules (CCI adapter + lens subdev); requires the kernel cn3927 module.
 
+Package: oneplus-erhai-desktop
+Version: 1.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli
+Filename: ./oneplus-erhai-desktop_1.1_all.deb
+Size: 11738
+MD5sum: 7826ba928f28d1acc7bbb91e196e2d8c
+SHA1: abbe27d134ef305798ccf06f4f75ce65f124beb7
+SHA256: e9031ff817735cb99045567cf96d7a3bfd85d8f2c7a255d5950606d68894f76a
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: GPU pinning of
+ the Adreno 830 GMU before session start (erhai-gpu-pin), boot-time GL
+ environment selection (erhai-desktop-gl), power-key backlight toggle
+ (erhai-power-toggle + erhai-power-watch.py + logind powerkey conf),
+ ktz8868 backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
 Package: oneplus-erhai-erhaicam
 Version: 1.3
 Architecture: arm64
@@ -326,6 +350,28 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
+Package: oneplus-erhai-otg
+Version: 1.2
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Filename: ./oneplus-erhai-otg_1.2_all.deb
+Size: 2356
+MD5sum: 441573abc98fd13b14b6a82c6b9960a1
+SHA1: 8d43874cbb8192d32dba6ba944234972e67c0b3e
+SHA256: 57dabae81c26883c5f4f816f1a5e1392b1e06bf4c93c6da274239400711c4b91
+Section: utils
+Priority: optional
+Description: ADSP OTG session re-arm for the OnePlus Pad 3 (erhai)
+ On every USB-C detach the kernel driver erhai_otg_glink disarms the ADSP
+ OTG session to keep the dwc3 island alive; on this ADSP firmware a
+ disarmed session after a DP-altmode-capable partner leaves the Type-C CC
+ attach detection dead (replugs are invisible until reboot). This package
+ ships /usr/local/sbin/erhai-otg-rearm.sh, which re-arms the session over
+ pmic_glink via the erhai_otg debugfs cmd knob (USB_OTG_AP_ENABLE=17,
+ USB_OTG_SWITCH=18), a oneshot systemd unit, and a udev rule triggering it
+ on Type-C port change / partner removal so every detach self-heals.
+ Requires the erhai kernel (erhai_otg_glink + debugfs).
+
 Package: oneplus-erhai-sensors
 Version: 1.2
 Architecture: arm64
@@ -493,4 +539,37 @@ Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
  installing on a running desktop, log out and back in once.
  .
  The iris-vaapi source tree ships in /usr/src/oneplus-erhai-video/iris-vaapi.
+
+Package: oneplus-erhai-wifi
+Version: 1.4
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: network-manager, iw, iproute2
+Recommends: kmod
+Filename: ./oneplus-erhai-wifi_1.4_all.deb
+Size: 299612
+MD5sum: 2c5de0d2482ace272116d169611b1648
+SHA1: f514eb0755f90b5a20522a0cdbba79cbd4bf0159
+SHA256: c2f653563d40d968409d52d95e62b5deccffc9a16935eff95255694994ab0d16
+Section: net
+Priority: optional
+Description: WCN7880 WiFi bring-up for the OnePlus Pad 3 (erhai)
+ Everything the internal WCN7880 (WCN7850-family) WiFi needs on the erhai
+ image: modprobe.d policy (blacklist ath12k, no cnss2 auto-load), the
+ erhai-wcn-holdfloor / erhai-wcn-devcd / erhai-wcn-wifi systemd units and
+ their scripts (erhai-wcn-wifi.sh, save-wcn-devcd.sh, wl_drvcmd), and the
+ qcacld config INI (scan_mode_6ghz=0 so 5GHz networks show at cold boot).
+ .
+ erhai-wcn-wifi.service (oneshot at boot, after NetworkManager) brings the
+ station up: wait for the PCIe endpoint, modprobe cnss2 until fs_ready
+ appears, trigger the cold-boot calibration, settle, modprobe wlan
+ (qcacld-3.0 mission driver from the kernel deb's extra/), detect the
+ managed-type netdev, set the country via wl_drvcmd and hand the interface
+ to NetworkManager for last-used autoconnect.
+ .
+ erhai-wifi-discover.service runs erhai-wifi-discover.sh: while the internal
+ station is disconnected it fires small-channel-list active scans every 30s
+ because the qcacld firmware never probes UNII-1 (ch36-48) in disconnected
+ full-band scans — without this, 5GHz APs on UNII-1 are found only by
+ passive beacon luck or after connecting on 2.4GHz first.
 
