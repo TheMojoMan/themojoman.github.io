@@ -130,6 +130,32 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  touch-calibration udev rule), dconf defaults, and the desktop-users /
  user-groups helpers used by image presets.
 
+Package: oneplus-erhai-desktop
+Version: 1.2
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli
+Filename: ./oneplus-erhai-desktop_1.2_all.deb
+Size: 14228
+MD5sum: 7c2d7c42316b4729e2292c0c51ffadec
+SHA1: 56c0636d72b4416709b9a9305eca0a6d831d435b
+SHA256: c9bdab76cf1494b4d316caa56203cbfcdbceb7a6ae3af630b04ae47fe08555c3
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: GPU pinning of
+ the Adreno 830 GMU before session start (erhai-gpu-pin), boot-time GL
+ environment selection (erhai-desktop-gl), power-key backlight toggle
+ (erhai-power-toggle + erhai-power-watch.py + logind powerkey conf),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), ktz8868 backlight display toggle, USB-C host
+ charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
 Package: oneplus-erhai-erhaicam
 Version: 1.3
 Architecture: arm64
@@ -185,6 +211,28 @@ Size: 27169730
 MD5sum: 025decb14aea3c7b36e32ccc1a4ba888
 SHA1: 7b22303149ae799d62bb1306f52693e0a945593c
 SHA256: 63196236a0c1b7b62232bbc8e7f27df39261624b532044b53a2489a69addec25
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman+b12
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b12_arm64.deb
+Size: 27174206
+MD5sum: 96f18a005431417ca7abdadad99a4f18
+SHA1: 9f5ca618b0b33c4e937a32658260f7291376af55
+SHA256: ff5de3ba982e13f936b0584fb203ba0989e8d1dabafd03c45f3b258221dd8444
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
@@ -459,6 +507,44 @@ Size: 3080140
 MD5sum: 80521fc05a43eade5366f76db08aaeac
 SHA1: c4f4e4c40bf6786ce149620947324e7f186ff0d6
 SHA256: 99bcc1c6412dea8c83f445ace0d97df668b81426b512454bfef4dea91c22733c
+Section: utils
+Priority: optional
+Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
+ Brings the ADSP SSC sensors (BMI3x0 accelerometer, ambient light) up to
+ iio-sensor-proxy and the GNOME desktop:
+  - patched iio-sensor-proxy 3.9 with SSC support + startup-claim-race fix
+    (/usr/local/libexec/iio-sensor-proxy), monitor-sensor and ssccli helpers
+  - libssc 0.4.4 (/usr/local/lib/aarch64-linux-gnu/libssc.so.2)
+  - hexagonrpcd 0.4.0 with odm-sensor-config + nonfatal-dispatch patches
+    (/usr/local/bin/hexagonrpcd-erhai), a hexagonrpcd.service drop-in that
+    points at it, and the complete /var/lib/hexagonfs-erhai remotefs tree
+    (acdb, fastrpc_shell_0 + libsns_* DSP libs, vendor sensor configs,
+    odm json_list). The tree must be complete BEFORE hexagonrpcd first
+    attaches: the ADSP sensor PD loads its configs exactly once.
+  - udev rule 90-erhai-ssc-sensors.rules: SSC sensor types + ACCEL_MOUNT_MATRIX
+    (rotated -90 deg so natural landscape classifies as "normal") on
+    fastrpc-adsp-secure, SYSTEMD_WANTS=iio-sensor-proxy.service
+  - iio-sensor-proxy.service drop-in redirecting ExecStart to the SSC build
+  - erhai-sensors@erhai.local GNOME Shell quick-settings extension
+    (auto-brightness toggle; auto-rotate toggle whose value is saved and
+    turned OFF when the pogo keyboard is attached and recovered on detach
+    (save persists across sessions) — the toggle itself stays enabled at
+    all times — plus suppression of the shell's built-in duplicate rotation
+    toggle)
+ The source patches for the binary builds ship under
+ /usr/share/doc/oneplus-erhai-sensors/patches/.
+
+Package: oneplus-erhai-sensors
+Version: 1.6
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-sensors_1.6_arm64.deb
+Size: 3082142
+MD5sum: 93b1e41bedab616a3bc79894790855b2
+SHA1: 337cfb6ef2458d1f4a96d36ebedcb60d8bad081d
+SHA256: dc491122e9de7662c6b4967e103f1699990dfaf09550fa11cabdf9d228e215ee
 Section: utils
 Priority: optional
 Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
