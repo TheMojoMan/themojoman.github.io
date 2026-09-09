@@ -193,6 +193,28 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman+b13
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b13_arm64.deb
+Size: 27172922
+MD5sum: 6381f209909ff8555e48ae1b06d19a96
+SHA1: 84c814d9243a2898925db0aea8944c5207ea488b
+SHA256: fd98b818b5ddb8995066fe9c2f3fb62950d71f2c05c404a41bf696414e923c09
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
 Package: oneplus-erhai-mesa
 Version: 26.3.0~devel.git228935.g063a4640270-1erhai1
 Architecture: arm64
@@ -317,10 +339,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: libva2
 Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b10), firefox | chromium | brave-browser
 Filename: ./oneplus-erhai-video_1.0_arm64.deb
-Size: 1084726
-MD5sum: 6b4bf8ebee6800e369dbae076667d5d8
-SHA1: f39b99175beefb21a929385377b8e265ee8b771f
-SHA256: 9f787dae1c042e44d578c340ce6415e83606b9cfaf48bada4018d5f1c1d788a5
+Size: 1084904
+MD5sum: e2655701a275a3c399671e9c085d1efd
+SHA1: 8af1e6f49fc82c53b5a67360084ccc1fa32893d2
+SHA256: d79063565dbb483eb572448e1c7c086f3d1e497cf93b2912424a5d24cdb9bec5
 Section: video
 Priority: optional
 Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
