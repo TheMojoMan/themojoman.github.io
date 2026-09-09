@@ -136,6 +136,32 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  touch-calibration udev rule), dconf defaults, and the desktop-users /
  user-groups helpers used by image presets.
 
+Package: oneplus-erhai-desktop
+Version: 1.3
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli
+Filename: ./oneplus-erhai-desktop_1.3_all.deb
+Size: 14232
+MD5sum: dbad8ac32c5563948946b6c4af3ef463
+SHA1: a60ccbd098f4ec6def575edc338fffaca0c22fa3
+SHA256: 5ef392bb94d18ddd96a9e5b852fe3413b3262c5253dd8349cd1915c4f817d2d2
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: GPU pinning of
+ the Adreno 830 GMU before session start (erhai-gpu-pin), boot-time GL
+ environment selection (erhai-desktop-gl), power-key backlight toggle
+ (erhai-power-toggle + erhai-power-watch.py + logind powerkey conf),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), ktz8868 backlight display toggle, USB-C host
+ charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
 Package: oneplus-erhai-erhaicam
 Version: 1.3
 Architecture: arm64
