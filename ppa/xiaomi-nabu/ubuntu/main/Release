@@ -2,15 +2,15 @@ Origin: TheMojoMan Xiaomi-nabu PPA
 Label: TheMojoMan Xiaomi-nabu PPA
 Suite: main
 Codename: main
-Date: Wed, 09 Sep 2026 10:09:56 +0000
+Date: Wed, 09 Sep 2026 11:12:13 +0000
 Architectures: arm64
 Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
 MD5Sum:
  c5738a5bfebb38dafba10bba96a9e4ef 1729 Packages
- c3b33044e240f22190381299a58394e1 788 Packages.gz
+ 0778bbe00d54d6e44909afc64864afb6 788 Packages.gz
 SHA1:
  442dce89adb93608ae1faf4fb4afdbaa9c25bc25 1729 Packages
- cc8d1899e53448271de68bf043f77f7882ca335a 788 Packages.gz
+ 03e4d5300a7f9b18cf363741e0d2a73fce713098 788 Packages.gz
 SHA256:
  8ee00379d5854eca25f868f2ae01ffe95785a20e4a66a1b06306364da1c2a468 1729 Packages
- 985a1ff041e063c6cb4b10b47375022216b084ef04a1f7acd703f5a52d16803d 788 Packages.gz
+ df62a66faab1186b962c5b63614052397428ac8a06a5c97e212470068d9a3985 788 Packages.gz
