@@ -171,6 +171,19 @@ SHA1: 43f0b3dae82011ebba0c82f540740fae0fa98ddb
 SHA256: 10eb25b3487d23aa825d8bb52894ab074d00eee311a8fd923c077328d82e9c87
 Description: Firmware blobs for OnePlus Pad 3 (erhai)
 
+Package: oneplus-erhai-firmware
+Version: 1.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Filename: ./oneplus-erhai-firmware_1.1_all.deb
+Size: 33000806
+MD5sum: e2010dfed020495c6842ae32881d04a0
+SHA1: e8d2c25097a057f6d0968ef533a59b660e6cedfc
+SHA256: 79aa59e3c640b8e8dc0a3a99ed5448025b68998a37166131636a2b1c1c3368f7
+Description: Firmware blobs for OnePlus Pad 3 (erhai)
+
 Package: oneplus-erhai-linux-7.2
 Version: 7.2.0-sm8750-themojoman+b12
 Architecture: arm64
