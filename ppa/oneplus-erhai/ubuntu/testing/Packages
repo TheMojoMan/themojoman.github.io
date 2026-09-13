@@ -1,0 +1,44 @@
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman+b47
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b47_arm64.deb
+Size: 27150330
+MD5sum: 76843d5a8fd550600cbef2c0ec869df0
+SHA1: 6b769595b1e8381858b2660c013bc22026592868
+SHA256: 88845a46db41de5f7bfd135d8d4b5eeb9e49b73f1d443826445e5a4f2c0f8d80
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc2-sm8750-themojoman+b1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc2-sm8750-themojoman+b1_arm64.deb
+Size: 27629774
+MD5sum: 27ebaaf51976384f8ec67bf3cb1c7ef8
+SHA1: ceafe6208cec8be5106e089e19ebdcfa50476715
+SHA256: 81705be9e83e8c0f515ff209aa9ec171906ef860169ae0219c8d8ede4a781711
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0-rc2 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
