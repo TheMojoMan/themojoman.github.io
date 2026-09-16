@@ -5,31 +5,31 @@ Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Suite: main
 Codename: main
-Date: Sun, 13 Sep 2026 15:52:45 +0000
+Date: Wed, 16 Sep 2026 14:38:36 +0000
 Architectures: arm64
 Description: Unofficial PPA for OnePlus Pad 3 (erhai)
 MD5Sum:
  9db520565a7283e29df086f93cce9c3b 31667 Packages
- b5e335336dbb50157066a80a17c7049b 9616 Packages.gz
+ 86cea03147c1f8573bae253c829d1ebe 9616 Packages.gz
 SHA1:
  999d39bae3476fa37cb1d447f1581de026a21985 31667 Packages
- d7344e0823939bf5e339fd06b39ec9ab7bfc36d7 9616 Packages.gz
+ 8ff89372c8225676e67c8c32d1bc48ad1d4b82c4 9616 Packages.gz
 SHA256:
  bc07eb5960a63ddeaf72cd33e9c97d381b598745b59d8138ab22cb13fae4c9c2 31667 Packages
- d51e71e606567ad010ea8777f81528b3f5d7f794d668e5dc8236f92994353b5f 9616 Packages.gz
+ c52f98f231cab8d83632e8cec6443ffbea9ed520046b9ddc2a2b777292da8070 9616 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmqmxs0ACgkQZtHcLLi+
-FAr87hAAjT198iEetSkt9bruGwMtFf+pQ297Pf+zySDB4EGVibvK6VoV1qdZS70n
-rhSqepiK1deDdCYXjsh3F/yKMQz42njvzDzd3NEi/lriXSqNDAqTAJisBtZt1ssa
-aqFMvDxhk+IsxS1n2BcraqxNUTd5Ek50f1hvYs11OJn0pF2Iy8R5/I0TCEC5QXLY
-rwHqIUx2L7J4/QIsgobKJ6KPO8+A8A2RRsdnAxrQQ6cNnP9y8v46wavVcKWa77n0
-CxeOYdqwvgZARR5+mhIF3/AyFUIHAv1aYaf4DYt33JuPjCSLcXjF0Mx53qDuwvIC
-lkGlIEkjW9hvCFKuvqyvuaCQt34iS7MXyvKI3qVbypiTUpYncEBqElneR93azemd
-5wdskM5cVFd7tq7zGs1U3JMsoldfiZLNn3BmNBpg7sNjmFT6Uexzvyu5IQnga4JV
-boGKm8ytDzzuLjKQP+MvRw3Db38qz3UekiOIvDnjvMypzVmomN1Lkc4ktp/bPucB
-Tn1iAP+w/nctyo5a6Yy+/V2dzZCczjkNywnved8G1ZM4H4B5goJJfgm/XEUIJJ+o
-AjHqDDMCMc9HzAT3IZYFREli19lra4FsXXYfBlhKdexy9zsakZu0Vv3wt/XChFxH
-yCgy7ilP0FcVcgU0SYysZoMuaykmybcXQjl/z4WbZsoCo8EVfZE=
-=iTU2
+iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmqqqewACgkQZtHcLLi+
+FAqR0xAAu6MG2UpB1Jwv2fXWG8CfZGerlC607VkstN1ecyRMm2P8NjhqDIYDuEe3
+sl5kqwAtPIaKQ6hu9kmEoLJ2MBQbN/X1xbNhFRdXm6czC8Iufv2lhvx12ZDPABF+
+pK6zeQnWYVVncP0NxWBpfn7yn6nAf2t8anC+1XCWlpz2xSXhpKiI4iCaTv39ilBB
++jVcjq82LN+uZPf/s7BGRZR6ZxlrQAkcqOFDlDhNQcspX3u9NVckginCa83YnwwE
+A/n0u8ptoCFoU7x6nieNgd9QA/feNF41fbLLmbAeugxYJa6tS46Xm5Bv4HZ4secn
+J4XgJbRhUmWL9rANUla3rf+HAvcJR1Qm/95TkqowGYC02Bn+zyUtdcYFgFBMptQu
+jdOOGpadOG0HhEldfJQu6GMczBoh8KyENMzRtq3yLT63wUivnVRXDiQwnKGUUEfZ
+tnJ3fYiEObkiBH0vQpKQ0ZQadKSLIpzRcp7PUiJ8YCbdr6ZGTlPPPAdDWSVlPO2L
+lo4p/xcTt2Y7rNfYId8IaVEOyBPzXw50hVrppT2ZEpJgr4jF6rPqDmHB3KfHQd/z
+TRCD4n//RMsS8qKEHprEokY/3KznYk8yJs9by9dzISvFdeugLUzDQsfcvhdskhRU
+tubUOui0xkifx3zw6bO7EuMSzjlTi6rFtTmAYIuCfU1obJP9fEU=
+=JXIL
 -----END PGP SIGNATURE-----

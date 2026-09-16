@@ -1,3 +1,43 @@
+Package: oneplus-erhai-desktop
+Version: 1.9
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_1.9_all.deb
+Size: 53200
+MD5sum: da66b2dd39165a60ac62dcb46fe65c1e
+SHA1: f5c0c8f612ce4fd4f2bfbad9c45cd68e930dc58e
+SHA256: d05e5ccb83d9d0252f95ae01ad3074107b156322ce0c47a4af836d35e976d056
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start (erhai-gpu-pin; the GPU is PINNED
+ always-active at runtime-PM 'on' on every kernel since 2026-09-13 — it never
+ runtime-suspends, so the intermittent GMU resume hang can never fire),
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; ships
+ suspend.target MASKED — GNOME never offers the b29 s2idle POR-lottery),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
 Package: oneplus-erhai-linux-7.2
 Version: 7.2.0-sm8750-themojoman+b47
 Architecture: arm64
@@ -21,16 +61,38 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
 Package: oneplus-erhai-linux-7.3
-Version: 7.3.0-rc2-sm8750-themojoman+b1
+Version: 7.3.0-rc2-sm8750-themojoman+b30
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
 Recommends: oneplus-erhai-firmware
-Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc2-sm8750-themojoman+b1_arm64.deb
-Size: 27629774
-MD5sum: 27ebaaf51976384f8ec67bf3cb1c7ef8
-SHA1: ceafe6208cec8be5106e089e19ebdcfa50476715
-SHA256: 81705be9e83e8c0f515ff209aa9ec171906ef860169ae0219c8d8ede4a781711
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc2-sm8750-themojoman+b30_arm64.deb
+Size: 27626128
+MD5sum: d0070702ac8961c31eab8297a9d22d6f
+SHA1: 7159c3d06602e86c6074f176c8dbe38a137e2c1a
+SHA256: 59f52a1405833917d807baa036f54f3f996c2f3bab0d36f26b80147bd3b7610c
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0-rc2 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc2-sm8750-themojoman+b9
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc2-sm8750-themojoman+b9_arm64.deb
+Size: 27630524
+MD5sum: 1886bc7226203f547725d6636bd240e5
+SHA1: 11d5fe9302617b75b61a0fab411bea6b1f8e0499
+SHA256: a58917afc2813fd58f4e7724769616676962a0ef4b40fe3da7f5a839932bffc9
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
