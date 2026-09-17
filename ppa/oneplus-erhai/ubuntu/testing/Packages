@@ -38,6 +38,49 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  touch-calibration udev rule), dconf defaults, and the desktop-users /
  user-groups helpers used by image presets.
 
+Package: oneplus-erhai-desktop
+Version: 2.0
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_2.0_all.deb
+Size: 60712
+MD5sum: 0fb98424bdf80267610c2da385807ea7
+SHA1: 526052b00f104c0a397f59bc5146b14b6e3cb6c6
+SHA256: 12fc760c7557474934766326b4c0e1a94ce4d382e543697f347637ae739b2b05
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start (erhai-gpu-pin; the GPU is PINNED
+ always-active at runtime-PM 'on' on every kernel since 2026-09-13 — it never
+ runtime-suspends, so the intermittent GMU resume hang can never fire),
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; GNOME's
+ "Suspend" wired to the proven manual-wake s2idle harness via a
+ systemd-suspend.service ExecStart override -> erhai-suspend-gnome.sh ->
+ erhai-suspend-s2idle.sh (display-off-first + WLAN quiesce + full restore;
+ short power press wakes, long press powers off; auto-sleep stays off)),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+
 Package: oneplus-erhai-linux-7.2
 Version: 7.2.0-sm8750-themojoman+b47
 Architecture: arm64
