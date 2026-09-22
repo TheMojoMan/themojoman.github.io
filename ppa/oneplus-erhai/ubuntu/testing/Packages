@@ -221,10 +221,10 @@ Breaks: oneplus-erhai-cam (<< 1.3)
 Replaces: oneplus-erhai-cam (<< 1.3)
 Provides: oneplus-erhai-cam
 Filename: ./oneplus-erhai-erhaicam_1.4_arm64.deb
-Size: 428388
-MD5sum: 1decabe7118558f5333724972e7aeed7
-SHA1: 147ce61b4d36b675027b63f36b1ab2e22edb947d
-SHA256: 224deb589967826e47c27020f3ff19791aa06fbdeea0f3eabab252e1f5effba6
+Size: 428392
+MD5sum: dc49504d1a18488690937efee12535f3
+SHA1: ac2e4c5401b19b6ae941459bad9aa9f9390469dd
+SHA256: 8fd9c73db56b1b7ef80d580ad68c27b02ca9bdfa32bfdccf100404113fe4b4fa
 Section: graphics
 Priority: optional
 Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
