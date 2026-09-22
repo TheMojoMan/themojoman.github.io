@@ -1,3 +1,51 @@
+Package: oneplus-erhai-audio
+Version: 1.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: alsa-ucm-conf
+Filename: ./oneplus-erhai-audio_1.1_all.deb
+Size: 10794
+MD5sum: e5b3aa49f714992ed82d5f269377e13d
+SHA1: 812be70338ab8bd562f11de708fbfe38776bb30e
+SHA256: a709e0a08840584914b17bcbfd45ad3d3922eebad97c0e538506decf4d6afa58
+Section: sound
+Priority: optional
+Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
+ ALSA Use Case Manager profile for the q6apm/AudioReach sound card of the
+ OnePlus Pad 3 (card "OnePlus-Pad3-erhai-24976", driver sm8750).
+ .
+ The HiFi verb wires the MultiMedia front-ends to their back-ends
+ (MM1 -> SECONDARY_MI2S_RX speaker TDM, MM2 -> DisplayPort, MM3 -> headset
+ mic via TX_CODEC_DMA_TX_3, MM4 -> internal DMICs via VA_CODEC_DMA_TX_0) and
+ un-mutes the six AW88261 speaker amps.
+ .
+ Installing this package is all audio needs on the erhai image: PipeWire /
+ WirePlumber's ACP layer resolves the profile through
+ /usr/share/alsa/ucm2/conf.d/sm8750/ and applies the HiFi verb (and its
+ EnableSequence mixer writes) automatically when the desktop session starts.
+ .
+ A USB-C monitor that carries audio gets a selectable "DisplayPort" output
+ via the jack-gated UCM device; erhai-dp-audio-sync.service (triggered by a
+ udev rule on DRM connector changes) bounces WirePlumber when a monitor is
+ attached after boot, so the DP output appears without a manual restart.
+ .
+ The LPASS audio devices (lpass-lpi-pinctrl@7760000, rx/tx/va macros, both
+ SoundWire masters) can end up never probed when their kernel modules load
+ after the platform devices are created (late udev coldplug), which leaves
+ the snd-sc8280xp machine driver without its codec components and no sound
+ card at all. This package therefore also ships
+ erhai-audio-bringup.service (oneshot at boot): it binds the LPI pinctrl,
+ re-runs the ASoC module probe chain if needed, waits for card0 and applies
+ the HiFi verb.
+ .
+ WirePlumber's ACP opens the UCM with the ALSA card ID ("OnePlusPad3") rather
+ than "hw:0"; ALSA's UCM resolver does not match the card ID against the
+ card's driver/name/longname fields, so the conf.d/ lookup misses and no ctl
+ is opened (leaving ${CardId} undefined and the verb's mixer writes without a
+ cdev). This package therefore also ships a legacy-path fallback
+ (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
+ hardcodes card 0 and opens its own control device via "cdev hw:0".
+
 Package: oneplus-erhai-desktop
 Version: 1.9
 Architecture: all
@@ -81,6 +129,80 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  touch-calibration udev rule), dconf defaults, and the desktop-users /
  user-groups helpers used by image presets.
 
+Package: oneplus-erhai-desktop
+Version: 2.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_2.1_all.deb
+Size: 54012
+MD5sum: e74d0689bc209e329e20605dda4a3e97
+SHA1: d40ea5edd40827f29b834d4a37ceada3ba342683
+SHA256: 2516b4f5a86dedc2e56299e767a1b1a27297bffe738f476f97c3802f951d616d
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start (erhai-gpu-pin; the GPU is PINNED
+ always-active at runtime-PM 'on' on every kernel since 2026-09-13 — it never
+ runtime-suspends, so the intermittent GMU resume hang can never fire),
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; GNOME's
+ "Suspend" wired to the proven manual-wake s2idle harness via a
+ systemd-suspend.service ExecStart override -> erhai-suspend-gnome.sh ->
+ erhai-suspend-s2idle.sh (display-off-first + WLAN quiesce + full restore;
+ short power press wakes, long press powers off; auto-sleep stays off)),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+ Fixed login-screen policy (2026-09-22): the internal panel comes up at 50 % of
+ max_brightness at boot (erhai-backlight.service) and is re-pinned to 50 % for
+ every GDM greeter session, i.e. the login screen, by
+ erhai-greeter-brightness.py (a logind watcher; user sessions are never
+ touched).  GNOME's own ambient-light auto-brightness is forced OFF as a
+ GSettings DEFAULT (99-erhai-no-gsd-ambient.gschema.override) because the
+ greeter's dconf can end up unreadable, in which case only a default override
+ reaches it - that was the login screen crashing to its minimum level.  The
+ greeter also gets session-name='gnome-login' (greeter dconf seed +
+ /usr/share/gdm/dconf/95-erhai-greeter + /etc/dconf/profile/gdm) and a greeter
+ .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
+ come up as a FULL UBUNTU DESKTOP.
+
+Package: oneplus-erhai-firmware
+Version: 1.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Filename: ./oneplus-erhai-firmware_1.2_all.deb
+Size: 34621402
+MD5sum: 1b66d5cd64a051062ebc3cc0745a0500
+SHA1: 6ae717739653953e4a325d9ea8d1b435008cc23e
+SHA256: 304885a2f6b972323a253c8f346fa70f4278160988fc3ddb58363aa31a670747
+Description: Firmware blobs for OnePlus Pad 3 (erhai)
+ OxygenOS 16.0.9.400 firmware for the OnePlus Pad 3 (erhai/SM8750):
+ WCN7880 (peach) WLAN, BRAHMA Bluetooth, IPA, the ADSP split image
+ (adsp.mdt + adsp_dtb.mdt) and, since 1.2, the CDSP split image
+ (cdsp.mdt + cdsp.bNN + cdsp_dtb.mdt + cdsp_dtb.bNN) that hosts the
+ Hexagon NPU (HTP) and is the prerequisite for FastRPC on the compute
+ DSP (/dev/fastrpc-cdsp).
+
 Package: oneplus-erhai-linux-7.2
 Version: 7.2.0-sm8750-themojoman+b47
 Architecture: arm64
@@ -92,6 +214,28 @@ Size: 27150330
 MD5sum: 76843d5a8fd550600cbef2c0ec869df0
 SHA1: 6b769595b1e8381858b2660c013bc22026592868
 SHA256: 88845a46db41de5f7bfd135d8d4b5eeb9e49b73f1d443826445e5a4f2c0f8d80
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.2.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.2
+Version: 7.2.0-sm8750-themojoman+b78
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.2_7.2.0-sm8750-themojoman+b78_arm64.deb
+Size: 27181482
+MD5sum: 31f2aa974dd0614a883e8e14eea4b53d
+SHA1: fe51dac97eeb5b68146aa14f370a9f52c3535859
+SHA256: 2ea6b1eb220f6b36f4eabc008b45210948a30db64f124fe4926971cd3acccd5f
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
@@ -146,4 +290,168 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  .
  The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-mesa
+Version: 26.3.0~devel.git228935.g063a4640270-2erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 134032
+Depends: libc6, libdrm2, libexpat1, libgcc-s1, libstdc++6,
+ libwayland-client0, libx11-6, libx11-xcb1, libxext6, libxxf86vm1,
+ libxcb1, libxcb-dri3-0, libxcb-glx0, libxcb-keysyms1, libxcb-present0,
+ libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0,
+ libxshmfence1, zlib1g, libzstd1,
+ libllvm21, libllvmspirvlib21.1
+Recommends: libvulkan1
+Suggests: vulkan-tools, mesa-utils
+Filename: ./oneplus-erhai-mesa_26.3.0~devel.git228935.g063a4640270-2erhai1_arm64.deb
+Size: 31056850
+MD5sum: bdb2a5d06f609af8bdafd5d09c798e2e
+SHA1: 0c1d943f3fb1e905b47e7a1a6b05c8726fd76f14
+SHA256: 2331ff6e808507a137acb5c08f82dd757ae82d8e1df917ed6d865965673e4400
+Section: libs
+Priority: optional
+Description: Mesa 26.3.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
+ Out-of-tree Mesa build for the Adreno 830 (gen8_0_1) in the OnePlus Pad 3,
+ installed under /opt/mesa so it never shadows the system Mesa.
+ .
+ Ubuntu's Mesa is too old for gen8: its freedreno gallium driver refuses the
+ chip ("failed to create dri2 screen") and its turnip does not recognise the
+ chip id, so GL falls back to llvmpipe and every hardware-accelerated Vulkan
+ client fails. This build supports the part both ways -- native freedreno
+ gallium (GL_RENDERER=FD830) and Vulkan 1.4 turnip, with zink on top of it as
+ the alternative GL path.
+ .
+ Nothing is activated by installing this package. The desktop session opts in
+ through environment variables (VK_DRIVER_FILES, LD_LIBRARY_PATH,
+ __EGL_VENDOR_LIBRARY_FILENAMES); a ready-made drop-in is shipped at
+ /usr/share/oneplus-erhai-mesa/10-desktop.conf.gpu, which is what
+ erhai-desktop-gl.service installs into the user's environment.d when the
+ kernel has the GPU enabled.
+
+Package: oneplus-erhai-npu
+Version: 0.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: hexagonrpcd, libhexagonrpc0.4
+Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b63), oneplus-erhai-firmware (>= 1.2)
+Filename: ./oneplus-erhai-npu_0.1_arm64.deb
+Size: 9319630
+MD5sum: a8fb844ba37d761f4f9cb0b3e0e89ad4
+SHA1: 20d0a36a041e4a1d3218875f62873418bd698065
+SHA256: 7cdf80145cb1f2dc51f1c66803259474ca4cf3fb8a60b5b9ab3301230377a0b1
+Section: utils
+Priority: optional
+Description: Hexagon NPU / compute-DSP (CDSP) stack for the OnePlus Pad 3 (erhai)
+ Brings the Hexagon COMPUTE DSP (CDSP) up to userspace. The Hexagon NPU
+ (HTP, Hexagon Tensor Processor) is not a standalone device: it hangs off the
+ CDSP and is driven by DSP-side firmware and libraries (libhcp_rpc_skel.so,
+ libhcpfrc.so, ubwcdma_dynlib.so, libQnnHtpV79Skel.so) that the AP loads over
+ FastRPC. This package provides everything on the AP side of that path:
+  - the complete CDSP FastRPC remotefs tree served to the DSP
+    (/var/lib/hexagonfs-cdsp/dsp/cdsp): fastrpc_shell_3 +
+    fastrpc_shell_unsigned_3 (the user-PD shells), the Hexagon CoProcessor
+    (HTP) runtime libs from the device's own dsp partition, the vendor QNN
+    HTP v79 skel (libQnnHtpV79Skel.so) and the C++ runtime the skels link
+    against -- all taken from OxygenOS 16.0.9.400;
+  - hexagonrpcd-cdsp.service: a second hexagonrpcd instance (the upstream
+    open-source FastRPC daemon) attaching to /dev/fastrpc-cdsp in "rootpd"
+    mode, the Linux equivalent of Android's `cdsprpcd rootpd cdsp`;
+  - erhai-npu-status.sh: one-shot health report of the whole chain
+    (kernel DT/firmware, remoteproc, FastRPC nodes, daemon, dmesg evidence).
+ .
+ Kernel side (oneplus-erhai-linux >= +b63 + oneplus-erhai-firmware >= 1.2):
+ &remoteproc_cdsp enabled with the OxygenOS cdsp.mdt/cdsp_dtb.mdt split image
+ and the OEM-identical carveouts (0x9d200000+0x1900000, 0x9eb00000+0x80000).
+ .
+ NOTE: the QNN *host* runtime (libQnnHtp.so / libQnnHtpV79Stub.so) is not
+ shippable -- Qualcomm only distributes it for Android (bionic) and through
+ the account-gated QNN/Hexagon SDK. The skel and the HTP runtime are present
+ here, so the NPU itself is bring-up complete; driving a graph additionally
+ needs a glibc QNN host runtime.
+
+Package: oneplus-erhai-sensors
+Version: 2.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-sensors_2.1_arm64.deb
+Size: 3092942
+MD5sum: edf0084841fa21fe30f4dda3c71381f1
+SHA1: b19f2d33bf05b43e80629c29bc52ce9302245b6d
+SHA256: 757431f7fb8bd578d7e018c8c6530bd14066bb861322b4b32487d41563feb0f5
+Section: utils
+Priority: optional
+Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
+ Brings the ADSP SSC sensors (BMI3x0 accelerometer, ambient light) up to
+ iio-sensor-proxy and the GNOME desktop:
+  - patched iio-sensor-proxy 3.9 with SSC support + startup-claim-race fix
+    (/usr/local/libexec/iio-sensor-proxy), monitor-sensor and ssccli helpers
+  - libssc 0.4.4 (/usr/local/lib/aarch64-linux-gnu/libssc.so.2)
+  - hexagonrpcd 0.4.0 with odm-sensor-config + nonfatal-dispatch patches
+    (/usr/local/bin/hexagonrpcd-erhai), a hexagonrpcd.service drop-in that
+    points at it, and the complete /var/lib/hexagonfs-erhai remotefs tree
+    (acdb, fastrpc_shell_0 + libsns_* DSP libs, vendor sensor configs,
+    odm json_list). The tree must be complete BEFORE hexagonrpcd first
+    attaches: the ADSP sensor PD loads its configs exactly once.
+  - udev rule 90-erhai-ssc-sensors.rules: SSC sensor types + ACCEL_MOUNT_MATRIX
+    (rotated -90 deg so natural landscape classifies as "normal") on
+    fastrpc-adsp-secure, SYSTEMD_WANTS=iio-sensor-proxy.service
+  - iio-sensor-proxy.service drop-in redirecting ExecStart to the SSC build
+  - erhai-sensors@erhai.local GNOME Shell quick-settings extension
+    (auto-brightness toggle; auto-rotate toggle whose value is saved and
+    turned OFF when the pogo keyboard is attached and recovered on detach
+    (save persists across sessions) — the toggle itself stays enabled at
+    all times — plus suppression of the shell's built-in duplicate rotation
+    toggle)
+   - erhai-alsd (session auto-brightness) never writes brightness while the
+     panel is blanked — by the power button or by the folio-fold watcher in
+     oneplus-erhai-desktop — and re-applies its target once the panel is back
+   - ssccli gained `--rate HZ` (libssc 0.4.4 sample-rate property made
+     writable): the folio-fold watcher requests 1 Hz so the magnetometer is
+     not streamed at its 50 Hz ceiling all day (SSC hardware floors at 5 Hz)
+ The source patches for the binary builds ship under
+ /usr/share/doc/oneplus-erhai-sensors/patches/.
+
+Package: oneplus-erhai-torch
+Version: 0.1
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: udev
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-torch_0.1_all.deb
+Size: 13866
+MD5sum: 4723a229b968b5db8035f770506cccdb
+SHA1: e12c3fac6a2c9268cca8430f4eadc8df5a94b647
+SHA256: 567e0ab0e17e5b3e19d7161170a73c206e63a5e4632c7f4cfe40e68f3a669b9f
+Section: utils
+Priority: optional
+Description: Torch (rear camera flash LED) control for the OnePlus Pad 3 (erhai)
+ Turns the rear camera flash into a usable torch with on/off and a
+ brightness slider, driven from a GNOME Quick Settings quick slider
+ (erhai-torch@erhai.local).
+ .
+ The rear flash is the pm8550 SPMI flash-LED controller (led-controller@ee00)
+ exposed by leds-qcom-flash as two LEDs, white:flash-0 (channels 1+4) and
+ white:flash-1 (channels 2+3). Writing the LED class 'brightness' attribute
+ puts the LED into TORCH mode: the driver scales the torch current against
+ led-max-microamp (500 mA per LED, split over the two channels), and a value
+ of 0 disables the module again. That is exactly what a torch slider wants,
+ so the extension drives 'brightness' directly.
+ .
+ Writing a sysfs attribute is a privileged operation, and 'uaccess' does not
+ help here: LED class devices have no device node, so logind has nothing to
+ put an ACL on. The shipped udev rule (71-erhai-torch.rules) instead chgrp's
+ the LED attributes to a dedicated 'erhai-torch' group and makes them group
+ writable at device-add time, and the postinst puts the desktop users into
+ that group. The slider therefore writes the LED itself, with no root helper,
+ no polkit prompt and no round trip through a service.
+ .
+ Group membership takes effect at the next login, so an existing session may
+ need one logout before the slider can drive the LED; the extension reports
+ exactly that if the write is refused.
+ .
+ The extension switches the torch off when it is disabled (including at
+ logout), so a panel toggle can never leave the flash burning unattended.
 
