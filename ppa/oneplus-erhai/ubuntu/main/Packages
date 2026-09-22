@@ -86,6 +86,33 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  orientation handling (upright preview + upright snapshots).
  Video recording is experimental; photos and autofocus are the focus.
 
+Package: oneplus-erhai-cam
+Version: 1.3
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: oneplus-erhai-erhaicam (>= 1.4)
+Filename: ./oneplus-erhai-cam_1.3_all.deb
+Size: 930
+MD5sum: c04178b28431bad5e2f0be0075c6abdf
+SHA1: 33bdf68063b82996624976765e9e1c8e43bca873
+SHA256: 13925571bd74648a3eaa42e845f295d8b3f8621c1632d227c220d44be23f4174
+Section: oldlibs
+Priority: optional
+Description: transitional package — ErhaiCam was renamed to oneplus-erhai-erhaicam
+ The ErhaiCam GTK4/GStreamer camera app used to be packaged as
+ oneplus-erhai-cam (<= 1.2).  It is now oneplus-erhai-erhaicam, which ships the
+ same application (the binary is still /usr/bin/erhai-cam) and declares
+ Provides/Replaces/Breaks on the old name.
+ .
+ This package is EMPTY on purpose: it exists so that a device which still has
+ oneplus-erhai-cam installed upgrades through apt instead of keeping a retired
+ package forever.  Installing it pulls oneplus-erhai-erhaicam, and the file
+ hand-over (usr/bin/erhai-cam, usr/share/applications/…, the shipped source)
+ is done by that package's Replaces/Breaks on oneplus-erhai-cam (<< 1.3).
+ .
+ It is safe to remove once nothing depends on it:
+     sudo apt purge oneplus-erhai-cam
+
 Package: oneplus-erhai-camera
 Version: 1.2
 Architecture: arm64
@@ -192,6 +219,37 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  (front streams once its Phase-B driver work lands) and accelerometer
  orientation handling (upright preview + upright snapshots).
  Video recording is experimental; photos and autofocus are the focus.
+
+Package: oneplus-erhai-erhaicam
+Version: 1.4
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good
+Recommends: iio-sensor-proxy, gstreamer1.0-plugins-bad
+Breaks: oneplus-erhai-cam (<< 1.3)
+Replaces: oneplus-erhai-cam (<< 1.3)
+Provides: oneplus-erhai-cam
+Filename: ./oneplus-erhai-erhaicam_1.4_arm64.deb
+Size: 428392
+MD5sum: dc49504d1a18488690937efee12535f3
+SHA1: ac2e4c5401b19b6ae941459bad9aa9f9390469dd
+SHA256: 8fd9c73db56b1b7ef80d580ad68c27b02ca9bdfa32bfdccf100404113fe4b4fa
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with built-in contrast autofocus (Tenengrad sweep
+ driving the kernel cn3927 lens subdev, tap-to-focus, refocus on sharpness
+ drop), photo capture into ~/Pictures/ErhaiCam, video recording
+ (v4l2h264enc/mp4mux with vp8/webm fallback), front/rear camera switching
+ (front streams once its Phase-B driver work lands) and accelerometer
+ orientation handling (upright preview + upright snapshots).
+ Video recording is experimental; photos and autofocus are the focus.
+ .
+ This package takes over the renamed oneplus-erhai-cam (<= 1.2, the same app):
+ it Provides that name, and Replaces/Breaks the old versions so an installed
+ oneplus-erhai-cam upgrades here and its files (usr/bin/erhai-cam, the desktop
+ file, the shipped source) change hands cleanly.  The oneplus-erhai-cam 1.3
+ package is an empty transitional package that Depends on this one.
 
 Package: oneplus-erhai-firmware
 Version: 1.0
