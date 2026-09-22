@@ -502,10 +502,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: oneplus-erhai-fastrpc (>= 0.1)
 Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b63), oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp
 Filename: ./oneplus-erhai-npu_0.2_arm64.deb
-Size: 9329250
-MD5sum: c8b1bf8c9d85742bd1a3825675511294
-SHA1: 1034bc990a00a7353a7845eb8778068465028604
-SHA256: 3bc1503c9edb5d5b75bffdb08abbaa69ef00876c7a0f0355469532b790ecb338
+Size: 9330766
+MD5sum: 1d18df5cd69ad4412a29478addcca586
+SHA1: 2d0bfb12a0d7f10994038d473ba3b4e45787d5cd
+SHA256: b2a2884b7c706843ecf9596eeae0e31eb51db33ff8be5d4f8a0b7f967a7fc939
 Section: utils
 Priority: optional
 Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad 3 (erhai)
