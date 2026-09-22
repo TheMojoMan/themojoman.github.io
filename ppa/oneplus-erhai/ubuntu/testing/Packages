@@ -188,15 +188,15 @@ Package: oneplus-erhai-fastrpc
 Version: 0.1
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
-Installed-Size: 79340
+Installed-Size: 79356
 Depends: libc6, libbsd0, libyaml-0-2, systemd, udev
 Recommends: oneplus-erhai-firmware, oneplus-erhai-npu
 Suggests: oneplus-erhai-sensors, oneplus-erhai-linux-7.2
 Filename: ./oneplus-erhai-fastrpc_0.1_arm64.deb
-Size: 22507218
-MD5sum: e16494e23e9afd39f19f656d84e94e69
-SHA1: 4c441106908015a398f24efa476d03ddcc48da06
-SHA256: a06743d82c627d767a30068397bcb0edd3a49d96ea955783a8aeb051dcf810c4
+Size: 22506962
+MD5sum: 8b4f16dbe6fef4a73aeea994048fdf96
+SHA1: aab7d1bec9fb1a61c6dd00b9bd2f0a36e43afe79
+SHA256: 4b3f2b7a492fc2b4ef792c5efa5f263b578ff9c9d9e70893866a5634e95b3dfb
 Section: libs
 Priority: optional
 Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP transport
@@ -502,10 +502,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: oneplus-erhai-fastrpc (>= 0.1)
 Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b63), oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp
 Filename: ./oneplus-erhai-npu_0.2_arm64.deb
-Size: 9328214
-MD5sum: 42d0d027c2a694f7ee51c0feede278a5
-SHA1: a16dfbd771f6563909cca81a739964d63d6a2f27
-SHA256: 53a1090ddd2241cf6323ccd2f437af22106357c0056f076e3bf7bf0685754322
+Size: 9329250
+MD5sum: c8b1bf8c9d85742bd1a3825675511294
+SHA1: 1034bc990a00a7353a7845eb8778068465028604
+SHA256: 3bc1503c9edb5d5b75bffdb08abbaa69ef00876c7a0f0355469532b790ecb338
 Section: utils
 Priority: optional
 Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad 3 (erhai)
