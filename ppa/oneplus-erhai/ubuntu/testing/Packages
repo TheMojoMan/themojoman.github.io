@@ -184,6 +184,59 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
  come up as a FULL UBUNTU DESKTOP.
 
+Package: oneplus-erhai-fastrpc
+Version: 0.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 79340
+Depends: libc6, libbsd0, libyaml-0-2, systemd, udev
+Recommends: oneplus-erhai-firmware, oneplus-erhai-npu
+Suggests: oneplus-erhai-sensors, oneplus-erhai-linux-7.2
+Filename: ./oneplus-erhai-fastrpc_0.1_arm64.deb
+Size: 22507218
+MD5sum: e16494e23e9afd39f19f656d84e94e69
+SHA1: 4c441106908015a398f24efa476d03ddcc48da06
+SHA256: a06743d82c627d767a30068397bcb0edd3a49d96ea955783a8aeb051dcf810c4
+Section: libs
+Priority: optional
+Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP transport
+ This is the SHARED FastRPC layer of erhai: the Qualcomm userspace built from
+ github.com/qualcomm/fastrpc, plus the DSP-side payload trees a FastRPC client
+ uploads to the DSP. It is what makes /dev/fastrpc-cdsp usable at all, so the
+ NPU/HTP stack (oneplus-erhai-npu) and any other FastRPC client need it.
+ .
+  - client libraries in /usr/local/lib: libcdsprpc (SONAME libcdsprpc.so.1),
+    libadsprpc, libsdsprpc and the three *_default_listener shims;
+  - cdsprpcd, the remotefs daemon for the COMPUTE DSP (the Linux equivalent of
+    Android's `cdsprpcd rootpd cdsp`), with a hardened unit
+    (cdsprpcd.service: ConditionPathExists-gated so a kernel without the CDSP
+    SKIPS it) and a drop-in setting ADSP_LIBRARY_PATH/DSP_LIBRARY_PATH to the
+    DSP payload trees;
+  - the `fastrpc` group (usr/lib/sysusers.d/fastrpc.conf) and the udev rule that
+    hands /dev/fastrpc-* to it (root:fastrpc 0640) and ACLs /dev/dma_heap/system
+    -- uaccess cannot be used here, the FastRPC nodes are misc devices;
+    the postinst also puts the desktop accounts into the group, which needs a
+    re-login to take effect;
+  - /etc/environment.d/57-erhai-fastrpc-unsigned.conf (FASTRPC_UNSIGNED_PD=1):
+    the Linux QNN/ggml DSP skels are unsigned-only, and QNN picks
+    signed-vs-unsigned from the platform info, so the CDSP refuses the PD image
+    (0x8000054f) without it;
+  - the DSP payload trees clients read from: /usr/lib/rfsa/adsp,
+    /usr/lib/rfsa/cdsp and /usr/share/qcom/hexagon/v79 (fastrpc_shell_3 +
+    _unsigned_3, the Hexagon C++ runtime, the QNN HTP v79 skel, the HTP runtime
+    and the ggml-htp skels, from OxygenOS 16.0.9.400, the public QNN/QAIRT
+    releases and Qualcomm's PyPI GenieX tooling);
+  - fastrpc_test + fastrpc-healthcheck (bring-up/diagnostic tools).
+ .
+ DELIBERATELY NOT SHIPPED: the adsprpcd/sdsprpcd/gdsprpcd daemons and their
+ units -- the ADSP/SDSP paths on erhai are served by oneplus-erhai-sensors'
+ hexagonrpcd-erhai -- the libtool .la files, and the manual backup copies of the
+ QNN skel (*.previous, *.qai_appbuilder) that nothing loads.
+ .
+ Kernel side: the CDSP remoteproc must be enabled (oneplus-erhai-linux
+ >= 7.2.0-sm8750-themojoman+b63) and the firmware must carry the cdsp split
+ image (oneplus-erhai-firmware >= 1.2).
+
 Package: oneplus-erhai-firmware
 Version: 1.2
 Architecture: arm64
@@ -442,6 +495,55 @@ Description: Hexagon NPU / compute-DSP (CDSP) stack for the OnePlus Pad 3 (erhai
  here, so the NPU itself is bring-up complete; driving a graph additionally
  needs a glibc QNN host runtime.
 
+Package: oneplus-erhai-npu
+Version: 0.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: oneplus-erhai-fastrpc (>= 0.1)
+Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b63), oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp
+Filename: ./oneplus-erhai-npu_0.2_arm64.deb
+Size: 9328214
+MD5sum: 42d0d027c2a694f7ee51c0feede278a5
+SHA1: a16dfbd771f6563909cca81a739964d63d6a2f27
+SHA256: 53a1090ddd2241cf6323ccd2f437af22106357c0056f076e3bf7bf0685754322
+Section: utils
+Priority: optional
+Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad 3 (erhai)
+ The NPU/HTP half of erhai's Hexagon stack: the file tree the CDSP is served,
+ the health report and the user front end.  The TRANSPORT layer (libcdsprpc,
+ cdsprpcd, the fastrpc group, the udev rule, the DSP payload trees) is
+ oneplus-erhai-fastrpc, which this package depends on; the ADSP path stays in
+ oneplus-erhai-sensors.
+  - the complete CDSP FastRPC remote-filesystem tree served to the DSP
+    (/var/lib/hexagonfs-cdsp/dsp/cdsp): fastrpc_shell_3 +
+    fastrpc_shell_unsigned_3 (the user-PD shells), the Hexagon CoProcessor
+    (HTP) runtime libs from the device's own dsp partition, the vendor QNN
+    HTP v79 skel (libQnnHtpV79Skel.so) and the C++ runtime the skels link
+    against -- all taken from OxygenOS 16.0.9.400;
+  - hexagonrpcd-cdsp.service: the DISABLED fallback daemon (our hexagonrpcd
+    fork, attaching to /dev/fastrpc-cdsp as the DSP's root PD).  The daemon that
+    works with this firmware is Qualcomm's cdsprpcd from oneplus-erhai-fastrpc;
+    the fallback stays for a kernel/firmware combination whose apps_std ABI is
+    the one the upstream RPC host expects;
+  - erhai-npu-status.sh: one-shot health report of the whole chain (kernel
+    DT/firmware, remoteproc, FastRPC nodes, transport, daemon, payload), with an
+    optional --pd-test proving the DSP executes a host-uploaded shell;
+  - npu-llm: an ollama-style front end (pull/run/chat/list/rm/doctor/models)
+    running GGUF models on the NPU through the GenieX SDK's llama.cpp backend,
+    hiding the two local quirks (the fastrpc group and the CDSP mapping space);
+  - erhai-cdsp-restart.sh: recovery for an exhausted FastRPC mapping arena
+    (restarts the CDSP remoteproc only -- NEVER the ADSP, that freezes the SoC).
+ .
+ Kernel side (oneplus-erhai-linux >= +b63 + oneplus-erhai-firmware >= 1.2):
+ &remoteproc_cdsp enabled with the OxygenOS cdsp.mdt/cdsp_dtb.mdt split image
+ and the OEM-identical carveouts (0x9d200000+0x1900000, 0x9eb00000+0x80000).
+ .
+ NOTE: the QNN *host* runtime (libQnnHtp.so / libQnnHtpV79Stub.so) is not
+ shippable -- Qualcomm distributes it for Android (bionic) and through the
+ account-gated QNN/Hexagon SDK.  The DSP side is complete here, and npu-llm
+ reaches the NPU through the GenieX SDK's own host runtime (pip install --user
+ geniex, which also fetches its SDK zip).
+
 Package: oneplus-erhai-sensors
 Version: 2.1
 Architecture: arm64
@@ -483,6 +585,56 @@ Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
    - ssccli gained `--rate HZ` (libssc 0.4.4 sample-rate property made
      writable): the folio-fold watcher requests 1 Hz so the magnetometer is
      not streamed at its 50 Hz ceiling all day (SSC hardware floors at 5 Hz)
+ The source patches for the binary builds ship under
+ /usr/share/doc/oneplus-erhai-sensors/patches/.
+
+Package: oneplus-erhai-sensors
+Version: 2.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-sensors_2.2_arm64.deb
+Size: 3093322
+MD5sum: 2ceb6f45feeef1d1178a87f41456391c
+SHA1: a0f2765b2d19399f5f82754c9cdddca58ba4013b
+SHA256: 41590512539b27c07df2392e73e90a5c07900d9e0c20e912fd7cbea68d548e2e
+Section: utils
+Priority: optional
+Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
+ Brings the ADSP SSC sensors (BMI3x0 accelerometer, ambient light) up to
+ iio-sensor-proxy and the GNOME desktop:
+  - patched iio-sensor-proxy 3.9 with SSC support + startup-claim-race fix
+    (/usr/local/libexec/iio-sensor-proxy), monitor-sensor and ssccli helpers
+  - libssc 0.4.4 (/usr/local/lib/aarch64-linux-gnu/libssc.so.2)
+  - hexagonrpcd 0.4.0 with odm-sensor-config + nonfatal-dispatch patches
+    (/usr/local/bin/hexagonrpcd-erhai), a hexagonrpcd.service drop-in that
+    points at it, and the complete /var/lib/hexagonfs-erhai remotefs tree
+    (acdb, fastrpc_shell_0 + libsns_* DSP libs, vendor sensor configs,
+    odm json_list). The tree must be complete BEFORE hexagonrpcd first
+    attaches: the ADSP sensor PD loads its configs exactly once.
+  - udev rule 90-erhai-ssc-sensors.rules: SSC sensor types + ACCEL_MOUNT_MATRIX
+    (rotated -90 deg so natural landscape classifies as "normal") on
+    fastrpc-adsp-secure, SYSTEMD_WANTS=iio-sensor-proxy.service
+  - iio-sensor-proxy.service drop-in redirecting ExecStart to the SSC build
+  - erhai-sensors@erhai.local GNOME Shell quick-settings extension
+    (auto-brightness toggle; auto-rotate toggle whose value is saved and
+    turned OFF when the pogo keyboard is attached and recovered on detach
+    (save persists across sessions) — the toggle itself stays enabled at
+    all times — plus suppression of the shell's built-in duplicate rotation
+    toggle)
+   - erhai-alsd (session auto-brightness) never writes brightness while the
+     panel is blanked — by the power button or by the folio-fold watcher in
+     oneplus-erhai-desktop — and re-applies its target once the panel is back
+   - ssccli gained `--rate HZ` (libssc 0.4.4 sample-rate property made
+     writable): the folio-fold watcher requests 1 Hz so the magnetometer is
+     not streamed at its 50 Hz ceiling all day (SSC hardware floors at 5 Hz)
+ Note on the Hexagon stack split: the ADSP path (hexagonrpcd-erhai, the
+ hexagonfs-erhai remotefs tree, this package) is separate from the CDSP/NPU
+ path. The shared FastRPC TRANSPORT (libcdsprpc, cdsprpcd, the `fastrpc`
+ group, the udev rule, the /usr/lib/rfsa payload trees) lives in
+ oneplus-erhai-fastrpc; hexagonrpcd runs as User=fastrpc, so this package's
+ postinst creates that group if it is missing and works standalone.
  The source patches for the binary builds ship under
  /usr/share/doc/oneplus-erhai-sensors/patches/.
 
