@@ -431,6 +431,28 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc4-sm8750-themojoman+b14
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc4-sm8750-themojoman+b14_arm64.deb
+Size: 27685744
+MD5sum: 8295f6bec765534214e744f695cd609b
+SHA1: 7299c8688b7eeb7391f4c0229c145b198e216447
+SHA256: b57c13828b0891b23420a9601dab3ca05011773699f7e200470c7de4aeb0841c
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
 Package: oneplus-erhai-mesa
 Version: 26.3.0~devel.git228935.g063a4640270-1erhai1
 Architecture: arm64
@@ -489,6 +511,29 @@ Description: ADSP OTG session re-arm for the OnePlus Pad 3 (erhai)
  USB_OTG_SWITCH=18), a oneshot systemd unit, and a udev rule triggering it
  on Type-C port change / partner removal so every detach self-heals.
  Requires the erhai kernel (erhai_otg_glink + debugfs).
+
+Package: oneplus-erhai-pen
+Version: 0.2
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez, python3-gi
+Filename: ./oneplus-erhai-pen_0.2_all.deb
+Size: 10452
+MD5sum: 41973396250c33c526848a5560374aab
+SHA1: 501d61ba23540eadbff20d2ecacf6813e6dcbb6c
+SHA256: e0a7848e40413b11f861a18a6294d903e0c77bc59922766c734aa758824cfd51
+Section: misc
+Priority: optional
+Description: OnePlus pen (stylus) support for the OnePlus Pad 3 (erhai)
+ Linux/BlueZ port of the stock OxygenOS "OplusPen" service
+ (org.lineageos.pen in the LineageOS erhai open-source tree).  Auto-pairs,
+ trusts and connects the OnePlus pen over Bluetooth (BLE HID, Goodix OUI
+ F8:6F:DE / Maxeye OUI C0:87:06, HID vendor 22D9/330A) and keeps
+ /run/erhai-pen/{state,addr} current.  Since 0.2 also toasts the pen's
+ state of charge for 5 s when the pen is attached to / detached from the
+ tablet's charging coil (kernel +b10, oplus_cps8601 debugfs).  The pen
+ tip/position/pressure path stays in the NT36536 in-cell digitizer (touch
+ driver), as on stock.  Package README: /usr/share/oneplus-erhai-pen/README.md
 
 Package: oneplus-erhai-sensors
 Version: 1.8
