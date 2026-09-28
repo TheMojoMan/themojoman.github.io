@@ -2,15 +2,15 @@ Origin: TheMojoMan Xiaomi-nabu PPA
 Label: TheMojoMan Xiaomi-nabu PPA
 Suite: resolute
 Codename: resolute
-Date: Mon, 28 Sep 2026 12:21:26 +0000
+Date: Mon, 28 Sep 2026 12:35:02 +0000
 Architectures: arm64
 Description: Unofficial PPA for Xiaomi Pad 5 (nabu)
 MD5Sum:
  4683f72c17dabac4b409abf6fd816274 652 Packages
- 203b26c5c5d94405367b24ad80eab49d 471 Packages.gz
+ dcf5d4ae848319d84ae36f338d7a5767 471 Packages.gz
 SHA1:
  1882c1a1d224aaf59f8f51a2ae614ddc49885688 652 Packages
- 13d2fcb06bdb9ec7aa0d80e56b5fef587a7499ae 471 Packages.gz
+ 33337ab9ebf6a095ebf97f1281fa68434b27a8d7 471 Packages.gz
 SHA256:
  9f0702d976f86b52a10c6dc8e5ba7df53a6fc9fb32e56f908769ae8a1b001591 652 Packages
- 5b63af9bd2372922d2c375257273ce828947b77c69d4e2f84680be58a7bcffd1 471 Packages.gz
+ 8cdeee41f10981210fdcf33368d143c8c1ca38618eed400ef46c296cbfa83f22 471 Packages.gz
