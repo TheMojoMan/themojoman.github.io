@@ -2,15 +2,15 @@ Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Suite: testing
 Codename: testing
-Date: Tue, 29 Sep 2026 09:51:15 +0000
+Date: Tue, 29 Sep 2026 15:12:22 +0000
 Architectures: arm64
 Description: Unofficial PPA for OnePlus Pad 3 (erhai)
 MD5Sum:
  d41d8cd98f00b204e9800998ecf8427e 0 Packages
- d667c45a6acb8a96d3f5a55f982a9972 29 Packages.gz
+ d3eca1b08db72655e7da8a04481e7d28 29 Packages.gz
 SHA1:
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 Packages
- 21863843bd5c66cec24c3e3a787727ee687c0388 29 Packages.gz
+ 42924d4649426dcfcb1249475ab9cd41c5adeea1 29 Packages.gz
 SHA256:
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 Packages
- 6efbbd293d447ed2c3f0bf07cda186a73167953f45de97fe1cfb707a86d88f7d 29 Packages.gz
+ f1b81f71ab877f01f52feec73e2edb12148f5c082f8f61a5757d3986dab2ae70 29 Packages.gz
