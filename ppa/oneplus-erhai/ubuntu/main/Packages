@@ -499,16 +499,16 @@ Description: Patched llama.cpp for the OnePlus Pad 3 (erhai): CPU + Adreno OpenC
  /usr/share/doc/oneplus-erhai-llamacpp/.
 
 Package: oneplus-erhai-npu
-Version: 0.4
+Version: 0.5
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: oneplus-erhai-fastrpc (>= 0.1)
 Recommends: oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp, oneplus-erhai-thermal
-Filename: ./oneplus-erhai-npu_0.4_arm64.deb
-Size: 9338526
-MD5sum: 9569fb1884e42633e24ff49aba16f11b
-SHA1: 73d43727af6c8ea91af92faab5e9639da5bf1df3
-SHA256: 51c79551df55db125608d30f75957ee9e94921bafbe5d873698f6bb4eebcb461
+Filename: ./oneplus-erhai-npu_0.5_arm64.deb
+Size: 9339486
+MD5sum: f5dbcb6711c4b436908f7336cdb53863
+SHA1: cf88ae74f5456426286c21990d3234086236523e
+SHA256: 9e628aa53ce02a75f83d936236103a19c71b00bc75101ace066a3e320a98f79b
 Section: utils
 Priority: optional
 Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad 3 (erhai)
