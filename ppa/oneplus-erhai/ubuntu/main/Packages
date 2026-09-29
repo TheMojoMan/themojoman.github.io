@@ -331,18 +331,18 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  no longer ships it).
 
 Package: oneplus-erhai-fastrpc
-Version: 0.1
+Version: 0.2
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Installed-Size: 79356
 Depends: libc6, libbsd0, libyaml-0-2, systemd, udev
 Recommends: oneplus-erhai-firmware, oneplus-erhai-npu
-Suggests: oneplus-erhai-sensors, oneplus-erhai-linux-7.2
-Filename: ./oneplus-erhai-fastrpc_0.1_arm64.deb
-Size: 22506962
-MD5sum: 8b4f16dbe6fef4a73aeea994048fdf96
-SHA1: aab7d1bec9fb1a61c6dd00b9bd2f0a36e43afe79
-SHA256: 4b3f2b7a492fc2b4ef792c5efa5f263b578ff9c9d9e70893866a5634e95b3dfb
+Suggests: oneplus-erhai-sensors
+Filename: ./oneplus-erhai-fastrpc_0.2_arm64.deb
+Size: 22507010
+MD5sum: 634a3793d83c298eb47db87d289b4ec7
+SHA1: 8861f56b164214a7814b161dfc0e1a262ddaf66f
+SHA256: 40530266ef9aeb482ad15dca32f28d504b60634e8abbd1bda22047865dd9a681
 Section: libs
 Priority: optional
 Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP transport
@@ -379,9 +379,11 @@ Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP tran
  hexagonrpcd-erhai -- the libtool .la files, and the manual backup copies of the
  QNN skel (*.previous, *.qai_appbuilder) that nothing loads.
  .
- Kernel side: the CDSP remoteproc must be enabled (oneplus-erhai-linux
- >= 7.2.0-sm8750-themojoman+b63) and the firmware must carry the cdsp split
- image (oneplus-erhai-firmware >= 1.2).
+ Kernel side (NO kernel package is recommended or suggested on purpose: the
+ erhai kernel is mandatory for Ubuntu on this tablet and ships in the image):
+ the CDSP remoteproc must be enabled (oneplus-erhai-linux from the 7.2 +b63
+ build on, or any 7.3-rc* line) and the firmware must carry the cdsp split image
+ (oneplus-erhai-firmware >= 1.2).
 
 Package: oneplus-erhai-firmware
 Version: 1.2
@@ -497,16 +499,16 @@ Description: Patched llama.cpp for the OnePlus Pad 3 (erhai): CPU + Adreno OpenC
  /usr/share/doc/oneplus-erhai-llamacpp/.
 
 Package: oneplus-erhai-npu
-Version: 0.3
+Version: 0.4
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: oneplus-erhai-fastrpc (>= 0.1)
-Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b63), oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp, oneplus-erhai-thermal
-Filename: ./oneplus-erhai-npu_0.3_arm64.deb
-Size: 9335206
-MD5sum: a3b9c28bfd3cd2a260408d2a25c3ab4b
-SHA1: c77e63bff9d325161b9e31f3eb6f70c5bda8fdbb
-SHA256: 037e384c188109896a4844a6c56159a89752f5fe124114d001462f439ae3a9e7
+Recommends: oneplus-erhai-firmware (>= 1.2), oneplus-erhai-sensors, oneplus-erhai-llamacpp, oneplus-erhai-thermal
+Filename: ./oneplus-erhai-npu_0.4_arm64.deb
+Size: 9338526
+MD5sum: 9569fb1884e42633e24ff49aba16f11b
+SHA1: 73d43727af6c8ea91af92faab5e9639da5bf1df3
+SHA256: 51c79551df55db125608d30f75957ee9e94921bafbe5d873698f6bb4eebcb461
 Section: utils
 Priority: optional
 Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad 3 (erhai)
@@ -535,9 +537,12 @@ Description: Hexagon NPU / compute-DSP (CDSP) workload layer for the OnePlus Pad
   - erhai-cdsp-restart.sh: recovery for an exhausted FastRPC mapping arena
     (restarts the CDSP remoteproc only -- NEVER the ADSP, that freezes the SoC).
  .
- Kernel side (oneplus-erhai-linux >= +b63 + oneplus-erhai-firmware >= 1.2):
- &remoteproc_cdsp enabled with the OxygenOS cdsp.mdt/cdsp_dtb.mdt split image
- and the OEM-identical carveouts (0x9d200000+0x1900000, 0x9eb00000+0x80000).
+ Kernel side (NO dependency declared on purpose: the erhai kernel is mandatory
+ for Ubuntu on this tablet and ships in the image): the CDSP remoteproc must be
+ enabled, i.e. oneplus-erhai-linux from the 7.2 +b63 build on, or any 7.3-rc*
+ line, booting the OxygenOS cdsp.mdt/cdsp_dtb.mdt split image with the
+ OEM-identical carveouts (0x9d200000+0x1900000, 0x9eb00000+0x80000), plus
+ oneplus-erhai-firmware >= 1.2.
  .
  NOTE: the QNN *host* runtime (libQnnHtp.so / libQnnHtpV79Stub.so) is not
  shippable -- Qualcomm distributes it for Android (bionic) and through the
@@ -709,16 +714,15 @@ Description: Torch (rear camera flash LED) control for the OnePlus Pad 3 (erhai)
  logout), so a panel toggle can never leave the flash burning unattended.
 
 Package: oneplus-erhai-video
-Version: 1.1
+Version: 1.2
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: libva2
-Recommends: oneplus-erhai-linux-7.2 (>= 7.2.0-sm8750-themojoman+b10), firefox | chromium | brave-browser
-Filename: ./oneplus-erhai-video_1.1_arm64.deb
-Size: 1086322
-MD5sum: a5c75a88e47e0709d8ac38e9234e4810
-SHA1: 998701c7962dd02833fbf20c0f81fc699c086837
-SHA256: 20f2857d76e2b178fc527410053ae2c6360e76e8976319c4fa2387a4c15d7b24
+Filename: ./oneplus-erhai-video_1.2_arm64.deb
+Size: 1086390
+MD5sum: c9ebf59a3a3cd5bbdc73e57e639bb816
+SHA1: ac5fdd999d3ac8e851a97ca75448521f864a2b06
+SHA256: 9766f9920c5824352532af9f157d383e012c0b8789e70f294dd98eceb49b6d7d
 Section: video
 Priority: optional
 Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
@@ -738,9 +742,12 @@ Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
  Codecs: H.264, HEVC Main/Main10, VP9 Profile 0/2 (no AV1). Chromium
  (xtradeb) decodes H.264/VP9 via V4L2; Firefox and Brave decode H.264/HEVC
  Main (and Main10/VP9 P2 where the firmware exposes P010) via VA-API.
- Requires oneplus-erhai-linux-7.2 >= +b10 (decode-order output property) for
- Firefox/Brave; works out of the box in the full erhai image. After
- installing on a running desktop, log out and back in once.
+ Needs an erhai kernel with the iris decode-order output property (the 7.2
+ line from +b10 on, or any 7.3-rc* line) for Firefox/Brave; the full erhai
+ image ships it. The package declares NO Recommends on purpose: the kernel,
+ the browsers and libva are provided by the image (or by the user), so
+ installing it drags nothing else in. After installing on a running desktop,
+ log out and back in once.
  .
  The iris-vaapi source tree ships in /usr/src/oneplus-erhai-video/iris-vaapi.
 
