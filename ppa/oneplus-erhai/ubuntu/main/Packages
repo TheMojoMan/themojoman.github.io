@@ -286,6 +286,77 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
  come up as a FULL UBUNTU DESKTOP.
 
+Package: oneplus-erhai-desktop
+Version: 2.2
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_2.2_all.deb
+Size: 394686
+MD5sum: 7597697c559574c0520852cf3133b046
+SHA1: 17291bf06607c3a16e416a42741df68ebfa46954
+SHA256: e60c861d6a8e3b586556e72e1df40cccb0653b392119258842ac1d4712ccbbe2
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start (erhai-gpu-pin; the GPU is PINNED
+ always-active at runtime-PM 'on' on every kernel since 2026-09-13 — it never
+ runtime-suspends, so the intermittent GMU resume hang can never fire),
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; GNOME's
+ "Suspend" wired to the proven manual-wake s2idle harness via a
+ systemd-suspend.service ExecStart override -> erhai-suspend-gnome.sh ->
+ erhai-suspend-s2idle.sh (display-off-first + WLAN quiesce + full restore;
+ short power press wakes, long press powers off; auto-sleep stays off)),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+ Fixed login-screen policy (2026-09-22): the internal panel comes up at 50 % of
+ max_brightness at boot (erhai-backlight.service) and is re-pinned to 50 % for
+ every GDM greeter session, i.e. the login screen, by
+ erhai-greeter-brightness.py (a logind watcher; user sessions are never
+ touched).  GNOME's own ambient-light auto-brightness is forced OFF as a
+ GSettings DEFAULT (99-erhai-no-gsd-ambient.gschema.override) because the
+ greeter's dconf can end up unreadable, in which case only a default override
+ reaches it - that was the login screen crashing to its minimum level.  The
+ greeter also gets session-name='gnome-login' (greeter dconf seed +
+ /usr/share/gdm/dconf/95-erhai-greeter + /etc/dconf/profile/gdm) and a greeter
+ .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
+ come up as a FULL UBUNTU DESKTOP.
+ Ships the FIXED gjs-osk on-screen keyboard as a system-wide GNOME Shell
+ extension (/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/), copied
+ from the image overlay on every build so the deb and a flashed image can never
+ diverge.  Its folio gate (pogoGate.js + the [erhai] hunks in extension.js)
+ keeps the OSK from coming up by itself while the pogo keyboard is attached: no
+ touch/tap auto-show, no bottom-edge swipe, no restore at login, an
+ automatically opened keyboard is retracted on the attach edge, an external
+ keyboard-visible=true is forced back to false, and the on-screen CLOSE key
+ clears the sticky keyboard-visible flag through the extension object.  The
+ indicator / quick-settings toggle and the `opened` command key still work, so
+ the OSK stays one deliberate tap away.  Nothing in it loads in the greeter
+ (no session-modes), which keeps GNOME's built-in OSK there.  A USER-LEVEL copy
+ of the same uuid takes precedence in gnome-shell (the user data dir is
+ collected first and the later system copy is skipped as "already installed"),
+ so a device that has one in ~/.local/share/gnome-shell/extensions/ keeps
+ loading that one.
+
 Package: oneplus-erhai-erhaicam
 Version: 1.5
 Architecture: arm64
