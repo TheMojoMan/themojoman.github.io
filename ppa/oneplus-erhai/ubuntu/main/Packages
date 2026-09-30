@@ -384,6 +384,99 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  clock and exits 0 on a kernel without the cell (pre-+b8), so it is harmless
  everywhere.  Audit/seed the cell by hand with workspace tmp/rtc-offset-probe.py.
 
+Package: oneplus-erhai-desktop
+Version: 2.5
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_2.5_all.deb
+Size: 407116
+MD5sum: 70a897e771d31774a16b4819c381eaa9
+SHA1: b2cd4472d316a6c117d52f955cd5a30ec8384e67
+SHA256: 8b7370e4bbbf03649f1a2bf032b2ea1e35818c28f201b57292e7003062021471
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start (erhai-gpu-pin; the GPU is PINNED
+ always-active at runtime-PM 'on' on every kernel since 2026-09-13 — it never
+ runtime-suspends, so the intermittent GMU resume hang can never fire),
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; GNOME's
+ "Suspend" wired to the proven manual-wake s2idle harness via a
+ systemd-suspend.service ExecStart override -> erhai-suspend-gnome.sh ->
+ erhai-suspend-s2idle.sh (display-off-first + WLAN quiesce + full restore;
+ short power press wakes, long press powers off; auto-sleep stays off)),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper + launcher,
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+ Fixed login-screen policy (2026-09-22): the internal panel comes up at 50 % of
+ max_brightness at boot (erhai-backlight.service) and is re-pinned to 50 % for
+ every GDM greeter session, i.e. the login screen, by
+ erhai-greeter-brightness.py (a logind watcher; user sessions are never
+ touched).  GNOME's own ambient-light auto-brightness is forced OFF as a
+ GSettings DEFAULT (99-erhai-no-gsd-ambient.gschema.override) because the
+ greeter's dconf can end up unreadable, in which case only a default override
+ reaches it - that was the login screen crashing to its minimum level.  The
+ greeter also gets session-name='gnome-login' (greeter dconf seed +
+ /usr/share/gdm/dconf/95-erhai-greeter + /etc/dconf/profile/gdm) and a greeter
+ .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
+ come up as a FULL UBUNTU DESKTOP.
+ Ships the FIXED gjs-osk on-screen keyboard as a system-wide GNOME Shell
+ extension (/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/), copied
+ from the image overlay on every build so the deb and a flashed image can never
+ diverge.  Its folio gate (pogoGate.js + the [erhai] hunks in extension.js)
+ keeps the OSK from coming up by itself while the pogo keyboard is attached: no
+ touch/tap auto-show, no bottom-edge swipe, no restore at login, an
+ automatically opened keyboard is retracted on the attach edge, an external
+ keyboard-visible=true is forced back to false, and the on-screen CLOSE key
+ clears the sticky keyboard-visible flag through the extension object.  The
+ indicator / quick-settings toggle and the `opened` command key still work, so
+ the OSK stays one deliberate tap away.  Nothing in it loads in the greeter
+ (no session-modes), which keeps GNOME's built-in OSK there.  A USER-LEVEL copy
+ of the same uuid takes precedence in gnome-shell (the user data dir is
+ collected first and the later system copy is skipped as "already installed"),
+ so a device that has one in ~/.local/share/gnome-shell/extensions/ keeps
+ loading that one.
+ Battery-backed clock (2026-09-29): the PMK8550 PMIC RTC is a 1 Hz
+ free-running counter with no wall-clock epoch of its own (and this firmware's
+ EFI "RTC" answers with an invalid date), which is why the pad used to boot at
+ 1970 and only got the right time once WiFi/NTP was up.  Kernel +b8 gives the
+ RTC an "offset" nvmem cell (PMIC SDAM 0x7150) and erhai-rtc-sync.py stores
+ system_time - counter into it once at boot and hourly
+ (erhai-rtc-sync.service + erhai-rtc-sync.timer), so the next boot is right
+ from second zero - the same value Android's time_daemon keeps in
+ /mnt/vendor/persist/time/ats_1.  The helper refuses to store an implausible
+ clock and exits 0 on a kernel without the cell (pre-+b8), so it is harmless
+ everywhere.  Audit/seed the cell by hand with workspace tmp/rtc-offset-probe.py.
+ Bypass charging (2026-09-30): a GNOME Quick Settings switch
+ (erhai-bypass@erhai.local) that stops the battery charging while a charger is
+ attached, so the tablet runs from the adapter alone (measured live: pack
+ 3.93 A -> 0.117 A = 0.49 W with the switch on, back to 1.74 A with it off).
+ The switch starts erhai-bypass-charge@<on|off>.service, which polkit lets an
+ active local user start without a prompt (50-erhai-bypass-charge.rules); the
+ helper /usr/local/sbin/erhai-bypass-charge.sh holds the ADSP battery-psy
+ charge-enable property (BATT_CHG_EN = 24, opcode 0x31) down, parks the
+ in-kernel max_soc limiter (it drives the same property, so it must stand down)
+ and applies a 10 % low-SoC safety floor; erhai-bypass-charge.service applies
+ and holds the persisted choice from /etc/default/erhai-charge at boot.
+
 Package: oneplus-erhai-erhaicam
 Version: 1.5
 Architecture: arm64
