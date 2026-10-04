@@ -1345,10 +1345,10 @@ Architecture: all
 Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: bluez, python3-gi
 Filename: ./oneplus-erhai-pen_0.5_all.deb
-Size: 17218
-MD5sum: ded0c84e6cadc47ca620ece190aae92f
-SHA1: 00b972bf58d095a72099e5d9b443a4aa3601f481
-SHA256: 36693077dbf85d86e0994fbcecdf4a41f3b567008ca93b220ce9d81a587900fa
+Size: 17208
+MD5sum: 53ff7ef92803518fd8c9cdbcd4a45661
+SHA1: ce2aa17c45be051e285e8081f39e058da8e5c4f0
+SHA256: fecc7f4a18ef9ae4f12e58f8207aea4e2646dd7e6f01b0837029440b6ca9138e
 Section: misc
 Priority: optional
 Description: OnePlus pen (stylus) support for the OnePlus Pad 3 (erhai)
@@ -1369,7 +1369,7 @@ Description: OnePlus pen (stylus) support for the OnePlus Pad 3 (erhai)
  coil for instant reconnects; new `erhai-pen charger` CLI.  Since 0.5 the
  monitor also feeds the pen's BLE SoC into the coil driver's writable rx_soc
  knob, so the driver stops charging the pen at 100% and re-arms charging once
- the pen has drained below the threshold (kernel +b16).  The pen
+ the pen has drained below the threshold (kernel +b17).  The pen
  tip/position/pressure path stays in the NT36536 in-cell digitizer (touch
  driver), as on stock.  Package README:
  /usr/share/oneplus-erhai-pen/README.md
