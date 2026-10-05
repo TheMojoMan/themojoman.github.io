@@ -1204,6 +1204,35 @@ Description: Patched llama.cpp for the OnePlus Pad 3 (erhai): CPU + Adreno OpenC
  libcdsprpc, /usr/lib/rfsa, the fastrpc group) -- see the README shipped in
  /usr/share/doc/oneplus-erhai-llamacpp/.
 
+Package: oneplus-erhai-nautilus
+Version: 0.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: nautilus (>= 1:50), nautilus-data (>= 1:50), libglib2.0-bin
+Recommends: xdg-terminal-exec
+Filename: ./oneplus-erhai-nautilus_0.1_arm64.deb
+Size: 555684
+MD5sum: 6e37d87482535d0cf0db57938b8099aa
+SHA1: ffa525a71c93cad86f57339aecd7e2695f78d331
+SHA256: 6fb992135ca7199e734ba115a4583748fd36bd83b013f1f7848e3f6a6267c634
+Section: gnome
+Priority: optional
+Description: Touch-friendly GNOME Files (Nautilus) for the OnePlus Pad 3 (erhai)
+ A patched build of GNOME Files (Nautilus) with touchscreen features:
+  * long-press on the empty view background opens the context menu (the
+    touch equivalent of a right click);
+  * a "Show Select Boxes" preference (Files > Preferences > General) that
+    shows a selection checkbox to the left of every file/folder, so several
+    items can be selected on a touchscreen -- tap a box to toggle one item,
+    or swipe a finger across the boxes to select/deselect several at once.
+ .
+ Nautilus is C/GTK4, so this is a source patch, not an extension.  The
+ package installs the patched /usr/bin/nautilus and its gschema by diverting
+ Ubuntu's files (kept as *.erhai-orig); removing the package restores them.
+ The build matches Ubuntu's debian/rules meson options (including
+ -Dxdg-terminal-exec=true, so "Open in Terminal" is present).
+ Package README: /usr/share/oneplus-erhai-nautilus/README.md
+
 Package: oneplus-erhai-npu
 Version: 0.5
 Architecture: arm64
