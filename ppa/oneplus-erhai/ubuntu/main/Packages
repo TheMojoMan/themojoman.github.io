@@ -1425,6 +1425,41 @@ Description: OnePlus pen (stylus) support for the OnePlus Pad 3 (erhai)
  driver), as on stock.  Package README:
  /usr/share/oneplus-erhai-pen/README.md
 
+Package: oneplus-erhai-ptyxis
+Version: 0.1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: ptyxis (>= 50), libvte-2.91-gtk4-0
+Filename: ./oneplus-erhai-ptyxis_0.1_arm64.deb
+Size: 244080
+MD5sum: a479cf49c01e03d34b42cdc4eed0ce7f
+SHA1: 123a20f5448af9cfa2770b5e5eb03ab86a7fa617
+SHA256: d3856d0df8e29f3811d0c09c058dbb87c3b3f979f018da443edd9792f1dcad25
+Section: gnome
+Priority: optional
+Description: Touch-friendly Ptyxis (GNOME terminal) for the OnePlus Pad 3 (erhai)
+ A patched build of Ptyxis with touchscreen features:
+  * one-finger drag scrolls the terminal contents (1:1 with the finger for
+    slow movement, accelerated up to 1.3x for fast swipes, and gliding to a
+    stop after release); dragging a selection handle or the marked end near
+    the top/bottom edge auto-scrolls, faster the closer it gets to the edge;
+  * a long press marks text: the word under the finger is selected, dragging
+    extends it, and on release the marked region is colour-inverted, copied
+    to the clipboard with a "Copied to clipboard" toast, and two draggable
+    handles appear to adjust the region (releasing a handle re-copies);
+  * a long press on the line that holds the text cursor pastes the clipboard.
+ .
+ Ptyxis is a C/GTK4/VTE application, so this is a source patch (of
+ src/ptyxis-terminal.c), not an extension.  The package installs the patched
+ /usr/bin/ptyxis by diverting Ubuntu's binary (kept as /usr/bin/ptyxis.erhai-orig);
+ removing the package restores it.  Mouse and keyboard behaviour is unchanged.
+ .
+ Already-running Ptyxis windows keep the old binary (the app is
+ single-instance), so close all Ptyxis windows once after installing to pick
+ up the new one.
+ Package README: /usr/share/oneplus-erhai-ptyxis/README.md
+ Source patch:   /usr/share/oneplus-erhai-ptyxis/ptyxis-erhai-touch.patch
+
 Package: oneplus-erhai-sensors
 Version: 2.2
 Architecture: arm64
