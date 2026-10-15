@@ -1814,6 +1814,33 @@ Description: Android-style whole-die CPU+GPU thermal governor for the OnePlus Pa
  erhai-thermal@erhai.local GNOME Shell extension exposes the switch in the
  Quick Settings. See /usr/share/oneplus-erhai-thermal/README.md.
 
+Package: oneplus-erhai-thermal
+Version: 1.3
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Recommends: gnome-shell, polkitd
+Filename: ./oneplus-erhai-thermal_1.3_all.deb
+Size: 15448
+MD5sum: f417a54c531252bdaa057daab23529cc
+SHA1: 55ba996121f649431080a1c6c682682e73d06383
+SHA256: ca3e0bdb2f6d755a8dd60b6ec66514af982918741fba8754b87ddb0ba9c66ef3
+Section: utils
+Priority: optional
+Description: Android-style whole-die CPU+GPU thermal governor for the OnePlus Pad 3 (erhai)
+ erhai-thermal.sh implements the same thermal architecture Android uses on this
+ SoC: a userspace governor watches the whole-die envelope (CPU + GPU + NPU +
+ DDR sensors) and, as it approaches the profile's switch-on trigger, writes
+ cooling levels into the kernel cpufreq/devfreq cooling devices - the exact
+ levels Android's thermal-engine-v2 produces under the Burnout benchmark
+ (960/1018/734 MHz floors). The performance profile reproduces Android's
+ measured 92-106C envelope under a full CPU+GPU+NPU load, which the old
+ plane-local power_allocator tables could not (they were blind to NPU heat).
+ Profiles selected via /etc/default/erhai-thermal; the boot service runs the
+ governor; a template unit (erhai-thermal@.service) applies switches and a
+ polkit ruleset lets the desktop user switch without a password. The
+ erhai-thermal@erhai.local GNOME Shell extension exposes the switch in the
+ Quick Settings. See /usr/share/oneplus-erhai-thermal/README.md.
+
 Package: oneplus-erhai-torch
 Version: 0.1
 Architecture: all
