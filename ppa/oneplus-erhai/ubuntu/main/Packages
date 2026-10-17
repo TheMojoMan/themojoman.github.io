@@ -106,6 +106,99 @@ Description: free implementation of the OpenGL API -- GLX vendor library (erhai,
  In-place replacement for Ubuntu's libglx-mesa0, rebuilt from mesa git for the
  OnePlus Pad 3 (erhai).
 
+Package: libgtk-4-1
+Source: gtk4
+Version: 4.22.4+ds-0ubuntu0.1+erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 12364
+Depends: adwaita-icon-theme, hicolor-icon-theme, shared-mime-info, libc6 (>= 2.43), libcairo-gobject2 (>= 1.18.2), libcairo-script-interpreter2 (>= 1.18.2), libcairo2 (>= 1.18.2), libcolord2 (>= 0.1.10), libcups2t64 (>= 1.7.0), libepoxy0 (>= 1.5.2), libfontconfig1 (>= 2.12.6), libfribidi0 (>= 0.19.2), libgdk-pixbuf-2.0-0 (>= 2.31.1), libglib2.0-0t64 (>= 2.87.3), libgraphene-1.0-0 (>= 1.10.0), libgstreamer-gl1.0-0 (>= 1.14.0), libgstreamer-plugins-base1.0-0 (>= 1.23.1), libgstreamer-plugins-extra1.0-0 (>= 1.27.90-1ubuntu3), libgstreamer1.0-0 (>= 1.14.0), libharfbuzz-subset0 (>= 8.4.0), libharfbuzz0b (>= 8.4.0), libjpeg8 (>= 8c), libpango-1.0-0 (>= 1.56.0), libpangocairo-1.0-0 (>= 1.56.0), libpangoft2-1.0-0 (>= 1.56.0), libpng16-16t64 (>= 1.6.46-2~), libtiff6 (>= 4.0.3), libvulkan1 (>= 1.2.131.2), libwayland-client0 (>= 1.24.0), libwayland-egl1 (>= 1.24.0), libx11-6 (>= 2:1.4.99.1), libxcursor1 (>> 1.1.2), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxi6 (>= 2:1.2.99.4), libxinerama1 (>= 2:1.1.4), libxkbcommon0 (>= 0.7.0), libxrandr2 (>= 2:1.5.0), libgles2, libgtk-4-common (>= 4.22.4+ds-0ubuntu0.1)
+Recommends: libgtk-4-bin, ibus-gtk4, iso-codes, librsvg2-common (>= 2.48)
+Suggests: gvfs
+Breaks: gnome-control-center (<< 1:50~), libgtk-4-media-gstreamer (<< 4.19.2), xdg-desktop-portal-gnome (<< 50~)
+Replaces: libgtk-4-media-gstreamer (<< 4.19.2)
+Provides: gtk4-binver-4.0.0, libgtk-4-media-gstreamer (= 4.22.4+ds-0ubuntu0.1)
+Filename: ./libgtk-4-1_4.22.4+ds-0ubuntu0.1+erhai1_arm64.deb
+Size: 3472878
+MD5sum: 899f107edb3276c60eb99076fdc1a770
+SHA1: 20e7d778d3a84f6a41f24c91899ff0c8a4bbc9be
+SHA256: a695381feb29bb28e294ebdc6c3e2c8b65eff1c6766db57094bf653f291d1b3b
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.gtk.org/
+Description: GTK graphical user interface library
+ GTK is a multi-platform toolkit for creating graphical user
+ interfaces. Offering a complete set of widgets, GTK is suitable
+ for projects ranging from small one-off tools to complete application
+ suites.
+ .
+ This package contains the shared libraries.
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: the shared library is the erhai build of GTK
+ 4.22.4+ds-0ubuntu0.1 carrying ONE guard (gdk/wayland/gdkseat-wayland.c:
+ _gdk_wayland_seat_get_implicit_grab_serial() no longer dereferences a
+ touch the compositor already cancelled -- the crash behind "a 3-finger
+ workspace swipe closes Files").  Everything else is Ubuntu's 4.22.4+ds-0ubuntu0.1.
+ See the oneplus-erhai-gtk4 project directory / README.md.
+
+Package: libgtk-4-1-dbgsym
+Source: gtk4
+Version: 4.22.4+ds-0ubuntu0.1+erhai1
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 27591
+Depends: libgtk-4-1 (= 4.22.4+ds-0ubuntu0.1+erhai1)
+Filename: ./libgtk-4-1-dbgsym_4.22.4+ds-0ubuntu0.1+erhai1_arm64.deb
+Size: 12356980
+MD5sum: 3e479744fc0774b1562c3f330ce723db
+SHA1: bb1a2fc8e69c21f9b39f36b729693c93ca34dc90
+SHA256: 0b80b190920338aeb7cbb31f9d94f5e1dd4f1d54c0f491c2ed86b011946e090c
+Section: debug
+Priority: optional
+Multi-Arch: same
+Description: debug symbols for libgtk-4-1
+Build-Ids: ef5e6896c691e4632001a1c35704fd9a672cc954
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: only the version and the exact pin on libgtk-4-1 are bumped
+ to 4.22.4+ds-0ubuntu0.1+erhai1.  The symbols inside are those of the UNPATCHED 4.22.4+ds-0ubuntu0.1 build.
+ See /usr/share/doc/oneplus-erhai-gtk4/README.md.
+
+Package: libgtk-4-dev
+Source: gtk4
+Version: 4.22.4+ds-0ubuntu0.1+erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 12883
+Depends: libcairo2-dev (>= 1.18.2), libegl1-mesa-dev, libepoxy-dev (>= 1.0), libfontconfig-dev, libgdk-pixbuf-2.0-dev (>= 2.30.0), libglib2.0-dev (>= 2.80.0), libgraphene-1.0-dev (>= 1.9.1), libpango1.0-dev (>= 1.56.0), libwayland-dev (>= 1.23.0), libx11-dev, libxcomposite-dev, libxcursor-dev, libxdamage-dev, libxext-dev, libxfixes-dev, libxi-dev, libxinerama-dev, libxkbcommon-dev, libxrandr-dev, libvulkan-dev, pkgconf, wayland-protocols (>= 1.44), gir1.2-cairo-1.0-dev, gir1.2-gdkpixbuf-2.0-dev, gir1.2-gio-2.0-dev, gir1.2-graphene-1.0-dev, gir1.2-gtk-4.0 (= 4.22.4+ds-0ubuntu0.1), gir1.2-pango-1.0-dev, gir1.2-pangocairo-1.0-dev, gir1.2-xlib-2.0-dev, libgtk-4-common, libgtk-4-1 (= 4.22.4+ds-0ubuntu0.1+erhai1)
+Suggests: libgtk-4-doc, gtk-4-examples
+Provides: gir1.2-gdk-4.0-dev (= 4.22.4+ds-0ubuntu0.1), gir1.2-gdkwayland-4.0-dev (= 4.22.4+ds-0ubuntu0.1), gir1.2-gdkx11-4.0-dev (= 4.22.4+ds-0ubuntu0.1), gir1.2-gsk-4.0-dev (= 4.22.4+ds-0ubuntu0.1), gir1.2-gtk-4.0-dev (= 4.22.4+ds-0ubuntu0.1)
+Filename: ./libgtk-4-dev_4.22.4+ds-0ubuntu0.1+erhai1_arm64.deb
+Size: 982352
+MD5sum: 4d9d7b90576967f808e7933635a98b85
+SHA1: 3d8158ad29689b33691d651bac74257c658b2009
+SHA256: 9d596087bdad08b9d16db531f43ee90f09f60bc8f5453b67b1d6bea18a33ccc4
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.gtk.org/
+Description: development files for the GTK library
+ GTK is a multi-platform toolkit for creating graphical user
+ interfaces. Offering a complete set of widgets, GTK is suitable
+ for projects ranging from small one-off tools to complete application
+ suites.
+ .
+ This package contains the header and development files which are
+ needed for building GTK applications.
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: only the version and its exact pin on libgtk-4-1 are bumped
+ to 4.22.4+ds-0ubuntu0.1+erhai1 (the patched library).  Payload unchanged.
+ See /usr/share/doc/oneplus-erhai-gtk4/README.md.
+
 Package: libmutter-18-0
 Source: mutter
 Version: 50.1-0ubuntu2.4+erhai1
@@ -318,6 +411,29 @@ Description: Bluetooth support package for the OnePlus Pad 3 (erhai)
  shared DTB address (C0:FF:EE:13:1E:1A) is used for all devices; BT comes up
  instantly via stock bluetooth.service. The former erhai-bt-addr /
  erhai-bt-up services and scripts are retired by the postinst.
+
+Package: oneplus-erhai-bluetooth
+Version: 2.3
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: bluez
+Filename: ./oneplus-erhai-bluetooth_2.3_all.deb
+Size: 2144
+MD5sum: 720baf56a07ef752baa12c62638a2c01
+SHA1: 2cc9ae7ed6bbb561cdd765eb0b2c4fde2b8f7edf
+SHA256: b9408a1f450e375d7c91d9b7021242b4a8be91430a24751392e8b07697baf9c9
+Section: net
+Priority: optional
+Description: Bluetooth support package for the OnePlus Pad 3 (erhai)
+ Since 2.2 this package no longer ships per-device address machinery. The
+ shared DTB address (C0:FF:EE:13:1E:1A) is used for all devices; BT comes up
+ instantly via stock bluetooth.service. The former erhai-bt-addr /
+ erhai-bt-up services and scripts are retired by the postinst.
+ .
+ Since 2.3 the postinst also sets "FilterDiscoverable = false" in
+ /etc/bluetooth/main.conf: BlueZ 5.85 defaults to hiding non-discoverable LE
+ advertisers, which made the OnePlus Stylo pen invisible to bluetoothctl
+ (its advertisement carries Flags=0x04, i.e. no LE-discoverable bit).
 
 Package: oneplus-erhai-cam
 Version: 1.3
@@ -1701,6 +1817,42 @@ Description: Touch-friendly GNOME Files (Nautilus) for the OnePlus Pad 3 (erhai)
     shows a selection checkbox to the left of every file/folder, so several
     items can be selected on a touchscreen -- tap a box to toggle one item,
     or swipe a finger across the boxes to select/deselect several at once.
+ .
+ Nautilus is C/GTK4, so this is a source patch, not an extension.  The
+ package installs the patched /usr/bin/nautilus and its gschema by diverting
+ Ubuntu's files (kept as *.erhai-orig); removing the package restores them.
+ The build matches Ubuntu's debian/rules meson options (including
+ -Dxdg-terminal-exec=true, so "Open in Terminal" is present).
+ Package README: /usr/share/oneplus-erhai-nautilus/README.md
+
+Package: oneplus-erhai-nautilus
+Version: 0.3
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: nautilus (>= 1:50), nautilus-data (>= 1:50), libglib2.0-bin
+Recommends: xdg-terminal-exec
+Filename: ./oneplus-erhai-nautilus_0.3_arm64.deb
+Size: 556748
+MD5sum: 82d41fc3fb9a01875eaa20cbde34107b
+SHA1: 91a9298212ea6831edd7887acb9204a6fc3bcd15
+SHA256: 8f24579a1dbe685d4a60836aa1c74cf0d387c99ac6f6c7da97e638357de39c85
+Section: gnome
+Priority: optional
+Description: Touch-friendly GNOME Files (Nautilus) for the OnePlus Pad 3 (erhai)
+ A patched build of GNOME Files (Nautilus) with touchscreen features:
+  * long-press on the empty view background opens the context menu (the
+    touch equivalent of a right click);
+  * a "Show Select Boxes" preference (Files > Preferences > General) that
+    shows a selection checkbox to the left of every file/folder, so several
+    items can be selected on a touchscreen -- tap a box to toggle one item,
+    or swipe a finger across the boxes to select/deselect several at once;
+  * FILE DRAGS ARE ONE-FINGER ONLY: with a second or third finger on the
+    glass (e.g. the 3-finger workspace swipe starting over an icon) the primary
+    finger used to start a drag and MOVE THE FILES.  The view counts the live
+    touch points (a GtkEventControllerLegacy in the capture phase) and
+    on_item_drag_prepare() returns NULL -- cancelling the drag before GTK's
+    gdk_drag_begin() -- while more than one finger is down.  Mouse and trackpad
+    drags are unaffected.
  .
  Nautilus is C/GTK4, so this is a source patch, not an extension.  The
  package installs the patched /usr/bin/nautilus and its gschema by diverting
