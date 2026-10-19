@@ -394,6 +394,62 @@ Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
  (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
  hardcodes card 0 and opens its own control device via "cdev hw:0".
 
+Package: oneplus-erhai-audio
+Version: 1.3
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: alsa-ucm-conf
+Filename: ./oneplus-erhai-audio_1.3_all.deb
+Size: 12066
+MD5sum: 8e622140aeeaadbc3fbdaf989da9eee5
+SHA1: a6b4a6bbeb4beb58a9c2da7bc1b28696e5bb419c
+SHA256: 51fd3d5d6f4d108c2cb5376b7c26f662334bd7d8a37d1d76b8b70745c8b3de87
+Section: sound
+Priority: optional
+Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
+ ALSA Use Case Manager profile for the q6apm/AudioReach sound card of the
+ OnePlus Pad 3 (card "OnePlus-Pad3-erhai-24976", driver sm8750).
+ .
+ The HiFi verb wires the MultiMedia front-ends to their back-ends
+ (MM1 -> SECONDARY_MI2S_RX speaker TDM, MM2 -> DisplayPort, MM3 -> the INTERNAL
+ MICROPHONES via TX_CODEC_DMA_TX_3, MM4 -> the VA/DMIC front-end) and un-mutes
+ the six AW88261 speaker amps.
+ .
+ Since 1.3 the Mic EnableSequence also keeps the wcd939x vendor lane labels at
+ ZERO ("ADC1 ChMap" / "ADC4 ChMap"): a restored non-zero label made the driver
+ put ADC4 on the wrong SoundWire channel (port mask 0x3/0xb instead of 0x9) and
+ the second capture channel stayed silent or the capture came out clipped.  It
+ also applies the measured microphone gain - ADC1/ADC4 Volume 20 = +5 dB analog
+ (before the ADC) and TX_DEC0/TX_DEC1 Volume 94 = +10 dB digital - which
+ captures voice at -9..-14 dBFS peaks with no clipping (TX_DEC 98 clipped).
+ .
+ Installing this package is all audio needs on the erhai image: PipeWire /
+ WirePlumber's ACP layer resolves the profile through
+ /usr/share/alsa/ucm2/conf.d/sm8750/ and applies the HiFi verb (and its
+ EnableSequence mixer writes) automatically when the desktop session starts.
+ .
+ A USB-C monitor that carries audio gets a selectable "DisplayPort" output
+ via the jack-gated UCM device; erhai-dp-audio-sync.service (triggered by a
+ udev rule on DRM connector changes) bounces WirePlumber when a monitor is
+ attached after boot, so the DP output appears without a manual restart.
+ .
+ The LPASS audio devices (lpass-lpi-pinctrl@7760000, rx/tx/va macros, both
+ SoundWire masters) can end up never probed when their kernel modules load
+ after the platform devices are created (late udev coldplug), which leaves
+ the snd-sc8280xp machine driver without its codec components and no sound
+ card at all. This package therefore also ships
+ erhai-audio-bringup.service (oneshot at boot): it binds the LPI pinctrl,
+ re-runs the ASoC module probe chain if needed, waits for card0 and applies
+ the HiFi verb.
+ .
+ WirePlumber's ACP opens the UCM with the ALSA card ID ("OnePlusPad3") rather
+ than "hw:0"; ALSA's UCM resolver does not match the card ID against the
+ card's driver/name/longname fields, so the conf.d/ lookup misses and no ctl
+ is opened (leaving ${CardId} undefined and the verb's mixer writes without a
+ cdev). This package therefore also ships a legacy-path fallback
+ (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
+ hardcodes card 0 and opens its own control device via "cdev hw:0".
+
 Package: oneplus-erhai-bluetooth
 Version: 2.2
 Architecture: all
@@ -1809,6 +1865,25 @@ Description: Firmware blobs for OnePlus Pad 3 (erhai)
  Hexagon NPU (HTP) and is the prerequisite for FastRPC on the compute
  DSP (/dev/fastrpc-cdsp).
 
+Package: oneplus-erhai-firmware
+Version: 1.3
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Filename: ./oneplus-erhai-firmware_1.3_all.deb
+Size: 34621990
+MD5sum: 34f1afb836d08e1f9ec47a2cf851fbfa
+SHA1: 93ca3d9718cf5222caf077671895f4e068916653
+SHA256: 37288efa556c003d13f111c4f67db8f3e38194c868f056a8b05ca52aa0b543c6
+Description: Firmware blobs for OnePlus Pad 3 (erhai)
+ OxygenOS 16.0.9.400 firmware for the OnePlus Pad 3 (erhai/SM8750):
+ WCN7880 (peach) WLAN, BRAHMA Bluetooth, IPA, the ADSP split image
+ (adsp.mdt + adsp_dtb.mdt) and, since 1.2, the CDSP split image
+ (cdsp.mdt + cdsp.bNN + cdsp_dtb.mdt + cdsp_dtb.bNN) that hosts the
+ Hexagon NPU (HTP) and is the prerequisite for FastRPC on the compute
+ DSP (/dev/fastrpc-cdsp).
+
 Package: oneplus-erhai-linux-7.3
 Version: 7.3.0-rc5-sm8750-themojoman+b10
 Architecture: arm64
@@ -1996,6 +2071,28 @@ Size: 27707714
 MD5sum: 68b79d63f07ff6294947560d096a1ea4
 SHA1: 1f59e2c78bdf703cd95e92f5960531f510e0b4ad
 SHA256: c4197f117fc8be1b762d120d104ba1489abfaaa67aa6b4c82ef5e8893dc2b5b5
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc5-sm8750-themojoman+b27
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc5-sm8750-themojoman+b27_arm64.deb
+Size: 27709688
+MD5sum: f806340b2428150cf518d1a4b0b16702
+SHA1: 86019273cec94c8ada3b11ca6c090857d0d7b070
+SHA256: 14714e9df8617d4ddb7ccd46eb8d65b1102327a971c81e276fc2a19435b7a5d6
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
