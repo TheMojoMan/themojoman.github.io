@@ -450,6 +450,74 @@ Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
  (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
  hardcodes card 0 and opens its own control device via "cdev hw:0".
 
+Package: oneplus-erhai-audio
+Version: 1.4
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: alsa-ucm-conf
+Filename: ./oneplus-erhai-audio_1.4_all.deb
+Size: 14662
+MD5sum: 73d4b21253bdd1501e8316de6c43e118
+SHA1: 927bea3ca9065bd1a353cd316aef02345c7c1e09
+SHA256: 012c9266ad5cff5c21ce4caf78161505a1391aa8e56e6be2c5037a429a75a584
+Section: sound
+Priority: optional
+Description: ALSA UCM profile and mixer routing for the OnePlus Pad 3 (erhai)
+ ALSA Use Case Manager profile for the q6apm/AudioReach sound card of the
+ OnePlus Pad 3 (card "OnePlus-Pad3-erhai-24976", driver sm8750).
+ .
+ The HiFi verb wires the MultiMedia front-ends to their back-ends
+ (MM1 -> SECONDARY_MI2S_RX speaker TDM, MM2 -> DisplayPort, MM3 -> the INTERNAL
+ MICROPHONES via TX_CODEC_DMA_TX_3, MM4 -> the VA/DMIC front-end) and un-mutes
+ the six AW88261 speaker amps.
+ .
+ Since 1.3 the Mic EnableSequence also keeps the wcd939x vendor lane labels at
+ ZERO ("ADC1 ChMap" / "ADC4 ChMap"): a restored non-zero label made the driver
+ put ADC4 on the wrong SoundWire channel (port mask 0x3/0xb instead of 0x9) and
+ the second capture channel stayed silent or the capture came out clipped.  It
+ also applies the measured microphone gain - ADC1/ADC4 Volume 20 = +5 dB analog
+ (before the ADC) and TX_DEC0/TX_DEC1 Volume 94 = +10 dB digital - which
+ captures voice at -9..-14 dBFS peaks with no clipping (TX_DEC 98 clipped).
+ .
+ Installing this package is all audio needs on the erhai image: PipeWire /
+ WirePlumber's ACP layer resolves the profile through
+ /usr/share/alsa/ucm2/conf.d/sm8750/ and applies the HiFi verb (and its
+ EnableSequence mixer writes) automatically when the desktop session starts.
+ .
+ A USB-C monitor that carries audio gets a selectable "DisplayPort" output
+ via the jack-gated UCM device; erhai-dp-audio-sync.service (triggered by a
+ udev rule on DRM connector changes) bounces WirePlumber when a monitor is
+ attached after boot, so the DP output appears without a manual restart.
+ .
+ The LPASS audio devices (lpass-lpi-pinctrl@7760000, rx/tx/va macros, both
+ SoundWire masters) can end up never probed when their kernel modules load
+ after the platform devices are created (late udev coldplug), which leaves
+ the snd-sc8280xp machine driver without its codec components and no sound
+ card at all. This package therefore also ships
+ erhai-audio-bringup.service (oneshot at boot): it binds the LPI pinctrl,
+ re-runs the ASoC module probe chain if needed, waits for card0 and applies
+ the HiFi verb.
+ .
+ 1.4 adds erhai-mic-state.service: the internal-microphone capture routing
+ lives in the UCM profile's SectionDevice "Mic" sequence, but WirePlumber runs
+ this card with api.alsa.use-acp=false and therefore never executes the UCM
+ *device* sequences. On a freshly flashed system (no
+ /var/lib/alsa/asound.state) the capture controls are then left at their
+ driver default — ADC muted, TX SMIC MUX0/1 = ZERO — and every recording in
+ every app (camera, recorder, browser) is digital silence with no error
+ anywhere. This unit applies the documented working mic state at every boot,
+ ordered after alsa-restore, so the microphone no longer depends on the stored
+ mixer state (a stale state restoring the vendor lane labels
+ SWR_MIC9/SWR_MIC4 silences it in exactly the same way).
+ .
+ WirePlumber's ACP opens the UCM with the ALSA card ID ("OnePlusPad3") rather
+ than "hw:0"; ALSA's UCM resolver does not match the card ID against the
+ card's driver/name/longname fields, so the conf.d/ lookup misses and no ctl
+ is opened (leaving ${CardId} undefined and the verb's mixer writes without a
+ cdev). This package therefore also ships a legacy-path fallback
+ (usr/share/alsa/ucm2/OnePlusPad3/) with a self-contained HiFi verb that
+ hardcodes card 0 and opens its own control device via "cdev hw:0".
+
 Package: oneplus-erhai-bluetooth
 Version: 2.2
 Architecture: all
@@ -1780,6 +1848,71 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  driver work lands) and accelerometer orientation handling (upright preview
  + upright snapshots).
  Photo capture and autofocus are the focus; video is experimental.
+ .
+ This package takes over the renamed oneplus-erhai-cam (<= 1.2, the same app):
+ it Provides that name, and Replaces/Breaks the old versions so an installed
+ oneplus-erhai-cam upgrades here and its files (usr/bin/erhai-cam, the desktop
+ file, the shipped source) change hands cleanly.  The oneplus-erhai-cam 1.3
+ package is an empty transitional package that Depends on this one.
+ .
+ The manual-focus/exposure GNOME Shell extension (erhai-cam-focus@erhai.local)
+ is retired: the app owns both loops natively now (oneplus-erhai-camera 1.3
+ no longer ships it).
+
+Package: oneplus-erhai-erhaicam
+Version: 2.3
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-pipewire
+Recommends: iio-sensor-proxy, python3-numpy
+Breaks: oneplus-erhai-cam (<< 1.3)
+Replaces: oneplus-erhai-cam (<< 1.3)
+Provides: oneplus-erhai-cam
+Filename: ./oneplus-erhai-erhaicam_2.3_arm64.deb
+Size: 478618
+MD5sum: 97ee794a9dc8b0130b4385a6debf7181
+SHA1: 9e974c60fc29918f520ec2e8a3b8d2ac6ce3a1c7
+SHA256: da7010df217311f8e63eecd1674df4ca8d05f3b39fa9e6f3a13e83aef7eac8f0
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with NPU-driven autofocus and auto-exposure.  The
+ per-frame image analysis (Tenengrad focus metric + luminance statistics) runs
+ on the Hexagon NPU (HTP) as an ONNX graph executed by ONNX Runtime's QNN
+ execution provider (erhai-npu-analyze.py), with a CPU implementation of the
+ same metric as the automatic fallback.  The AF sweep drives the kernel
+ cn3927 lens subdev (V4L2_CID_FOCUS_ABSOLUTE, tap-to-focus, refocus on
+ sharpness drop); AE is a log-domain controller on the SC1320CS integration
+ time written straight to the sensor register 0x3e00.  AE (top left) and AF
+ (top right) buttons toggle the automatics; turning one off reveals the
+ matching fader below the button for manual focus (VCM, 0..1023) or exposure
+ (sensor lines, 1..6396) — the faders stretch with the window and stop 50 px
+ above its bottom edge.
+ .
+ Also: photo capture into ~/Pictures/ErhaiCam, video recording, front/rear
+ camera switching (front streams once its Phase-B driver work lands) and
+ accelerometer orientation handling (upright preview + upright snapshots).
+ .
+ Video recording (1.6) is H.264 + AAC in MP4 through the hardware encoder
+ (v4l2h264enc / Iris, which only takes NV12 — the previous I420 request failed
+ its link and silently fell back to software VP8), with a VP8/Opus WebM
+ fallback.  The note button at the bottom right of the shutter bar picks the
+ soundtrack: "No audio" (silent video, the default) or "Microphone" — the
+ PipeWire default source (the pad's Internal Mics), captured as a second branch
+ of the same pipeline so the muxer keeps picture and sound in sync.  The
+ choice applies from the next recording on.
+ .
+ 1.7 fixes the resulting timestamps: the camera's frames carry the PREVIEW
+ pipeline's time base while the microphone starts at its own zero, so a
+ recording made a while after launch came out with a lead-in of nothing (black
+ picture, wrong duration) before the video began.  Each recording now re-bases
+ its frames onto the first one recorded, so picture and sound start together.
+ .
+ PRIVACY: the microphone is opened ONLY while a recording runs (from pressing
+ Record until Stop, or a headless --record run) and is closed again afterwards.
+ No capture stream is ever left running in the background, and the cold start
+ of the pad's capture path is handled by trimming the silent head of the track
+ instead of by keeping the mic awake (owner decision, 2026-10-20).
  .
  This package takes over the renamed oneplus-erhai-cam (<= 1.2, the same app):
  it Provides that name, and Replaces/Breaks the old versions so an installed
