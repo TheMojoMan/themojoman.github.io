@@ -4470,6 +4470,50 @@ Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
  and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
 
 Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc5-sm8750-themojoman+b32-gp-01
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc5-sm8750-themojoman+b32-gp-01_arm64.deb
+Size: 27729288
+MD5sum: 69837f0b1bf2ed3e2505b8daa19fc0d7
+SHA1: 4e68cdc0fd04d1393b278409607b1b1b71e92757
+SHA256: 5b54a67efe36c521fe02529bfc0349b0ac9caeda9ae3697cd3164826b4f4059f
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc5-sm8750-themojoman+b32-gp-02
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc5-sm8750-themojoman+b32-gp-02_arm64.deb
+Size: 27751600
+MD5sum: ddafd98a0de75a17ce992b4ae12dc6d5
+SHA1: 5ecad1606de923d4fe78494ba9b6021afc632800
+SHA256: f25fdc32487c96b8d70449e6ebe6255d3f9df43f6070f02fc79c699cb2556d52
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
 Version: 7.3.0-rc5-sm8750-themojoman+b33
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
@@ -4480,6 +4524,50 @@ Size: 27752848
 MD5sum: aca53e9d556132b8e42756d10303f11a
 SHA1: 8202571d5d36c899e9a3eb33aaacc154677ec6d2
 SHA256: 6bd8f521c4c8aafd8ce721b1f1cae7200871db3f4e5e73dae4c1a35d38c0259f
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc5-sm8750-themojoman+b33-panel-01
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc5-sm8750-themojoman+b33-panel-01_arm64.deb
+Size: 27760742
+MD5sum: ffd7544fd48a58f6742b4fe8a8a6ed32
+SHA1: cc71b3a82333215991ecb42a6cf57c56cdcf6601
+SHA256: 955f7de7729dcc837ffb5bf6ade603b2ea86c23b470130a956c9db043a241dfc
+Section: kernel
+Priority: optional
+Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
+ Mainline Linux 7.3.0 with the erhai port on top: dual-DSI 4-DSC
+ display for the XN242 panel, Adreno 830 (gen8_0_1), AudioReach speakers,
+ USB-C DisplayPort altmode and OTG host, WCN7880 Bluetooth, charging, the
+ NT36536 touchscreen, the cameras and the iris3 video codec.
+ .
+ The postinst builds a Unified Kernel Image from vmlinuz + erhai.dtb with ukify
+ and installs it into EFI/ubuntu on the ESP, where rEFInd finds it.
+
+Package: oneplus-erhai-linux-7.3
+Version: 7.3.0-rc5-sm8750-themojoman+b33-panel-02
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: systemd-ukify, systemd-boot-efi, util-linux, coreutils, mount, kmod
+Recommends: oneplus-erhai-firmware
+Filename: ./oneplus-erhai-linux-7.3_7.3.0-rc5-sm8750-themojoman+b33-panel-02_arm64.deb
+Size: 27757950
+MD5sum: c2c3f88298f944173a81650a8286bc9e
+SHA1: aa9bbb4f7a78ff5d5b725a5bd920469002aaba84
+SHA256: 6715ef8b5e0f59f88306f611802e8d6b818a64cc18a63ea5e6947cf4e300fe39
 Section: kernel
 Priority: optional
 Description: Kernel and modules for the OnePlus Pad 3 (erhai, SM8750)
@@ -5458,6 +5546,52 @@ Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
  author's identity -- because that build still ran from a tree carrying the clone
  metadata.  No code changed (the driver is rebuilt from the same source, byte for
  byte); the tree is clean and build-video-deb.sh now REFUSES to pack a nested .git.
+
+Package: oneplus-erhai-waydroid-installer
+Version: 0.6
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3, e2fsprogs
+Recommends: waydroid
+Filename: ./oneplus-erhai-waydroid-installer_0.6_arm64.deb
+Size: 5821150
+MD5sum: 14a1473d9d55e1b542f8f31db395cbbf
+SHA1: e3eff61ad9587f401ecb7273a8eb27fb91213e8c
+SHA256: 1232a03a096478e49047b4a0f67c134247e8f93a03f0d462c37a227e089b0ff1
+Section: utils
+Priority: optional
+Description: install Waydroid with the erhai Mesa driver payload on the OnePlus Pad 3
+ This package does the whole Waydroid setup on this tablet: it carries the
+ official Waydroid apt repository (key /usr/share/keyrings/waydroid.gpg, deb822
+ source /etc/apt/sources.list.d/waydroid.sources) and, right after its own
+ installation, runs `apt-get update` + `apt-get install waydroid` in a deferred
+ systemd unit (apt holds its lock while a postinst runs, so the install cannot
+ happen inline).  The Waydroid icon then shows up and works like upstream.
+ .
+ Shutting Android down from its own power menu also ends Waydroid now: a small
+ watcher (erhai-waydroid-container-guard.service, started/stopped with
+ waydroid-container.service) notices that the LXC container exited and stops the
+ unit, whose own SIGTERM handler closes the session and the window and tears
+ down the network.  Upstream leaves all of that running, so the next icon click
+ would attach to a dead session.
+ .
+ Waydroid's stock vendor image carries a fake "a830" Mesa driver that wedges
+ the Adreno a few seconds into every session on this tablet (SM8750, Adreno
+ 830).  This package ships the five working Mesa shared objects (stripped
+ libgallium_dri, vulkan.freedreno, libEGL_mesa, libGLESv1_CM_mesa,
+ libGLESv2_mesa), the in-place patcher erhai_vendor_patch.py and a hook that
+ runs it from waydroid's OWN image downloader, so the image the user picks in
+ Waydroid on first start is patched as it is downloaded -- and so are
+ "waydroid upgrade" and OTA image replaces.
+ .
+ The patcher rewrites the five files inside vendor.img in place (same inode,
+ so the SELinux label, mode and owner survive) and grows the image only by the
+ blocks it is really short of - normally by nothing, the payload is a net
+ shrink. It refuses a mounted image, so a running session is never touched.
+ .
+ An apt post-invoke hook re-applies the images.py hook if "apt upgrade
+ waydroid" overwrites it. Commands: waydroid-erhai-installer.sh
+ [setup|status|patch-now|reapply|uninstall].
 
 Package: oneplus-erhai-wifi
 Version: 1.4
