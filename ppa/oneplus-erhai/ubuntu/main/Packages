@@ -614,6 +614,39 @@ Description: Camera bring-up for the OnePlus Pad 3 (erhai)
  VCM writes are granted to the desktop user via the included udev uaccess
  rules (CCI adapter + lens subdev); requires the kernel cn3927 module.
 
+Package: oneplus-erhai-camera
+Version: 1.4
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: i2c-tools, libgtk-4-1, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-camera_1.4_arm64.deb
+Size: 31006
+MD5sum: f71a42b902ad35dfd3ce9af1369e832c
+SHA1: 14722cc4f589d25d23da43803832cc3576e080f2
+SHA256: 3d080f1517fbbf64f948bfce3893e489039a84d38bf562a31eeaac5cba88e92f
+Section: utils
+Priority: optional
+Description: Camera bring-up for the OnePlus Pad 3 (erhai)
+ Arms the CCI CSR and both camera sensors at boot (erhai-cam-arm.service +
+ erhai-cam-arm.sh) and ships the manual VCM focus / exposure helpers for the
+ SC1320CS rear camera (i2c-10 slaves 0x0c / 0x36).  Also ships
+ erhai-autofocus, a GTK4/GStreamer contrast-autofocus prototype that drives
+ the kernel cn3927 lens subdev (V4L2_CID_FOCUS_ABSOLUTE) with a Tenengrad
+ sharpness scan; run it with the Snapshot preview closed.
+ The erhai-cam-focus@erhai.local GNOME Shell extension is RETIRED (1.3 removes
+ it): ErhaiCam (oneplus-erhai-erhaicam >= 1.5) owns focus AND exposure
+ natively — an AE button (auto exposure on the NPU) and an AF button (auto
+ focus on the NPU), each with a vertical manual slider when turned off.  The
+ i2c helper scripts stay as manual CLI tools.
+ VCM writes are granted to the desktop user via the included udev uaccess
+ rules (CCI adapter + lens subdev); requires the kernel cn3927 module.
+ 1.4: the shipped erhai-autofocus is no longer a -g binary.  The DWARF of 1.3
+ (and earlier) carried this pad's absolute build paths (the workspace tree and
+ its tmp/gst-dev include dirs) into a public .deb; the builder now maps the
+ prefix and strips the debug info, and refuses to pack a binary that still
+ contains the build directory.  No functional change.
+
 Package: oneplus-erhai-desktop
 Version: 2.10
 Architecture: all
@@ -3098,6 +3131,443 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  the pam logic through the ERHAI_PAM_DIR seam).
 
 Package: oneplus-erhai-desktop
+Version: 2.31
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: python3
+Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
+Filename: ./oneplus-erhai-desktop_2.31_all.deb
+Size: 503256
+MD5sum: 14b7ceb377254d951ca844cda0c56f14
+SHA1: 974ddd280a79a1f34daa963a5335e5022126b4a6
+SHA256: ebe7f8546665c0a078406edb0d72f010268d86e8b43067d3acd5ec857e19f6be
+Section: utils
+Priority: optional
+Description: Desktop glue for the OnePlus Pad 3 (erhai)
+ Everything the GNOME desktop needs on top of the base image: bringing up the
+ Adreno 830 GMU before session start and a boot-only GPU pin
+ (erhai-gpu-pin-once.service, 2.25: the Adreno is pinned for the boot
+ bring-up — an unpinned boot could not bring the desktop up — and released to
+ runtime-PM 'auto' once gdm runs, the panel is lit and the GPU clock has risen
+ above its idle floor; release only, a timeout stays pinned, an external
+ display keeps it pinned.  /etc/erhai/gpu-pin.conf MODE=always restores the
+ pre-2.25 permanent pin, erhai-gpu-pin.sh, where the GPU never
+ runtime-suspends.  2.26: the pin taken FOR an external DP monitor is handed
+ back when that monitor is unplugged (through 'erhai-gpu-pin-once.sh unpin
+ ext-detach', so the state file records it), covering both a monitor attached
+ later and one attached at boot (state 'kept external'), so a monitor cannot
+ leave the GPU pinned for the rest of the boot), and — 2.28 — the GPU WEDGE
+ WATCHDOG of 2.27 (erhai-gpu-watch.service) is REMOVED AGAIN by owner decision
+ (2026-10-24): it could not clear the real Waydroid wedge — a GPU reset cannot
+ retire a submit held by an unreaped zombie — so the pad relies on the kernel fix
+ instead of killing clients (kernel +b33: a PINNED Adreno can be recovered
+ again, because a8xx_recover() lifts the runtime-PM block that
+ power/control=on sets and that block made "cx gdsc didn't collapse" loop
+ forever; a6xx_destroy() also frees the pwrup reglist BO that a reload leaked).
+ An upgrade from 2.27/2.28 stops, disables and deletes the retired unit, script
+ and conffile, so no watcher process is left anywhere,
+ boot-time GL environment selection
+ (erhai-desktop-gl), power-key REAL panel power cycle
+ (erhai-power-toggle + erhai-power-watch.py -> erhai-panel-power.sh: parks the
+ GPU then tears the internal DPU/DSI panel down via gnome-shell SetActive, so
+ compiles/downloads/external-display apps keep running while the panel sleeps;
+ backlight-only toggle while a DP-1 external monitor is attached; GNOME's
+ "Suspend" wired to the proven manual-wake s2idle harness via a
+ systemd-suspend.service ExecStart override -> erhai-suspend-gnome.sh ->
+ erhai-suspend-s2idle.sh (display-off-first + WLAN quiesce + full restore;
+ short power press wakes, long press powers off; auto-sleep stays off)),
+ pogo keyboard attach/detach -> OSK on/off (erhai-pogo-osk +
+ erhai-pogo-osk.py), folio folded onto the screen -> panel backlight
+ off/on (erhai-folio-gate.service starts/stops erhai-folio-fold.py with the
+ keyboard attach state; erhai-folio-calibrate + erhai-folio-probe.py pick the
+ fold signal and write /etc/erhai/folio-fold.conf), the shared backlight
+ on/off/toggle script both features use (erhai-display-toggle.sh, which also
+ plays a panel-off click on every blank and a panel-on click on every restore
+ through the active session via pw-play; /etc/erhai/display.conf can mute or
+ replace either), ktz8868
+ backlight display toggle, USB-C host charging while acting as data
+ host (erhai-host-charge), pogo keyboard activation helper (CLI only -- the
+ app-grid launcher was removed 2026-10-17),
+ Novatek NT36536 touchscreen bring-up before GDM (erhai-touchscreen +
+ touch-calibration udev rule), dconf defaults, and the desktop-users /
+ user-groups helpers used by image presets.
+ Fixed login-screen policy (2026-09-22): the internal panel comes up at 50 % of
+ max_brightness at boot (erhai-backlight.service) and is re-pinned to 50 % for
+ every GDM greeter session, i.e. the login screen, by
+ erhai-greeter-brightness.py (a logind watcher; user sessions are never
+ touched).  GNOME's own ambient-light auto-brightness is forced OFF as a
+ GSettings DEFAULT (99-erhai-no-gsd-ambient.gschema.override) because the
+ greeter's dconf can end up unreadable, in which case only a default override
+ reaches it - that was the login screen crashing to its minimum level.  The
+ greeter also gets session-name='gnome-login' (greeter dconf seed +
+ /usr/share/gdm/dconf/95-erhai-greeter + /etc/dconf/profile/gdm) and a greeter
+ .desktop that pins --session=gnome-login, so a dconf-less greeter can no longer
+ come up as a FULL UBUNTU DESKTOP.
+ Ships the FIXED gjs-osk on-screen keyboard as a system-wide GNOME Shell
+ extension (/usr/share/gnome-shell/extensions/gjsosk@vishram1123.com/), copied
+ from the image overlay on every build so the deb and a flashed image can never
+ diverge.  Its folio gate (pogoGate.js + the [erhai] hunks in extension.js)
+ keeps the OSK from coming up by itself while the pogo keyboard is attached: no
+ touch/tap auto-show, no bottom-edge swipe, no restore at login, an
+ automatically opened keyboard is retracted on the attach edge, an external
+ keyboard-visible=true is forced back to false, and the on-screen CLOSE key
+ clears the sticky keyboard-visible flag through the extension object.  It also
+ sends modifier+key combinations for the NON-character keys and for HELD
+ modifiers (2026-10-06): tapping Shift then Enter sends Shift+Enter (likewise
+ arrows/Esc/Tab/Space), and holding Ctrl/Alt/Super with one finger while tapping
+ another key sends Ctrl/Alt/Super+key - a held modifier is applied to that key
+ and is not left latched behind.  The
+ indicator / quick-settings toggle and the `opened` command key still work, so
+ the OSK stays one deliberate tap away.  Nothing in it loads in the greeter
+ (no session-modes), which keeps GNOME's built-in OSK there.  A USER-LEVEL copy
+ of the same uuid takes precedence in gnome-shell (the user data dir is
+ collected first and the later system copy is skipped as "already installed"),
+ so a device that has one in ~/.local/share/gnome-shell/extensions/ keeps
+ loading that one.
+ Battery-backed clock (2026-09-29): the PMK8550 PMIC RTC is a 1 Hz
+ free-running counter with no wall-clock epoch of its own (and this firmware's
+ EFI "RTC" answers with an invalid date), which is why the pad used to boot at
+ 1970 and only got the right time once WiFi/NTP was up.  Kernel +b8 gives the
+ RTC an "offset" nvmem cell (PMIC SDAM 0x7150) and erhai-rtc-sync.py stores
+ system_time - counter into it once at boot and hourly
+ (erhai-rtc-sync.service + erhai-rtc-sync.timer), so the next boot is right
+ from second zero - the same value Android's time_daemon keeps in
+ /mnt/vendor/persist/time/ats_1.  The helper refuses to store an implausible
+ clock and exits 0 on a kernel without the cell (pre-+b8), so it is harmless
+ everywhere.  Audit/seed the cell by hand with workspace tmp/rtc-offset-probe.py.
+ Bypass charging (2026-09-30): a GNOME Quick Settings switch
+ (erhai-bypass@erhai.local) that stops the battery charging while a charger is
+ attached, so the tablet runs from the adapter alone (measured live: pack
+ 3.93 A -> 0.117 A = 0.49 W with the switch on, back to 1.74 A with it off).
+ The switch starts erhai-bypass-charge@<on|off>.service, which polkit lets an
+ active local user start without a prompt (50-erhai-bypass-charge.rules); the
+ helper /usr/local/sbin/erhai-bypass-charge.sh holds the ADSP battery-psy
+ charge-enable property (BATT_CHG_EN = 24, opcode 0x31) down, parks the
+ in-kernel max_soc limiter (it drives the same property, so it must stand down)
+ and applies a 10 % low-SoC safety floor; erhai-bypass-charge.service applies
+ and holds the persisted choice from /etc/default/erhai-charge at boot.
+ Since 2.6 it ALSO parks the SC8547A SuperVOOC charge pump (fastchg_deliver /
+ fastchg_auto on the *-006f master debugfs) while bypass holds: the CP is a
+ direct 2:1 path to the cell driven by the AP kernel, which the ADSP
+ charge-enable inhibit cannot reach, so a genuine SuperVOOC brick kept charging
+ straight through bypass until the CP itself was stopped (2026-10-03).  On `off`
+ it gives the CP back and restarts the VOOC PHY so the ladder re-identifies.
+ Since 2.7 the IN-KERNEL CHARGE LIMIT engages the same full bypass at the cap:
+ erhai_otg_glink's max_soc (default 80 %) only stopped the ADSP charger, which
+ on this hardware left the pad running down on battery (the erhai_pps stall
+ watchdog re-injected current, and the SC8547A pump charged through the ADSP
+ inhibit).  While the pack sits at the limit the holder now parks the stall
+ watchdog AND the charge pump and releases both below the limit (release band
+ ERHAI_BYPASS_HYST, default 3 %), so a reached charge limit means "tablet on
+ adapter power, pack held" instead of "charging off, battery draining".  The
+ kernel limiter keeps owning BATT_CHG_EN (still exactly one writer); the
+ augmentation can be disabled with ERHAI_BYPASS_AUTO_LIMIT=0.  `erhai-bypass-
+ charge.sh limit [n]` reads/sets the limit.  No kernel change is needed.
+ Since 2.8 the UBUNTU DOCK SCROLLS WITH A FINGER: a patched dash.js adds a
+ Clutter.PanGesture to the dock's scroll view (capture phase) so a quick swipe
+ scrolls the app icons with a kinetic glide, while a press-and-hold still
+ starts an icon reorder drag and mouse/trackpad drags are untouched.
+ ubuntu-dock@ubuntu.com is a GNOME SESSION-MODE extension, so a per-user
+ override is refused and the patched file must sit at its system path, which
+ belongs to gnome-shell-ubuntu-extensions; the deb ships it under a private
+ name (usr/share/oneplus-erhai-desktop/ubuntu-dock-dash.js) and DEBIAN/postinst
+ installs it with dpkg-divert (Ubuntu's file kept as dash.js.erhai-orig), so it
+ is not a dpkg file conflict and an Ubuntu upgrade cannot clobber it; postrm
+ restores Ubuntu's file on removal.  The package README documents it.
+ Re-login needed (GNOME cannot reload extension code).
+ Since 2.9 the DESKTOP ICONS NG (DING) EXTENSION OPENS ITS CONTEXT MENUS WITH A
+ LONG FINGER TAP: DING (ding@rastersoft.com) draws the desktop background and
+ icons in its own gjs process and opened both context menus only on a secondary
+ (mouse) button press (button == 3), while a touch tap or long tap arrives as an
+ emulated PRIMARY (button 1) press, so a long tap did nothing.  A touch-only
+ shim now opens the same menu when a finger is held still for 500 ms over the
+ desktop or an icon (cancelled if the finger moves more than 14 px; only events whose device source
+ is Gdk.InputSource.TOUCHSCREEN are affected, so mouse and trackpad behaviour is
+ untouched and a held mouse button does NOT open the menu).  Like the dock patch, the files belong to gnome-shell-ubuntu-extensions,
+ so the patched app/desktopGrid.js, app/desktopManager.js and
+ app/desktopIconItem.js ship under /usr/share/oneplus-erhai-desktop/ding-touch/
+ and DEBIAN/postinst installs them with dpkg-divert (Ubuntu's files kept as
+ *.erhai-orig); postrm restores them.  This is NOT reachable through GNOME's
+ built-in "Simulated Secondary Click" accessibility setting: that is implemented
+ in Mutter/Clutter for pointer buttons only, and Mutter's touch path emits
+ CLUTTER_TOUCH_* events, never a button press.  Re-login (or `pkill -f ding.js`)
+ needed to load the patched code.
+ Since 2.11 that long press is a SINGLE-FINGER gesture and it is cancelled when
+ the compositor cancels the touch.  The 500 ms timer used to be armed on the
+ emulated button-1 press of ANY touch, which is indistinguishable with one or
+ with three fingers down, so three fingers resting on the glass - or a slow
+ 3-finger workspace swipe, whose fingers rest before they move - opened the
+ desktop menu 500 ms in; the menu's popup grab then cancelled the shell's
+ 3-finger workspace gesture (SwipeTracker._cancelPanGesture() ends at
+ cancelProgress = the CURRENT workspace), i.e. the swipe snapped back and only
+ fast swipes still worked.  DING now watches the raw touch events (adds
+ Gdk.EventMask.TOUCH_MASK and handles touch-event: GTK3 delivers one per finger,
+ while the emulated button event carries no finger count) and a touch the
+ compositor CANCELS because the shell grabbed it for a gesture never comes with
+ a button-release - so the cancel must also clear the timer.  A live finger
+ count + a "saw more than one finger" latch gate the timer, so the menu opens
+ only for a real one-finger long press (or a mouse right-click, which is a
+ different code path entirely and untouched).
+ Since 2.13 the CHARGE-LIMIT BYPASS RELEASES ONLY A PARK IT RECORDED.  The
+ release path decided "something is parked" from the SC8547A pump's own
+ fastchg_deliver reading 0 - but 0 is ALSO the driver's normal idle state (no
+ (S)VOOC brick attached, or any auto-decline/auto-finish/PHY stop), so the holder
+ re-armed the pump and bounced the VOOC PHY (vooc 0 -> 1) on EVERY poll; a PHY
+ stop flips the USB D+/D- crossbar, so every attached USB device was dropped and
+ re-enumerated once per POLL+1 s, forever (measured 2026-10-18: a Kingston
+ DataTraveler cycled every 11 s with no charger even attached).  A limit park is
+ now recorded in /run/erhai-charge-limit-parked (written BEFORE the park, so a
+ park can never exist without its record) and only a recorded park is released,
+ exactly once; the manual switch keeps its own record in
+ /etc/default/erhai-charge.  No kernel change is needed.
+ Since 2.15 the PANEL BLANK HAS ONE OWNER AT A TIME, and a blanked panel is
+ DEAF.  Two features blank this panel - the power button (marker
+ /run/erhai-panel-off) and the folio-fold watcher (marker
+ /run/erhai-folio-fold-blanked) - and the watcher used to claim ANY blank it saw
+ and restore it on unfold: turning the display off with the power button, then
+ folding the pogo keyboard up and opening it again, lit the panel back up while
+ the power button still held it off (measured 2026-10-22 09:18 off ... 09:35:11
+ "UNFOLDED -> backlight on" with /run/erhai-panel-off present), which left the
+ power button's own state machine out of sync - its next press only deleted the
+ marker and the screen stayed on.  The watcher now claims the blank ONLY when
+ the panel was still lit when the fold started, never restores while the power
+ button's marker exists (unfold, shutdown and the idle/unconfigured path all
+ honour that), and erhai-panel-power.sh skips a blank the folio already holds.
+ And the fold used to grab the TOUCH node only, while the folded keyboard lying
+ on the glass also makes the panel's PEN node emit frames - live proof
+ 2026-10-22 09:23:57/09:24:34, DURING a grabbed fold: libinput "event5 -
+ NVTCapacitivePen: Ignoring pressure offset greater than 50%" - so those
+ reached the compositor as pointer activity and woke the session behind a
+ dark screen.  Both panel nodes (NVTCapacitiveTouchScreen + NVTCapacitivePen,
+ GRAB_DEVICES to override) are suppressed while folded, and erhai-power-watch.py
+ suppresses them for as long as ITS blank lasts too (EVIOCGRAB, released
+ before the panel comes back, dies with the process, PANEL_INPUT_GUARD=0 in
+ /etc/erhai/display.conf disables) - the power key is never grabbed.  Tests:
+ tmp/folio-test/{selftest.sh (26),ownership-test.py (15),
+ powerwatch-guard-test.py (16),live-grab-test.py (9, real nodes)}.
+ Since 2.16 the PANEL BLANK IS HIGH PRIORITY AND IMMEDIATE.  The owner reported
+ that turning the display off "can take several seconds before the screen turns
+ off when a process with high CPU load is running", and that a resume from s2idle
+ brings the display back faster than the power button does - both were true:
+   * ORDER - the old sequence was park GPU -> SetActive true -> sleep 2 ->
+     backlight off, and the park waits for the GPU to runtime-suspend, which does
+     NOT happen while the desktop renders (measured >5.5 s idle, 1.7 s under load,
+     budget 10 s), so the panel stayed LIT for 2-12 s after the press.  The
+     visible blank (erhai-display-toggle.sh off) is now the FIRST action, the
+     ownership marker follows, THEN the bounded park (PARK_WAIT, default 1.5 s)
+     and the DPU/DSI teardown - the park-before-teardown ordering that fixed the
+     POR is unchanged, only its wait is bounded and it no longer delays the dark
+     screen.  do_on dropped its sleep 3 + sleep 1: the s2idle harness has always
+     restored the lamp back-to-back with SetActive false (STEP6) and that is the
+     proven path (the DSI rail is down while the panel is dark, so an early lamp
+     shows nothing); ON_SETTLE_MS keeps a knob in case a flash is ever seen.
+   * PRIORITY - erhai-power-toggle.service runs at Nice=-20 with CPUWeight/
+     IOWeight 10000 and best-effort I/O priority 0, and both panel scripts renice
+     themselves to -20 (children inherit) so nothing queues behind a compile;
+     erhai-folio-fold.service takes a moderate -5 (it runs a magnetometer stream).
+   * FORKS - the compositor call uses setpriv instead of runuser (no PAM round
+     trip: 26 ms vs 101 ms under 8 sysbench threads), the click player likewise,
+     say()/snap() no longer spawn date/cut/tee/cat/grep/awk (bash builtins +
+     redirects), the 50-170 ms dmesg tail moved off the user path, and the
+     daemon's per-press survivability line is fire-and-forget.
+   Measured after the change: backlight dark 16 ms idle / 47 ms under 8-thread
+   load, lamp restored 13 ms / 35 ms, and the whole `off` stays under 0.5 s even
+   when the GPU never parks (was 2-12 s).  Tests: tmp/panel-latency/
+   {order-test.sh (19 stub-driven ordering + latency + ownership cases),
+   probe.sh (per-stage timings, LOAD=1 for the loaded case), measure-e2e.sh
+   (real path on demand, clicks muted)}.
+ Since 2.17 the GPU IS NEVER PARKED WHILE AN EXTERNAL DISPLAY IS CONNECTED
+ (owner: *"Make sure that GPU is NOT parked when external monitor is connected!"*).
+ The power-button blank parks the Adreno on purpose (`echo auto`) - it is only
+ needed to make the GPU/MMCX collapse safe once the internal DPU is torn down -
+ but a DP monitor over USB-C keeps rendering while the panel is off, and this
+ pad's policy is that the Adreno stays pinned always-active (erhai-gpu-pin.sh,
+ 2026-09-13: the unpinned path is where the GMU resume hang and the display POR
+ came from).  Three layers now guarantee it: `park_gpu()` REFUSES to park while
+ DP-1 reads `connected` (and re-pins instead), both `do_off`/`do_on` external
+ fallbacks call `pin_gpu()`, and a new udev rule
+ (etc/udev/rules.d/72-erhai-gpu-external.rules) runs
+ usr/local/sbin/erhai-gpu-external-pin.sh on every card*-DP-* add/change event,
+ which re-pins the GPU when a monitor is attached while the panel is blanked
+ (idempotent: it writes only if a DP connector reads `connected` AND the GPU is
+ not already `on`, so repeated uevents cost two reads).  The postinst also fires
+ a drm trigger so a monitor that is already attached is handled at install time.
+ Tests: tmp/panel-latency/gpu-external-test.sh (16 cases: pin/leave/graceful
+ read-only/multi-connector/rule-content) + order-test.sh cases G-I (external
+ monitor: no park, no compositor teardown, GPU re-pinned).
+ Since 2.18 a blank has ONE owner and that is ENFORCED (2026-10-22).  A
+ power-button blank was measured being undone from OUTSIDE - the kernel
+ re-enabled the DSI panel 12 min into a 51-minute blank (1 s after a folio fold,
+ `nvt_ts_panel_power_on`), the session was AWAKE behind the stale marker, and
+ from then on every press drove the DPU and the backlight correctly while the
+ screen stayed black until a reboot.  erhai-power-watch.py therefore watches two
+ signals while it owns the blank - `nvt_ts_panel_power_on` in /dev/kmsg (a CRTC
+ enable the compositor never asked for) and
+ org.gnome.ScreenSaver.ActiveChanged(false) (the session waking up behind a dark
+ screen, which an ungrabbed input device can cause) - and answers with
+ `erhai-panel-power.sh reassert [--cycle]`: the blank is put back, the lamp is
+ forced dark again (deactivating the screensaver makes gsd-power restore its own
+ brightness), and the marker, the brightness MEMORY and the GPU park are left
+ alone because they belong to the press that started the blank.  It never acts
+ while a monitor is attached (that blank is backlight-only by design, 2.17),
+ never over a folio-owned blank, at most once every 3 s, and BLANK_INTEGRITY=0 in
+ /etc/erhai/display.conf (or ERHAI_BLANK_INTEGRITY=0) disables it.  Tests:
+ tmp/panel-latency/blank-integrity-test.py (39 cases) + reassert-test.sh (23).
+ Since 2.19 an UNFOLD IS A COVER OPEN and always wakes the panel (owner, after
+ 2.18 made the blank survive: *"power button -> display dark -> keyboard folded
+ up -> waited -> folded down -> display still dark! -> power key -> display lit
+ up"*).  When the blank is the power button's, erhai-folio-fold.py hands it back
+ THROUGH THE POWER PATH (new POWER_CMD -> `erhai-panel-power.sh on`), which
+ clears /run/erhai-panel-off AND restores the lamp from the brightness memory, so
+ the power button's state machine agrees with the panel - the old "restore the
+ lamp, keep the marker" form made the next press a no-op.  A fold that finds the
+ panel already dark (power button, idle DPMS) is REMEMBERED so the unfold can act
+ on it, while an idle-DPMS blank (no marker) is still left alone;
+ UNFOLD_RELEASES_POWER_BLANK=0 in /etc/erhai/folio-fold.conf restores the
+ previous "leave it off" behaviour.  `erhai-panel-power.sh on` now also drops the
+ marker BEFORE it lights the panel: a lit panel next to a "blanked" marker is
+ exactly the window in which the blank-integrity monitor would start a re-assert
+ in the middle of a restore, and it no longer exists; the monitor additionally
+ ignores both detectors for 5 s around a press.  Tests: tmp/folio-test/selftest.sh
+ 32 checks (H-M = the cover-open ownership rules incl. the opt-out and the
+ idle-DPMS case) + blank-integrity-test.py 44.
+ Since 2.20 the two blank markers are ONE owner-tagged state file:
+ /run/erhai-panel.state, one line "<owner> <epoch>", owner = power | folio.  The
+ file existing means "the panel is wanted OFF" and the owner says who asked —
+ the two watchers (erhai-power-watch.py for the power key, erhai-folio-fold.py for
+ the cover) read and write exactly this file, whoever blanks first owns it, a
+ press or fold while it is there is a no-op, and whoever restores CLEARS it, so
+ the "dark marker next to a lit panel" state that the pair of markers kept
+ producing cannot be written any more.  A missing or garbled owner is treated as
+ "blanked, owner unknown" (never light a panel on unreadable state), the folio
+ blanks lightly (lamp only) and the power button deeply (lamp, park, DPU/DSI
+ teardown), and erhai-panel-power.sh `on` drops the state BEFORE it lights the
+ lamp so the blank-integrity monitor can never fight a restore.  The postinst
+ migrates a blank that is in force during an upgrade and restarts both watchers;
+ erhai-folio-unblank.sh (the stop safety net) and erhai-backlight-fixed.sh read
+ the same single file.  Tests: tmp/folio-test/panel-state-test.sh (the shared
+ format, bash <-> Python, malformed cases), selftest.sh, cover-open-live.sh.
+ Since 2.21 a PRESS-AND-HOLD on the power key is the blind escape: holding it for
+ POWER_HOLD_REBOOT_S (default 8 s, 0 disables; /etc/erhai/display.conf, env
+ ERHAI_HOLD_REBOOT_S) makes erhai-power-watch.py ask systemd for a CLEAN reboot
+ (systemctl reboot), so a black screen with a live SoC no longer needs a hard
+ reset - a power cut that loses the journal and every forensic marker - and it
+ fires BEFORE whatever the PMIC's own long-press reset does.  The configured
+ logind long-press poweroff never fired on this pad (measured 2026-10-22
+ 13:13:10 + 13:14:03: "Power key pressed long." with no shutdown started), which
+ is why the escape lives in the watcher that already reads the key.  A short
+ press still toggles the panel AT ONCE (the hold never delays it), one escape per
+ hold with the release re-arming it, and a failed systemctl is logged, not
+ retried.  Tests: tmp/panel-latency/powerhold-test.py (24 cases, fake clock) +
+ hold-reboot-live-test.sh (6 cases: a FIFO-fed power key against the real daemon
+ with recorder stubs for the panel and the reboot command).
+ Since 2.22 the watcher also RECORDS display-pipeline errors: it scans every
+ /dev/kmsg line for `dpu error`, `frame done timeout`, `dsi_cmds2buf_tx`,
+ `vblank timeout`, `wait for commit done returned`, `commit done failed` and
+ `failed to map buffer`, logs each to the journal (rate limited) and to the
+ fsync'd survivor log, and writes the NEWEST one to /run/erhai-display-error
+ (printed by tmp/panel-blank-diag/grabstate.sh).  Why: on 2026-10-22 (boot -1) a
+ press -> fold -> unfold left the panel BLACK with the backlight at 40 % while
+ gnome-shell was awake and unblanking (it relaunched DING on every unblank), the
+ CRTC/panel were enabled and the touch firmware reloaded on every press - and NOT
+ ONE kernel error was logged, so whatever the kernel does print must be kept with
+ a timestamp.  Tests: tmp/panel-latency/blank-integrity-test.py (58 cases, incl.
+ the recorder).
+ Since 2.23 NO SCRIPT NAMES A DESKTOP USER ANY MORE (bug report "session username
+ hardcoded"): erhai-suspend-s2idle.sh had `USER_NAME=themojoman` hardcoded, and
+ erhai-panel-power.sh / erhai-power-watch.py defaulted to the same name, so on an
+ install whose desktop user is somebody else `id -u` came back EMPTY - RT became
+ /run/user/ and the gnome-shell SetActive calls of the suspend harness (STEP4c
+ blank / STEP6 restore) and of the power-button toggle could not reach the
+ session at all.  All three now ask the new erhai_session_user() in
+ erhai-desktop-users.sh (order: $ERHAI_SESSION_USER / $ERHAI_USER -> the user of
+ the ACTIVE graphical logind session -> uid 1000 -> the first human account), and
+ erhai-power-watch.py makes the identical decision in Python and re-resolves it on
+ every session-monitor retry, because that daemon starts around multi-user.target,
+ i.e. possibly before anybody logged in.  The per-press panel path asks with
+ `cheap`, so the usual answer (uid 1000) costs ONE getent lookup instead of a
+ loginctl round trip - the blank still has to be immediate (2.16).  The same
+ release fixes the suspend harness' EXIT STATUS: its say() ended with
+ `[ -x "$SURVLOG" ] && ...` while /usr/local/sbin/erhai-surv-log is a dev-pad tool
+ this package does NOT ship, so on every other pad say() returned 1, the LAST
+ command of the script is a say, and systemd-suspend.service was marked FAILED
+ after a suspend that had worked (`suspend_stats success=1`), leaving the system
+ degraded; the author's pad only looked fine because that tool exists THERE.
+ say() now ends with `return 0`, exactly as erhai-panel-power.sh's always did.
+ Tests: tmp/session-user-test/session-user-test.sh (55 checks: bash <-> python
+ agreement on every resolution arm, the real resolution blocks cut out of both
+ shell scripts and run against a fake passwd/loginctl world, a scan that no
+ shipped file bakes a username into code, and the say() exit status including a
+ witness of the old behaviour).
+ Since 2.24 the AUTOLOGIN LOGIN-KEYRING UNLOCK ships with this package (closing the
+ gap build-root.sh tracked since 2026-09-28): /usr/local/sbin/erhai-keyring-unlock.sh
+ used to exist only on the dev pad and its second statement was
+ `[ "$PAM_USER" = "themojoman" ] || exit 0`, so on any install with a different
+ account the login keyring stayed LOCKED and the first app that read a secret
+ (goa-daemon, Brave/Chromium Safe Storage) popped a gcr prompt at every login.  The
+ helper is now a payload file, takes the account from PAM_USER (human accounts only -
+ never root, a greeter or a system account) and honours the ONE account named by the
+ group of /etc/erhai/keyring.pass, so one user's password can never be fed to another
+ user's keyring; it always exits 0.  The postinst/postrm own exactly ONE line in
+ /etc/pam.d/gdm-autologin (inserted before pam_gnome_keyring's auto_start, since a
+ keyring daemon can only be STARTED with the password and not unlocked once running;
+ idempotent, owner/mode and every other line preserved, and removed again on a real
+ removal) and the postinst puts a keyring.pass whose group names no human account back
+ on the documented root:<desktop-user> 0640 contract.  The pass file itself stays the
+ USER's - it holds the password that unlocks the keyring.  Tests:
+ tmp/keyring-test/keyring-unlock-test.sh (38 checks: the helper through PATH stubs,
+ the pam logic through the ERHAI_PAM_DIR seam).
+ Since 2.29 the GREETER also ignores the power key: the greeter dconf seed
+ (usr/share/gdm/dconf/95-erhai-greeter) now carries power-button-action='nothing'
+ for org.gnome.settings-daemon.plugins.power.  User sessions already got it from
+ /etc/dconf/db/local.d/00-erhai, but the greeter's profile (user-db:user +
+ system-db:gdm + the compiled file-db) never reads system-db:local, so after a
+ LOGOUT the login screen fell back to Ubuntu's 10_ubuntu-settings.gschema.override
+ value 'interactive' and gsd-power answered a short power press with
+ gnome-session's EndSessionDialog ("your computer will shut down in N seconds",
+ 2026-10-26) instead of leaving the key to erhai-power-watch.py, which already
+ toggles the panel in every session (a long press stays the clean reboot).  The
+ postinst's generate-config step recompiles the file-db, so the fix reaches a
+ running gdm without a greeter restart.
+ Since 2.30 the KEYRING-UNLOCK pam_exec line is also in /etc/pam.d/gdm-password.
+ gnome-keyring 50.0-1's own unlock path -- the one pam_gnome_keyring uses when it
+ HAS the typed password -- rejects the CORRECT password ("gkr-pam: the password for
+ the login keyring was invalid", 2026-10-26, on a keyring that this same daemon
+ unlocked from the command line with the very same password; the D-Bus
+ org.gnome.keyring.InternalUnsupportedGuiltRiddenInterface unlock/change methods
+ are broken the same way), so a MANUAL password login left the login keyring
+ locked and the first app that read a secret (Brave's "Safe Storage") popped the
+ gcr "the password you use to log in no longer matches that of your login
+ keyring" prompt, which could not unlock it either.  The helper starts the daemon
+ with `--unlock` -- the path that DOES verify the password, proven at every
+ autologin -- before pam_gnome_keyring's auto_start, so both login routes now
+ behave identically.  postrm removes the line from both files again.  Consequence
+ to keep in mind: /etc/erhai/keyring.pass must hold the password that unlocks the
+ keyring (a password change re-encrypts the keyring, so update it then too).
+ Since 2.31 NO DEVELOPER PATH SHIPS ANY MORE (personal-data audit, 2026-10-26).
+ The suspend/panel helpers used to bake a developer workspace/tmp/
+ gpu-hang-capture into the package: erhai-suspend-s2idle.sh took its helper
+ directory and its log from there (D=, LOG=, plus the "SKIPPED"/"fall back to
+ /var/log" comments), erhai-suspend-gnome.sh fell back to a copy of the harness
+ in that tree, erhai-panel-power.sh logged there, and erhai-folio-probe.py
+ carried it as WORKSPACE.  On any pad that is not the author's those paths do not
+ exist (the suspend log then only worked because of a /var/log fallback), and
+ they leaked the maintainer's filesystem layout into a public .deb.  All five are
+ now install paths or runtime state: D=${ERHAI_SUSPEND_DIR:-/usr/local/sbin},
+ LOG=${ERHAI_SUSPEND_LOG:-/var/log/erhai-suspend-s2idle.log} (an unwritable
+ directory falls back to /dev/null instead of killing the sleep),
+ HARNESS=${ERHAI_SUSPEND_HARNESS:-/usr/local/sbin/erhai-suspend-s2idle.sh},
+ LOG=${LOG:-/run/erhai/panel-power.log} in the panel helper, and
+ WORKSPACE=$ERHAI_WORKSPACE (unset by default) with /var/lib/erhai/folio-probe as
+ the probe's output directory.  The rule is enforced from now on: every builder
+ publishes through ppa-common.sh's ppa_copy/ppa_mv, which run ppa-guard.sh first
+ (secrets from /etc/erhai/*.pass + the workspace .clinerules + ~/.config/erhai/
+ ppa-denylist, private keys, keyring/browser stores, API tokens, this machine's
+ MAC addresses and Wi-Fi SSIDs, /home/<user> and the workspace path), and
+ update-ppa.sh --mvtomain guards every .deb it promotes to the public suite.
+ Both fail closed; ERHAI_GUARD_ALLOW=1 is the consciously unsafe bypass.
+
+Package: oneplus-erhai-desktop
 Version: 2.5
 Architecture: all
 Maintainer: TheMojoMan <themojoman@gmx.net>
@@ -3705,6 +4175,121 @@ Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
  no longer ships it).
 
 Package: oneplus-erhai-erhaicam
+Version: 2.10
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libgtk-4-1, libgdk-pixbuf-2.0-0, gstreamer1.0-libcamera, gstreamer1.0-gtk4, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-pipewire
+Recommends: iio-sensor-proxy, python3-numpy
+Breaks: oneplus-erhai-cam (<< 1.3)
+Replaces: oneplus-erhai-cam (<< 1.3)
+Provides: oneplus-erhai-cam
+Filename: ./oneplus-erhai-erhaicam_2.10_arm64.deb
+Size: 125604
+MD5sum: ea9bc78bed354850a13ff479db3a84bb
+SHA1: 3c586f03e544f54a28136cee5a5154235a8c2bc7
+SHA256: 4c8510e16b50e257e56deb01284e94d9597ebf9741d9c4d288533958e38107c7
+Section: graphics
+Priority: optional
+Description: ErhaiCam — standalone camera app for the OnePlus Pad 3 (erhai)
+ GTK4/GStreamer camera app with NPU-driven autofocus and auto-exposure.  The
+ per-frame image analysis (Tenengrad focus metric + luminance statistics) runs
+ on the Hexagon NPU (HTP) as an ONNX graph executed by ONNX Runtime's QNN
+ execution provider (erhai-npu-analyze.py), with a CPU implementation of the
+ same metric as the automatic fallback.  The AF sweep drives the kernel
+ cn3927 lens subdev (V4L2_CID_FOCUS_ABSOLUTE, tap-to-focus, refocus on
+ sharpness drop); AE is a log-domain controller on the SC1320CS integration
+ time written straight to the sensor register 0x3e00 (BOTH cameras since 2.8 —
+ the rear SC1320CS and the front SC820CS).  AE (top left) and AF (top right)
+ buttons toggle the automatics; turning one off reveals the matching fader
+ below the button for manual focus (VCM, 0..1023) or exposure (sensor lines,
+ 1..6396 rear / 1..3120 front) — the faders stretch with the window and stop
+ 50 px above its bottom edge.
+ .
+ 2.9 MAKES LOW LIGHT USABLE — a frame-length (VTS) ladder in the AE.  A
+ sensor's integration time can never exceed its FRAME LENGTH, and the mode table
+ fixes that at 3128 lines (front SC820CS) / 6404 (rear SC1320CS): so in a dim
+ room the front camera was simply out of light (measured: luma 43, signal band
+ 18 of 255) and NO setting of the software ISP could help (its AGC is inert on
+ these sensors — libcamera has no CameraSensorHelper for either — and every
+ option set measured identical).  Lengthening the frame is the one lever that
+ works: `0x320e/0x320f` 3128 -> 6240 gave luma 43.4 -> 48.7 and band 17.9 ->
+ 24.3 (real light, contrast intact) for a 7.5 fps preview instead of 15.  The AE
+ now doubles the frame (up to 4x) when the exposure is at its ceiling and the
+ scene is still dark, moves the exposure to the new ceiling, and halves it back
+ towards the mode table's length once the scene brightens — so a bright room
+ keeps full frame rate.  `--no-ae` and manual exposure never touch the frame.
+ .
+ 2.8 OWNED THE CAMERAS' EXPOSURE REGISTERS; the ISP tuning below follows.  Measured on two photos taken 13 s
+ apart: the picture's black floor rose 10 -> 42 (out of 255) while the
+ highlights barely moved and its colour temperature was unchanged — a fog, not
+ a colour cast.  Cause: this pad's software ISP has NO exposure model for
+ either sensor (libcamera: "Failed to create camera sensor helper") and the
+ kernel's exposure/gain controls are no-ops on both, so in a dark scene the
+ ISP's AGC could only brighten the picture in SOFTWARE, and its digital gain
+ multiplies the black level until the frame washes out.  The app now owns BOTH
+ sensors' exposure registers (so the ISP's AE cannot fight it and the front is
+ no longer left entirely to it — the front has no AE of its own), and
+ libcamera's gamma and saturation are pinned by default so its luminance-
+ dependent `Adjust` compensation cannot re-curve the picture (gamma 2.2,
+ saturation 1.0 = the pinned default).  Escape hatches: ERHAI_CAM_ISP=none
+ restores the old behaviour (or `=raw`/`=off`/`=isp`), `=default`/`=on`/`=pins`
+ is the default, `=lowlight` adds `ae-enable=false` (no ISP gain stage at all —
+ darkest but never washed out), and any `key=value,…` is a complete override;
+ ~/.config/erhai/erhaicam.conf `[isp] key=value` lines are appended to the
+ default.
+ .
+ Also: photo capture into ~/Pictures/ErhaiCam, video recording, front/rear
+ camera switching (front streams once its Phase-B driver work lands) and
+ accelerometer orientation handling (upright preview + upright snapshots).
+ .
+ Video recording (1.6) is H.264 + AAC in MP4 through the hardware encoder
+ (v4l2h264enc / Iris, which only takes NV12 — the previous I420 request failed
+ its link and silently fell back to software VP8), with a VP8/Opus WebM
+ fallback.  The note button at the bottom right of the shutter bar picks the
+ soundtrack: "No audio" (silent video, the default) or "Microphone" — the
+ PipeWire default source (the pad's Internal Mics), captured as a second branch
+ of the same pipeline so the muxer keeps picture and sound in sync.  The
+ choice applies from the next recording on.
+ .
+ RESOLUTION (2.4, default changed in 2.5): the button in the bottom-LEFT corner
+ shows the stream size and opens a menu to choose it.  One stream feeds preview,
+ video and photos, so the choice sets all three.  Each camera has its OWN list
+ and its own remembered choice — switching camera switches the menu.  Default
+ for BOTH cameras: 1920x1080 (Full HD).
+   back  — 4152x3120 (sensor native), 3840x2160 (4K UHD), 3200x2400 (8 MP),
+           2560x1920, 1920x1080 (Full HD, the default), 1280x720, 640x480
+   front — 3200x2400 (8 MP), 2560x1920, 1920x1080 (Full HD, the default),
+           1600x1200, 1280x960, 640x480
+ (the front sensor's bare native 3264x2448 does NOT negotiate on this hardware;
+ 3200x2400 is its largest usable size).  The size is asked of the software ISP,
+ so it is scaled before the colour conversion.  Both choices persist in
+ ~/.config/erhai/erhaicam.conf, and the picker is locked while a recording runs
+ (a new stream would end the take).  A scripted run can force a size with
+ --res WxH or ERHAI_CAM_RES=WxH.
+ .
+ 1.7 fixes the resulting timestamps: the camera's frames carry the PREVIEW
+ pipeline's time base while the microphone starts at its own zero, so a
+ recording made a while after launch came out with a lead-in of nothing (black
+ picture, wrong duration) before the video began.  Each recording now re-bases
+ its frames onto the first one recorded, so picture and sound start together.
+ .
+ PRIVACY: the microphone is opened ONLY while a recording runs (from pressing
+ Record until Stop, or a headless --record run) and is closed again afterwards.
+ No capture stream is ever left running in the background, and the cold start
+ of the pad's capture path is handled by trimming the silent head of the track
+ instead of by keeping the mic awake (owner decision, 2026-10-20).
+ .
+ This package takes over the renamed oneplus-erhai-cam (<= 1.2, the same app):
+ it Provides that name, and Replaces/Breaks the old versions so an installed
+ oneplus-erhai-cam upgrades here and its files (usr/bin/erhai-cam, the desktop
+ file, the shipped source) change hands cleanly.  The oneplus-erhai-cam 1.3
+ package is an empty transitional package that Depends on this one.
+ .
+ The manual-focus/exposure GNOME Shell extension (erhai-cam-focus@erhai.local)
+ is retired: the app owns both loops natively now (oneplus-erhai-camera 1.3
+ no longer ships it).
+
+Package: oneplus-erhai-erhaicam
 Version: 2.3
 Architecture: arm64
 Maintainer: TheMojoMan <themojoman@gmx.net>
@@ -4059,6 +4644,61 @@ Size: 22507010
 MD5sum: 634a3793d83c298eb47db87d289b4ec7
 SHA1: 8861f56b164214a7814b161dfc0e1a262ddaf66f
 SHA256: 40530266ef9aeb482ad15dca32f28d504b60634e8abbd1bda22047865dd9a681
+Section: libs
+Priority: optional
+Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP transport
+ This is the SHARED FastRPC layer of erhai: the Qualcomm userspace built from
+ github.com/qualcomm/fastrpc, plus the DSP-side payload trees a FastRPC client
+ uploads to the DSP. It is what makes /dev/fastrpc-cdsp usable at all, so the
+ NPU/HTP stack (oneplus-erhai-npu) and any other FastRPC client need it.
+ .
+  - client libraries in /usr/local/lib: libcdsprpc (SONAME libcdsprpc.so.1),
+    libadsprpc, libsdsprpc and the three *_default_listener shims;
+  - cdsprpcd, the remotefs daemon for the COMPUTE DSP (the Linux equivalent of
+    Android's `cdsprpcd rootpd cdsp`), with a hardened unit
+    (cdsprpcd.service: ConditionPathExists-gated so a kernel without the CDSP
+    SKIPS it) and a drop-in setting ADSP_LIBRARY_PATH/DSP_LIBRARY_PATH to the
+    DSP payload trees;
+  - the `fastrpc` group (usr/lib/sysusers.d/fastrpc.conf) and the udev rule that
+    hands /dev/fastrpc-* to it (root:fastrpc 0640) and ACLs /dev/dma_heap/system
+    -- uaccess cannot be used here, the FastRPC nodes are misc devices;
+    the postinst also puts the desktop accounts into the group, which needs a
+    re-login to take effect;
+  - /etc/environment.d/57-erhai-fastrpc-unsigned.conf (FASTRPC_UNSIGNED_PD=1):
+    the Linux QNN/ggml DSP skels are unsigned-only, and QNN picks
+    signed-vs-unsigned from the platform info, so the CDSP refuses the PD image
+    (0x8000054f) without it;
+  - the DSP payload trees clients read from: /usr/lib/rfsa/adsp,
+    /usr/lib/rfsa/cdsp and /usr/share/qcom/hexagon/v79 (fastrpc_shell_3 +
+    _unsigned_3, the Hexagon C++ runtime, the QNN HTP v79 skel, the HTP runtime
+    and the ggml-htp skels, from OxygenOS 16.0.9.400, the public QNN/QAIRT
+    releases and Qualcomm's PyPI GenieX tooling);
+  - fastrpc_test + fastrpc-healthcheck (bring-up/diagnostic tools).
+ .
+ DELIBERATELY NOT SHIPPED: the adsprpcd/sdsprpcd/gdsprpcd daemons and their
+ units -- the ADSP/SDSP paths on erhai are served by oneplus-erhai-sensors'
+ hexagonrpcd-erhai -- the libtool .la files, and the manual backup copies of the
+ QNN skel (*.previous, *.qai_appbuilder) that nothing loads.
+ .
+ Kernel side (NO kernel package is recommended or suggested on purpose: the
+ erhai kernel is mandatory for Ubuntu on this tablet and ships in the image):
+ the CDSP remoteproc must be enabled (oneplus-erhai-linux from the 7.2 +b63
+ build on, or any 7.3-rc* line) and the firmware must carry the cdsp split image
+ (oneplus-erhai-firmware >= 1.2).
+
+Package: oneplus-erhai-fastrpc
+Version: 0.3
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 79356
+Depends: libc6, libbsd0, libyaml-0-2, systemd, udev
+Recommends: oneplus-erhai-firmware, oneplus-erhai-npu
+Suggests: oneplus-erhai-sensors
+Filename: ./oneplus-erhai-fastrpc_0.3_arm64.deb
+Size: 21989664
+MD5sum: d896ddddefdb382200933ce3eccd349f
+SHA1: 82811833e34dd159ae14034ac29e7ae31b3ed07d
+SHA256: 349fb6081e877881906580e5d0aa42e227eeb771099b141d1ed092af9008c5f6
 Section: libs
 Priority: optional
 Description: Qualcomm FastRPC userspace for the OnePlus Pad 3 (erhai): CDSP transport
@@ -4613,6 +5253,56 @@ Size: 10871202
 MD5sum: bede1e565805a1151076aadd5ee76524
 SHA1: b001a8024996e1e24babb6e94e29f3b85d16959b
 SHA256: 87562ca1f57bcebe394327f6fb3d553646a6833bb61717abc1aaa77f46b1b865
+Section: utils
+Priority: optional
+Description: Patched llama.cpp for the OnePlus Pad 3 (erhai): CPU + Adreno OpenCL + Hexagon NPU
+ llama.cpp (ggml 0.24.0, upstream 6f41ac5) built with the local erhai patch
+ set, installed under /opt/llama.cpp so it never shadows a distro build.
+ .
+ The patches are the price of running ggml on this device:
+  - OpenCL/Adreno (rusticl): accept the OpenCL 3.0 subgroup family instead of
+    the legacy cl_khr_subgroups name, empty REQD_SUBGROUP_SIZE_* for a compiler
+    that lacks cl_qcom_reqd_sub_group_size, keep the qcom shuffle mapping in
+    mul_mv_f16_f32_l4.cl conditional, portable float32 in the nine
+    gemm_moe_*_ns.cl kernels, and is_qualcomm_adreno_compiler() so the
+    unparsable Mesa driver version stops skipping the 1d_8x_flat decode
+    kernels the dispatch path still uses (without it every single-token decode
+    died with clSetKernelArg error -48);
+  - a hexagon backend loader fix: ggml-backend-reg.cpp also accepts the legacy
+    ggml_backend_<name>_reg() entry point, which is what the prebuilt Hexagon
+    backend exports;
+  - --offload-spec / -os (env LLAMA_ARG_OFFLOAD_SPEC): explicit device
+    placement ('HTP0:8', 'HTP0:layers=0-3,GPUOpenCL:layers=4-5,CPU:rest',
+    'HTP0:bytes=2G'), rules left to right, first match wins, unnamed layers
+    stay on the CPU.
+ .
+ The vendor Hexagon (HTP) backend that this build loads for NPU offload,
+ libggml-hexagon.so + libggml-htp-v79.so, is shipped under
+ /opt/llama.cpp/share/hexagon-v79/ (Qualcomm's public GenieX/qai_appbuilder
+ binaries -- DSP-side blobs, not built here).
+ .
+ llama-erhai and llama-erhai-server wrap the binaries with the environment the
+ device stack needs and REFUSE to run on the GPU by default: an Adreno OpenCL
+ fault on this pad takes the panel down with it (2026-09-22: ggml-opencl
+ GGML_ASSERT -> msm hangcheck -> drm recover loop -> hard reset).  The safe
+ local-LLM devices are the CPU and the Hexagon NPU.
+ .
+ NOTE the NPU route additionally needs the CDSP userspace stack (cdsprpcd,
+ libcdsprpc, /usr/lib/rfsa, the fastrpc group) -- see the README shipped in
+ /usr/share/doc/oneplus-erhai-llamacpp/.
+
+Package: oneplus-erhai-llamacpp
+Version: 0.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 35444
+Depends: libc6, libstdc++6, libgcc-s1, libssl3t64, ocl-icd-libopencl1
+Recommends: oneplus-erhai-mesa, oneplus-erhai-npu
+Filename: ./oneplus-erhai-llamacpp_0.2_arm64.deb
+Size: 10871228
+MD5sum: 85e2282f46da5dbc41b7481e3ee8b319
+SHA1: daea74af8dbc455b1bc8169b01fb99f549a9b17a
+SHA256: 4500a2c9acb43d634cb9e87bee0159f4561ffd14880f7c73a3cbd1e74b1225d3
 Section: utils
 Priority: optional
 Description: Patched llama.cpp for the OnePlus Pad 3 (erhai): CPU + Adreno OpenCL + Hexagon NPU
@@ -5304,6 +5994,69 @@ Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
  The source patches for the binary builds ship under
  /usr/share/doc/oneplus-erhai-sensors/patches/.
 
+Package: oneplus-erhai-sensors
+Version: 2.6
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: iio-sensor-proxy, hexagonrpcd, tqftpserv, libqmi-glib5, libmbim-glib4, libqrtr-glib0, libprotobuf-c1
+Recommends: gnome-shell
+Filename: ./oneplus-erhai-sensors_2.6_arm64.deb
+Size: 2892200
+MD5sum: 473df8ac6d184816073b123443666e7e
+SHA1: 0196d5ff77894bfa2d4af42583c5eadf74bfb721
+SHA256: 2d8230fd8929a59bf868991de6eb4f011cd557dc06268e4af0019da2fd7a20d8
+Section: utils
+Priority: optional
+Description: SSC sensor stack for the OnePlus Pad 3 (erhai)
+ Brings the ADSP SSC sensors (BMI3x0 accelerometer, ambient light) up to
+ iio-sensor-proxy and the GNOME desktop:
+  - patched iio-sensor-proxy 3.9 with SSC support + startup-claim-race fix
+    (/usr/local/libexec/iio-sensor-proxy), monitor-sensor and ssccli helpers
+  - libssc 0.4.4 (/usr/local/lib/aarch64-linux-gnu/libssc.so.2)
+  - hexagonrpcd 0.4.0 with odm-sensor-config + nonfatal-dispatch patches
+    (/usr/local/bin/hexagonrpcd-erhai), an /etc/systemd/system/hexagonrpcd.service
+    override that replaces the distro unit (which is ordered after
+    multi-user.target and therefore started ~75 s late, waiting for the WiFi
+    bring-up -- with no accelerometer/ALS until then, i.e. no auto-rotate and
+    no auto-brightness for the first ~85 s of every boot), and the complete
+    /var/lib/hexagonfs-erhai remotefs tree
+    (acdb, fastrpc_shell_0 + libsns_* DSP libs, vendor sensor configs,
+    odm json_list). The tree must be complete BEFORE hexagonrpcd first
+    attaches: the ADSP sensor PD loads its configs exactly once.
+  - udev rule 90-erhai-ssc-sensors.rules: SSC sensor types + ACCEL_MOUNT_MATRIX
+    (rotated -90 deg so natural landscape classifies as "normal") on
+    fastrpc-adsp-secure, SYSTEMD_WANTS=iio-sensor-proxy.service
+  - iio-sensor-proxy.service drop-in redirecting ExecStart to the SSC build
+  - erhai-sensors@erhai.local GNOME Shell quick-settings extension
+    (auto-brightness toggle; auto-rotate toggle whose value is saved and
+    turned OFF when the pogo keyboard is attached and recovered on detach
+    (save persists across sessions) — the toggle itself stays enabled at
+    all times — plus suppression of the shell's built-in duplicate rotation
+    toggle)
+   - erhai-alsd (session auto-brightness) never writes brightness while the
+     panel is blanked — by the power button or by the folio-fold watcher in
+     oneplus-erhai-desktop — and re-applies its target once the panel is back.
+     It also idles in any logind session that is not a logged-in desktop
+     (class 'greeter': GDM's login screen AND the gnome-initial-setup session,
+     both of which get the globally-enabled unit), so the 2.5 % floor can
+     never override the fixed greeter/boot panel level
+   - erhai-alsd's auto-brightness curve is FITTED to the levels the owner
+     measured for himself on 2026-10-20: 0 lux -> 20 of 2047 (1 %, the flat
+     dark-room floor), 2.7 lux -> 685 (33 %), 96 lux -> 1457 (71 %), reaching
+     100 % at ~2900 lux (pct = 1 + 99*(log10(1+lux)/log10(1+2906))^0.618) -
+     the previous curve was far darker at low light (0 lux was 51)
+   - ssccli gained `--rate HZ` (libssc 0.4.4 sample-rate property made
+     writable): the folio-fold watcher requests 1 Hz so the magnetometer is
+     not streamed at its 50 Hz ceiling all day (SSC hardware floors at 5 Hz)
+ Note on the Hexagon stack split: the ADSP path (hexagonrpcd-erhai, the
+ hexagonfs-erhai remotefs tree, this package) is separate from the CDSP/NPU
+ path. The shared FastRPC TRANSPORT (libcdsprpc, cdsprpcd, the `fastrpc`
+ group, the udev rule, the /usr/lib/rfsa payload trees) lives in
+ oneplus-erhai-fastrpc; hexagonrpcd runs as User=fastrpc, so this package's
+ postinst creates that group if it is missing and works standalone.
+ The source patches for the binary builds ship under
+ /usr/share/doc/oneplus-erhai-sensors/patches/.
+
 Package: oneplus-erhai-thermal
 Version: 1.2
 Architecture: all
@@ -5447,6 +6200,50 @@ Size: 537668
 MD5sum: efaeb00dc9a2800d8a3385dfa3d0e113
 SHA1: 7d00ef2ba4fb02bdcb4e446da17c2fbfd9197c2b
 SHA256: 8eec088d8123ac871d0ae99dc4a352dfe1ca9db18b0c39a05dbf254afebfc89c
+Section: video
+Priority: optional
+Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
+ Userspace stack for the Qualcomm Iris hardware video decoder (the Venus
+ lineage, "Iris Decoder" V4L2 node, qcom_iris kernel module) of the OnePlus
+ Pad 3. Ships the iris-vaapi VA-API driver (iris_drv_video.so) so VA-API
+ clients drive /dev/videoN directly, plus all browser integration:
+ . - /etc/environment.d/55: LIBVA_DRIVER_NAME=iris (libva cannot autodetect
+   the driver on msm platform devices)
+ . - /etc/environment.d/56: MOZ_DISABLE_RDD_SANDBOX=1 (Firefox VA-API decode
+   runs in the RDD process, whose seccomp sandbox blocks /dev/dma_heap)
+ . - /etc/firefox/policies/policies.json: locked VA-API decode prefs
+ . - /etc/chromium.d/erhai-hw-video: AcceleratedVideoDecoder feature flag
+   (chromium's V4L2VideoDecoder drives the iris node directly, no VA-API)
+ . - /etc/brave/policies/managed/erhai-hwvideo.json: HardwareAccelerationMode
+ . - udev rule giving the video group access to /dev/dma_heap/system
+ Codecs: H.264, HEVC Main/Main10, VP9 Profile 0/2 (no AV1). Chromium
+ (xtradeb) decodes H.264/VP9 via V4L2; Firefox and Brave decode H.264/HEVC
+ Main (and Main10/VP9 P2 where the firmware exposes P010) via VA-API.
+ Needs an erhai kernel with the iris decode-order output property (the 7.2
+ line from +b10 on, or any 7.3-rc* line) for Firefox/Brave; the full erhai
+ image ships it. The package declares NO Recommends on purpose: the kernel,
+ the browsers and libva are provided by the image (or by the user), so
+ installing it drags nothing else in. After installing on a running desktop,
+ log out and back in once.
+ .
+ The iris-vaapi source tree ships in /usr/src/oneplus-erhai-video/iris-vaapi.
+ .
+ 1.3 (2026-10-23): the 1.2 payload ALSO shipped the vendored iris-vaapi's .git
+ directory -- 44 entries: the object store, the hooks and commit signatures with the
+ author's identity -- because that build still ran from a tree carrying the clone
+ metadata.  No code changed (the driver is rebuilt from the same source, byte for
+ byte); the tree is clean and build-video-deb.sh now REFUSES to pack a nested .git.
+
+Package: oneplus-erhai-video
+Version: 1.4
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libva2
+Filename: ./oneplus-erhai-video_1.4_arm64.deb
+Size: 429000
+MD5sum: aeabbe016aaacdd2cf8946c80a03c324
+SHA1: 43674e4b4ddeaea93863f6d8d269227c4e5ccb71
+SHA256: 2a20da2384f05175000f6811164eee2c47c1409fc5501c96d776c36968c625dd
 Section: video
 Priority: optional
 Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
