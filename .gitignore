@@ -1,0 +1,8 @@
+# Per-release erhai suites that exist ONLY for local build+test so far.
+# A directory listed here is generated and signed by ./update-ppa.sh
+# (--no-push for a purely local refresh) but can never be committed by
+# `git add -A`, so a normal publish cannot push an untested package live.
+# To PUBLISH a release, delete its lines here and publish deliberately:
+#   stonking (26.10) -- nothing built or tested for it yet
+ppa/oneplus-erhai/ubuntu/stonking/
+ppa/oneplus-erhai/ubuntu/dists/stonking
