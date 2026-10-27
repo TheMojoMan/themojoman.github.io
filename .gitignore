@@ -2,7 +2,6 @@
 # A directory listed here is generated and signed by ./update-ppa.sh
 # (--no-push for a purely local refresh) but can never be committed by
 # `git add -A`, so a normal publish cannot push an untested package live.
-# To PUBLISH a release, delete its lines here and publish deliberately:
-#   stonking (26.10) -- nothing built or tested for it yet
-ppa/oneplus-erhai/ubuntu/stonking/
-ppa/oneplus-erhai/ubuntu/dists/stonking
+# (none right now: the stonking suite is a REAL suite as of 2026-10-27 -- the
+#  stonking image ships main + stonking in its sources, so the suite has to be
+#  published together with the debs that live in it)
