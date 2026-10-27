@@ -1,15 +1,15 @@
 Package: gir1.2-mutter-18
 Source: mutter
-Version: 50.1-0ubuntu2.4+erhai1
+Version: 50.1-0ubuntu2.5+erhai1
 Architecture: arm64
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Installed-Size: 548
-Depends: libmutter-18-0 (= 50.1-0ubuntu2.4+erhai1), gir1.2-atk-1.0, gir1.2-gdesktopenums-3.0 (>= 50~alpha), gir1.2-gio-2.0, gir1.2-gl-1.0, gir1.2-gobject-2.0, gir1.2-graphene-1.0, gir1.2-pango-1.0, gir1.2-xfixes-4.0, gir1.2-xlib-2.0
-Filename: ./gir1.2-mutter-18_50.1-0ubuntu2.4+erhai1_arm64.deb
-Size: 133670
-MD5sum: d209c2e59273977642b79fde96ffe0f5
-SHA1: 8da76065eb618dfe10625b5480f072d6b91f389d
-SHA256: e6e58fcf5041b9b5e584bfd0688ac470c1bc1843f00a755dc688a1a1c0f0ff72
+Depends: libmutter-18-0 (= 50.1-0ubuntu2.5+erhai1), gir1.2-atk-1.0, gir1.2-gdesktopenums-3.0 (>= 50~alpha), gir1.2-gio-2.0, gir1.2-gl-1.0, gir1.2-gobject-2.0, gir1.2-graphene-1.0, gir1.2-pango-1.0, gir1.2-xfixes-4.0, gir1.2-xlib-2.0
+Filename: ./gir1.2-mutter-18_50.1-0ubuntu2.5+erhai1_arm64.deb
+Size: 133660
+MD5sum: 669aadd9d5356a269e42d5b0dd978a2d
+SHA1: be3a434fad1c6741f1c2512537293df13778a7de
+SHA256: f8ad930b4e8bcf121d88cfe3fd63a01f94fc3e545b7ae1b04bfb5512b8206030
 Section: introspection
 Priority: optional
 Multi-Arch: same
@@ -29,7 +29,7 @@ Description: GObject introspection data for Mutter
 Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
  .
  Locally rebuilt package: its exact dependency on libmutter-18-0 is bumped to
- 50.1-0ubuntu2.4+erhai1, the locally patched library (erhai compositor touch-drag guard).
+ 50.1-0ubuntu2.5+erhai1, the locally patched library (erhai compositor touch-drag guard).
  The payload is the unmodified Ubuntu build.
 
 Package: libegl-mesa0
@@ -201,17 +201,17 @@ Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.aliot
 
 Package: libmutter-18-0
 Source: mutter
-Version: 50.1-0ubuntu2.4+erhai1
+Version: 50.1-0ubuntu2.5+erhai1
 Architecture: arm64
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Installed-Size: 4741
 Depends: adwaita-icon-theme, gsettings-desktop-schemas (>= 40~alpha), mutter-common (>= 50~beta), mutter-common-bin (>= 49.0), libatk1.0-0t64 (>= 2.2.0), libc6 (>= 2.43), libcairo2 (>= 1.6.0), libcanberra0 (>= 0.2), libcolord2 (>= 1.4.5), libdisplay-info3 (>= 0.3.0), libdrm2 (>= 2.4.119), libegl1, libeis1 (>= 1.5.0), libfribidi0 (>= 0.19.2), libgbm1 (>= 21.3.0~rc1), libgl1, libglib2.0-0t64 (>= 2.83.0), libglycin-2-0 (>= 2.0~beta.2), libgnome-desktop-4-2t64 (>= 3.17.92), libgraphene-1.0-0 (>= 1.10.0), libgudev-1.0-0 (>= 238), libharfbuzz0b (>= 0.6.0), libinput10 (>= 1.30.0), libjson-glib-1.0-0 (>= 1.5.2), liblcms2-2 (>= 2.6), libpango-1.0-0 (>= 1.45.5), libpangocairo-1.0-0 (>= 1.18.0), libpipewire-0.3-0t64 (>= 1.6.1), libpixman-1-0 (>= 0.11.2), libsoup-3.0-0 (>= 3.0.3), libstartup-notification0 (>= 0.11), libsystemd0 (>= 226), libudev1 (>= 183), libwacom9 (>= 2.0.0), libwayland-server0 (>= 1.24.0), libx11-6 (>= 2:1.7.0), libx11-xcb1, libxau6 (>= 1:1.0.11), libxcb-res0 (>= 1.10), libxcb1, libxcomposite1 (>= 1:0.4.6), libxcursor1 (>> 1.1.2), libxdamage1 (>= 1:1.1), libxext6, libxfixes3 (>= 1:6.0.0), libxi6 (>= 2:1.2.99.4), libxinerama1 (>= 2:1.1.4), libxkbcommon0 (>= 1.0.0), libxkbregistry0 (>= 1.0.0), libxrandr2 (>= 2:1.2.99.3)
 Breaks: gnome-kiosk (<< 50~rc~), gnome-shell (<< 50~rc~), xwayland (<< 2:23.1.0)
-Filename: ./libmutter-18-0_50.1-0ubuntu2.4+erhai1_arm64.deb
-Size: 1440664
-MD5sum: 0d57a29aea00fcb078a2769ded5226db
-SHA1: 3ef78714de57e0bf61fd7a86696570a389663157
-SHA256: d75844b8bf7c57aae4e6d415b9806c4ff90f8c16f411315f82cbe5f036ed10f5
+Filename: ./libmutter-18-0_50.1-0ubuntu2.5+erhai1_arm64.deb
+Size: 1440840
+MD5sum: 9c09eb1f9854a7851c00337703aa1435
+SHA1: a85b3d1d8f8f4535363a12ebe15e48b96fc9d8fa
+SHA256: b4445a988931da6990653aa0e4134f732d13abb504c68b10249a8982f4762c7f
 Section: libs
 Priority: optional
 Multi-Arch: same
@@ -230,33 +230,33 @@ Description: window manager library from the Mutter window manager
  itself, and gnome-shell.
 Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
  .
- Locally rebuilt package: Ubuntu's 50.1-0ubuntu2.4 with the oneplus-erhai patched
+ Locally rebuilt package: Ubuntu's 50.1-0ubuntu2.5 with the oneplus-erhai patched
  libmutter-18.so.0.0.0 (compositor touch-drag NULL-deref guard).  Depends, Breaks
  and Symbols are Ubuntu's, unchanged.
 
 Package: libmutter-18-0-dbgsym
 Source: mutter
-Version: 50.1-0ubuntu2.4+erhai1
+Version: 50.1-0ubuntu2.5+erhai1
 Auto-Built-Package: debug-symbols
 Architecture: arm64
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Installed-Size: 12813
-Depends: libmutter-18-0 (= 50.1-0ubuntu2.4+erhai1)
-Filename: ./libmutter-18-0-dbgsym_50.1-0ubuntu2.4+erhai1_arm64.deb
-Size: 6464028
-MD5sum: 814f6c2a2f45a22935340d0c51a7f3d3
-SHA1: 6fbad900f9bcc9930e3949a31cf560664990f5d8
-SHA256: 2992a5a14f6c7a0d7670c274cf651e76d13825aa0cf9bbaeffc5ce6d9e6c94f1
+Installed-Size: 12821
+Depends: libmutter-18-0 (= 50.1-0ubuntu2.5+erhai1)
+Filename: ./libmutter-18-0-dbgsym_50.1-0ubuntu2.5+erhai1_arm64.deb
+Size: 6471390
+MD5sum: ef542dca95e36f52311544f6a597d1a5
+SHA1: b09ca4ee019be893597b1c557804d6639958c491
+SHA256: 79c13712b165b6657f5751a55044156dc3f7765a10bfc9fe1e06b6b74bde926f
 Section: debug
 Priority: optional
 Multi-Arch: same
 Description: debug symbols for libmutter-18-0
-Build-Ids: 5043ae55c40db5a92cf23d0c3e1547995726a3a1 8518148ccc44b0cbf18d4f20c82a90005340b903 daa65b578c16f4a55af2d3a9c1f30421ea60755a dc8cfaec89a307a2f5b139b1fa232561869371df
+Build-Ids: 09edffa1125f19b7881c47b2d75a675c9bb22271 2808a6ea5958bceeac02e45abc8c59a9f5f332a7 8c3cda0e633891327c6e2df788afa27eaacfed70 adb5512ca21e5a2173fc9e600978f11834386113
 Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
  .
  Locally rebuilt package: only the version and the exact dependency on libmutter-18-0
- are bumped to 50.1-0ubuntu2.4+erhai1.  The debug symbols inside are those of the UNPATCHED
- 50.1-0ubuntu2.4 build (see Build-Ids) and do NOT match the patched library's build-id; the
+ are bumped to 50.1-0ubuntu2.5+erhai1.  The debug symbols inside are those of the UNPATCHED
+ 50.1-0ubuntu2.5 build (see Build-Ids) and do NOT match the patched library's build-id; the
  patched library's own symbols live in
  /usr/lib/debug/.build-id/0d/5a3252c52375a05265f5f175064253309ef4f8.debug.
 
