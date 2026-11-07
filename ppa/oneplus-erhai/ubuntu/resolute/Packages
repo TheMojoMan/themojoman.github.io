@@ -32,6 +32,71 @@ Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.aliot
  50.1-0ubuntu2.5+erhai1, the locally patched library (erhai compositor touch-drag guard).
  The payload is the unmodified Ubuntu build.
 
+Package: gir1.2-mutter-18
+Source: mutter
+Version: 50.1-0ubuntu2.5+erhai3
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 548
+Depends: libmutter-18-0 (= 50.1-0ubuntu2.5+erhai3), gir1.2-atk-1.0, gir1.2-gdesktopenums-3.0 (>= 50~alpha), gir1.2-gio-2.0, gir1.2-gl-1.0, gir1.2-gobject-2.0, gir1.2-graphene-1.0, gir1.2-pango-1.0, gir1.2-xfixes-4.0, gir1.2-xlib-2.0
+Filename: ./gir1.2-mutter-18_50.1-0ubuntu2.5+erhai3_arm64.deb
+Size: 133686
+MD5sum: 74ba6fd8cd79de1c09d21e1415a1dbd8
+SHA1: b93068a47bfc5ea4ee61113b5e09cffd6927e5b6
+SHA256: a9b9cb907833c2421abc2652ba60615c65dc18ce5f52bfd8cc96bf7adc6151b4
+Section: introspection
+Priority: optional
+Multi-Arch: same
+Homepage: https://mutter.gnome.org/
+Description: GObject introspection data for Mutter
+ Mutter is a Wayland display server and X11 window manager and
+ compositor library. It contains functionality related to, among other
+ things, window management, window compositing, focus tracking, workspace
+ management, keybindings and monitor configuration.
+ .
+ Internally it uses a fork of Cogl, a hardware acceleration abstraction
+ library used to simplify usage of OpenGL pipelines, as well as a fork
+ of Clutter, a scene graph and user interface toolkit.
+ .
+ This package contains the GObject introspection data which may be
+ used to generate dynamic bindings.
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: its exact dependency on libmutter-18-0 is bumped to
+ 50.1-0ubuntu2.5+erhai3, the locally patched library (erhai compositor touch-drag guard).
+ The payload is the unmodified Ubuntu build.
+
+Package: gnome-control-center
+Version: 1:50.3-0ubuntu0.2+erhai1
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 4837
+Depends: accountsservice (>= 23.11.69), colord, desktop-file-utils, gnome-control-center-data (<< 1:51~), gnome-control-center-data (>= 1:50.3-0ubuntu0.2), gnome-desktop3-data, gnome-online-accounts (>= 3.51.0), gnome-settings-daemon (>= 48~rc), gsettings-desktop-schemas (>= 50~alpha), heif-gdk-pixbuf, heif-thumbnailer, language-selector-gnome (>= 0.179~), libjxl-gdk-pixbuf, mutter-common (>= 47), tecla (>= 47), upower, webp-pixbuf-loader, whoopsie-preferences, libaccountsservice0 (>= 23.13.9), libadwaita-1-0 (>= 1.8~alpha), libc6 (>= 2.38), libcairo2 (>= 1.2.4), libcolord-gtk4-1t64 (>= 0.1.24), libcolord2 (>= 1.4.3), libcups2t64 (>= 1.7.0), libdrm2 (>= 2.4.3), libepoxy0 (>= 1.0), libfontconfig1 (>= 2.12.6), libgcr-4-4 (>= 3.8.0), libgdk-pixbuf-2.0-0 (>= 2.30.1), libglib2.0-0t64 (>= 2.83.0), libgnome-bg-4-2t64 (>= 3.27.90), libgnome-bluetooth-ui-3.0-13 (>= 42~beta), libgnome-desktop-4-2t64 (>= 3.33.4), libgnutls30t64 (>= 3.7.0), libgoa-1.0-0b (>= 3.51.0), libgoa-backend-1.0-2 (>= 3.51.0), libgraphene-1.0-0 (>= 1.5.4), libgsound0t64 (>= 1.0.1), libgtk-4-1 (>= 4.21), libgtop-2.0-11 (>= 2.22.3), libgudev-1.0-0 (>= 146), libibus-1.0-5 (>= 1.5.2), libinsights0 (>= 0.8.1), libjson-glib-1.0-0 (>= 1.5.2), libkrb5-3 (>= 1.8+dfsg), libmalcontent-0-0 (>= 0.14~alpha), libmm-glib0 (>= 1.16.6), libnm0 (>= 1.52.0), libnma-gtk4-0 (>= 1.10.2), libpango-1.0-0 (>= 1.37.2), libpolkit-gobject-1-0 (>= 0.99), libpulse-mainloop-glib0 (>= 0.99.1), libpulse0 (>= 0.99.1), libpwquality1 (>= 1.1.0), libsecret-1-0 (>= 0.7), libsmbclient0 (>= 2:4.0.3+dfsg1), libsoup-3.0-0 (>= 3.0.3), libudisks2-0 (>= 2.0.0), libupower-glib3 (>= 1.90.6), libwacom9 (>= 2.0.0), libwayland-client0 (>= 1.20.0), libwhoopsie-preferences0 (>= 0.9), libx11-6, libxml2-16 (>= 2.14.1)
+Recommends: cracklib-runtime, cups-pk-helper, fwupd, gnome-bluetooth-sendto, gnome-control-center-faces, gnome-remote-desktop (>= 47), gnome-user-docs, ibus, iso-codes, libcanberra-pulse, libspa-0.2-bluetooth | pulseaudio-module-bluetooth, mobile-broadband-provider-info, nm-connection-editor | network-manager-gnome (<< 1.36.0-3~), polkitd, power-profiles-daemon, rygel | rygel-tracker, system-config-printer-common
+Suggests: gnome-software | gnome-packagekit, gnome-user-share, gstreamer1.0-plugins-good (>= 1.18.0), malcontent-gui, realmd
+Breaks: gnome-remote-desktop (<< 42), gnome-shell (<< 49)
+Filename: ./gnome-control-center_50.3-0ubuntu0.2+erhai1_arm64.deb
+Size: 1832686
+MD5sum: e23c6f57ebd7522291549a74a590103b
+SHA1: 29f9dc7b7d4b4008d1d398b6c3484db41bcbeed8
+SHA256: 2ee510fc9290c94029dfd192a9173261c3c7337f856652a039f58c2a200a80b5
+Section: gnome
+Priority: optional
+Description: utilities to configure the GNOME desktop
+ This package contains configuration applets for the GNOME desktop,
+ allowing to set accessibility configuration, desktop fonts, keyboard
+ and mouse properties, sound setup, desktop theme and background, user
+ interface properties, screen resolution, and other GNOME parameters.
+ .
+ It also contains a front end to these applets, which can also be
+ accessed with the GNOME panel or the Nautilus file manager.
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: Ubuntu's 1:50.3-0ubuntu0.2 with the oneplus-erhai patched
+ gnome-control-center (rescaled mirroring in the Displays panel, together with
+ the matching libmutter-18-0).  Depends and other metadata are Ubuntu's,
+ unchanged.
+
 Package: libegl-mesa0
 Version: 26.3.0~devel.git230441.g9f1e484e2e9-1erhai1
 Architecture: arm64
@@ -234,6 +299,41 @@ Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.aliot
  libmutter-18.so.0.0.0 (compositor touch-drag NULL-deref guard).  Depends, Breaks
  and Symbols are Ubuntu's, unchanged.
 
+Package: libmutter-18-0
+Source: mutter
+Version: 50.1-0ubuntu2.5+erhai3
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 4741
+Depends: adwaita-icon-theme, gsettings-desktop-schemas (>= 40~alpha), mutter-common (>= 50~beta), mutter-common-bin (>= 49.0), libatk1.0-0t64 (>= 2.2.0), libc6 (>= 2.43), libcairo2 (>= 1.6.0), libcanberra0 (>= 0.2), libcolord2 (>= 1.4.5), libdisplay-info3 (>= 0.3.0), libdrm2 (>= 2.4.119), libegl1, libeis1 (>= 1.5.0), libfribidi0 (>= 0.19.2), libgbm1 (>= 21.3.0~rc1), libgl1, libglib2.0-0t64 (>= 2.83.0), libglycin-2-0 (>= 2.0~beta.2), libgnome-desktop-4-2t64 (>= 3.17.92), libgraphene-1.0-0 (>= 1.10.0), libgudev-1.0-0 (>= 238), libharfbuzz0b (>= 0.6.0), libinput10 (>= 1.30.0), libjson-glib-1.0-0 (>= 1.5.2), liblcms2-2 (>= 2.6), libpango-1.0-0 (>= 1.45.5), libpangocairo-1.0-0 (>= 1.18.0), libpipewire-0.3-0t64 (>= 1.6.1), libpixman-1-0 (>= 0.11.2), libsoup-3.0-0 (>= 3.0.3), libstartup-notification0 (>= 0.11), libsystemd0 (>= 226), libudev1 (>= 183), libwacom9 (>= 2.0.0), libwayland-server0 (>= 1.24.0), libx11-6 (>= 2:1.7.0), libx11-xcb1, libxau6 (>= 1:1.0.11), libxcb-res0 (>= 1.10), libxcb1, libxcomposite1 (>= 1:0.4.6), libxcursor1 (>> 1.1.2), libxdamage1 (>= 1:1.1), libxext6, libxfixes3 (>= 1:6.0.0), libxi6 (>= 2:1.2.99.4), libxinerama1 (>= 2:1.1.4), libxkbcommon0 (>= 1.0.0), libxkbregistry0 (>= 1.0.0), libxrandr2 (>= 2:1.2.99.3)
+Breaks: gnome-kiosk (<< 50~rc~), gnome-shell (<< 50~rc~), xwayland (<< 2:23.1.0)
+Filename: ./libmutter-18-0_50.1-0ubuntu2.5+erhai3_arm64.deb
+Size: 1496344
+MD5sum: e2c7f11f0f9a4d5ce4f03c41cd9d9434
+SHA1: 1a43cf6f61e6fea421a2cc2ee461c2406f916634
+SHA256: ea5f305441cee243fb9ecb0c0bf122bde4a5d71c70f3e5630179eac94de73198
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://mutter.gnome.org/
+Description: window manager library from the Mutter window manager
+ Mutter is a Wayland display server and X11 window manager and
+ compositor library. It contains functionality related to, among other
+ things, window management, window compositing, focus tracking, workspace
+ management, keybindings and monitor configuration.
+ .
+ Internally it uses a fork of Cogl, a hardware acceleration abstraction
+ library used to simplify usage of OpenGL pipelines, as well as a fork
+ of Clutter, a scene graph and user interface toolkit.
+ .
+ This package contains the window manager shared library, used by mutter
+ itself, and gnome-shell.
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: Ubuntu's 50.1-0ubuntu2.5 with the oneplus-erhai patched
+ libmutter-18.so.0.0.0 (compositor touch-drag NULL-deref guard).  Depends, Breaks
+ and Symbols are Ubuntu's, unchanged.
+
 Package: libmutter-18-0-dbgsym
 Source: mutter
 Version: 50.1-0ubuntu2.5+erhai1
@@ -256,6 +356,32 @@ Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.aliot
  .
  Locally rebuilt package: only the version and the exact dependency on libmutter-18-0
  are bumped to 50.1-0ubuntu2.5+erhai1.  The debug symbols inside are those of the UNPATCHED
+ 50.1-0ubuntu2.5 build (see Build-Ids) and do NOT match the patched library's build-id; the
+ patched library's own symbols live in
+ /usr/lib/debug/.build-id/0d/5a3252c52375a05265f5f175064253309ef4f8.debug.
+
+Package: libmutter-18-0-dbgsym
+Source: mutter
+Version: 50.1-0ubuntu2.5+erhai3
+Auto-Built-Package: debug-symbols
+Architecture: arm64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 12821
+Depends: libmutter-18-0 (= 50.1-0ubuntu2.5+erhai3)
+Filename: ./libmutter-18-0-dbgsym_50.1-0ubuntu2.5+erhai3_arm64.deb
+Size: 6471392
+MD5sum: 6d04a7530bea3ab15480e5d3f3cf2e32
+SHA1: 3c77bec65b3d9cb7c88b251ac8ed6d294653c7ad
+SHA256: 68748eb6a9972e416906063c5250d45e3f74c232802cdca271baa716ebae5d8a
+Section: debug
+Priority: optional
+Multi-Arch: same
+Description: debug symbols for libmutter-18-0
+Build-Ids: 09edffa1125f19b7881c47b2d75a675c9bb22271 2808a6ea5958bceeac02e45abc8c59a9f5f332a7 8c3cda0e633891327c6e2df788afa27eaacfed70 adb5512ca21e5a2173fc9e600978f11834386113
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+ .
+ Locally rebuilt package: only the version and the exact dependency on libmutter-18-0
+ are bumped to 50.1-0ubuntu2.5+erhai3.  The debug symbols inside are those of the UNPATCHED
  50.1-0ubuntu2.5 build (see Build-Ids) and do NOT match the patched library's build-id; the
  patched library's own symbols live in
  /usr/lib/debug/.build-id/0d/5a3252c52375a05265f5f175064253309ef4f8.debug.

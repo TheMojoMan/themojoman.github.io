@@ -2,15 +2,15 @@ Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Suite: stonking
 Codename: stonking
-Date: Fri, 06 Nov 2026 16:58:45 +0000
+Date: Sat, 07 Nov 2026 11:11:38 +0000
 Architectures: arm64
 Description: Unofficial PPA for OnePlus Pad 3 (erhai)
 MD5Sum:
  87f6af1b9aa402a6bc651653548c1954 4327 Packages
- 9e27a451ca9cf539b31509d77be6fb17 2095 Packages.gz
+ ae23320b4a730c126819afbb5c5d54cd 2095 Packages.gz
 SHA1:
  311f53cb2ba7c16454fed48559e17089539249ed 4327 Packages
- 7a14a97d1a95f7589314381af38d8337eedd439c 2095 Packages.gz
+ 72d4cd49cdce83f6115d702be05c0041c6e50d5f 2095 Packages.gz
 SHA256:
  4b3bc3121e16cb2420cf26c0bcc3083ee3dbccefe418bc63e4daaad1c7e6e321 4327 Packages
- 87415a3d1f9347ee0d04303376c31b8be1546cb6e2b8a443c20be3c5791a5735 2095 Packages.gz
+ d5278bf44168b5466e133a6112bb9ff3399ac79969e676bbfaed3e7a650a15d6 2095 Packages.gz
