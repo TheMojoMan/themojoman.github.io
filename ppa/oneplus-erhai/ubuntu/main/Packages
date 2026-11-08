@@ -2398,10 +2398,10 @@ Maintainer: TheMojoMan <themojoman@gmx.net>
 Depends: python3
 Recommends: gnome-shell, dconf-cli, oneplus-erhai-sensors
 Filename: ./oneplus-erhai-desktop_2.38_all.deb
-Size: 571544
-MD5sum: 8d1df2e5d2038470f654072480f8fe4a
-SHA1: e6470cff247ed8014b65b6478324df013c6b6d57
-SHA256: 0547f6707de9ed88a58d75f9e6cf931708b70daf6811373b056f901c20e05b0b
+Size: 572930
+MD5sum: d5331571ad0de19dc6b87cc819e640fa
+SHA1: 7c75b2e99dd0fc737a1ff446f55d4dcf2513e994
+SHA256: 80470763a76cd61ef00083bc4ca2391a5de23ba5ecaffeb091d738b5c72c5e66
 Section: utils
 Priority: optional
 Description: Desktop glue for the OnePlus Pad 3 (erhai)
@@ -2858,11 +2858,16 @@ Description: Desktop glue for the OnePlus Pad 3 (erhai)
  on-all-workspaces, and the extension groups those windows into virtual
  workspaces and hides the parked ones by minimizing them (dash markers are
  expected).  The primary keeps stock GNOME workspaces and Super+1..4, and the
- extension is inert on a single display.  Third-party GPL code shipped
- verbatim: danielbernalo/gnome-workspace-islands 0.1.2 (LICENSE included,
- release zip sha256 0f4da32d...705b), no local patches.  The seed enables it
- and sets workspaces-only-on-primary=true; a user-level copy of the same uuid
- shadows the system one.
+ extension is inert on a single display.  Third-party GPL code: danielbernalo/
+ gnome-workspace-islands 0.1.2 (LICENSE included, release zip sha256
+ 0f4da32d...705b) with one local patch
+ (workspace-islands-pointer-shortcuts.patch): the workspace-switch shortcuts
+ (Super+Alt+Arrow, Super+Page_Up/Down) rotate the monitor under the POINTER like
+ the 3-finger gesture, and GNOME's own handler is suppressed for that press so
+ the primary does not switch too; with the pointer on the primary the stock
+ behaviour is unchanged.  The seed enables it and sets
+ workspaces-only-on-primary=true; a user-level copy of the same uuid shadows the
+ system one.
 
 Package: oneplus-erhai-erhaicam
 Version: 2.11
