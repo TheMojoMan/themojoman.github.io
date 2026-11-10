@@ -298,6 +298,44 @@ Description: Mesa Vulkan graphics drivers (erhai, from git)
  In-place replacement for Ubuntu's mesa-vulkan-drivers: turnip (freedreno
  Vulkan 1.4) + lavapipe for the OnePlus Pad 3 (erhai).
 
+Package: oneplus-erhai-mesa
+Version: 27.0.0~devel.git233541.g4404b6bb9f8-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 216492
+Depends: libc6, libdrm2, libexpat1, libgcc-s1, libstdc++6,
+ libwayland-client0, libx11-6, libx11-xcb1, libxext6, libxxf86vm1,
+ libxcb1, libxcb-dri3-0, libxcb-glx0, libxcb-keysyms1, libxcb-present0,
+ libxcb-randr0, libxcb-shm0, libxcb-sync1, libxcb-xfixes0,
+ libxshmfence1, zlib1g, libzstd1,
+ libllvm21, libllvmspirvlib21.1
+Recommends: libvulkan1
+Suggests: vulkan-tools, mesa-utils
+Filename: ./oneplus-erhai-mesa_27.0.0~devel.git233541.g4404b6bb9f8-1erhai1_arm64.deb
+Size: 59021842
+MD5sum: c6fe1f107ef862d47007a556048114e0
+SHA1: 7aa0aa248133b559b7f0b7fec6f7c0fdd843ec63
+SHA256: 36ad7e0b9740a8118654f6dfaa45f7bae92148dba9f416b0f3c70c07af79a1cd
+Section: libs
+Priority: optional
+Description: Mesa 27.0.0-devel (turnip/freedreno) for the OnePlus Pad 3 (erhai)
+ Out-of-tree Mesa build for the Adreno 830 (gen8_0_1) in the OnePlus Pad 3,
+ installed under /opt/mesa so it never shadows the system Mesa.
+ .
+ Ubuntu's Mesa is too old for gen8: its freedreno gallium driver refuses the
+ chip ("failed to create dri2 screen") and its turnip does not recognise the
+ chip id, so GL falls back to llvmpipe and every hardware-accelerated Vulkan
+ client fails. This build supports the part both ways -- native freedreno
+ gallium (GL_RENDERER=FD830) and Vulkan 1.4 turnip, with zink on top of it as
+ the alternative GL path.
+ .
+ Nothing is activated by installing this package. The desktop session opts in
+ through environment variables (VK_DRIVER_FILES, LD_LIBRARY_PATH,
+ __EGL_VENDOR_LIBRARY_FILENAMES); a ready-made drop-in is shipped at
+ /usr/share/oneplus-erhai-mesa/10-desktop.conf.gpu, which is what
+ erhai-desktop-gl.service installs into the user's environment.d when the
+ kernel has the GPU enabled.
+
 Package: oneplus-erhai-nautilus
 Version: 0.3
 Architecture: arm64
