@@ -53,6 +53,37 @@ Description: libva 2.23.0 with the AV1 refresh-frame flag pass-through (erhai)
  libva-x11/libva-drm stay Ubuntu's own.  Built without X11/GLX/Wayland
  backends — the display helpers live in those separate distro libraries.
 
+Package: libva-av1fix
+Version: 2.23.0+av1fix3
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libc6
+Filename: ./libva-av1fix_2.23.0+av1fix3_arm64.deb
+Size: 183620
+MD5sum: 57ae078b1f78fabf9b6534a5d0e38bbf
+SHA1: a21366f716bce9333471240b02c6017d3510eefb
+SHA256: 225d92ce7c31fcc4f3dbf64ec93f70c9d343262faa37f1a1d88601e9b8321f71
+Section: libs
+Priority: optional
+Description: libva 2.23.0 with the AV1 refresh-frame flag pass-through (erhai)
+ Upstream libva 2.23.0 plus av1fix-patches/0001: VADecPictureParameterBufferAV1
+ learned refresh_frame_flags and refresh_frame_flags_valid, and libva passes
+ them through to the driver.
+ .
+ iris-vaapi cannot recover the AV1 refresh set from ref_frame_map[] alone (the
+ map describes the DPB BEFORE the picture is stored), so without these fields
+ the driver has to guess, and on real 1080p/4K streams that guess loses
+ references.  ffmpeg carries the same information with av1fix-patches/0002.
+ .
+ Built with libva's driver directory at the distro path
+ /usr/lib/aarch64-linux-gnu/dri, so the iris driver is found where
+ oneplus-erhai-video installs it and no second copy is needed.
+ .
+ Installed as a /usr/local drop-in (it wins over Ubuntu's libva.so.2 in the
+ loader path), so the distro package is neither replaced nor diverted, and
+ libva-x11/libva-drm stay Ubuntu's own.  Built without X11/GLX/Wayland
+ backends — the display helpers live in those separate distro libraries.
+
 Package: oneplus-erhai-audio
 Version: 1.5
 Architecture: all
@@ -4302,6 +4333,72 @@ Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
  iris_drv_video.so itself now (the patched libva searches that driverdir), and
  declares Conflicts/Replaces iris-vaapi-av1fix so apt removes the leftover
  package instead of failing on a shared file.
+
+Package: oneplus-erhai-video
+Version: 1.7
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libva2, libva-av1fix (>= 2.23.0+av1fix2)
+Recommends: ffmpeg-av1fix
+Filename: ./oneplus-erhai-video_1.7_arm64.deb
+Size: 476716
+MD5sum: d59c4450d93d3ba93b6f75c9b7514f6d
+SHA1: 6446dc721b2a5ddc13cf16e5210dfa47a115478e
+SHA256: 4f30f798032aa3bb6e5b8006aa7d58c23bdc0edf060e3545b14734ce83583c90
+Section: video
+Priority: optional
+Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
+ Userspace stack for the Qualcomm Iris hardware video decoder (the Venus
+ lineage, "Iris Decoder" V4L2 node, qcom_iris kernel module) of the OnePlus
+ Pad 3. Ships the iris-vaapi VA-API driver (iris_drv_video.so) so VA-API
+ clients drive /dev/videoN directly, plus all browser integration:
+ . - /etc/environment.d/55: LIBVA_DRIVER_NAME=iris (libva cannot autodetect
+   the driver on msm platform devices)
+ . - /etc/environment.d/56: MOZ_DISABLE_RDD_SANDBOX=1 (Firefox VA-API decode
+   runs in the RDD process, whose seccomp sandbox blocks /dev/dma_heap)
+ . - /etc/firefox/policies/policies.json: locked VA-API decode prefs
+ . - /etc/chromium.d/erhai-hw-video: AcceleratedVideoDecoder feature flag
+   (chromium's V4L2VideoDecoder drives the iris node directly, no VA-API)
+ . - /etc/brave/policies/managed/erhai-hwvideo.json: HardwareAccelerationMode
+ . - udev rule giving the video group access to /dev/dma_heap/system
+ Codecs: H.264, HEVC Main/Main10, VP9 Profile 0/2, AV1 Main (8-bit). Chromium
+ (xtradeb) decodes H.264/VP9 via V4L2; Firefox and Brave decode H.264/HEVC
+ Main (and Main10/VP9 P2 where the firmware exposes P010) via VA-API.
+ Needs an erhai kernel with the iris decode-order output property (the 7.2
+ line from +b10 on, or any 7.3-rc* line) for Firefox/Brave; the full erhai
+ image ships it. Installing it pulls in libva-av1fix, the one library the AV1
+ path needs on the client side (it carries the per-picture refresh set to the
+ driver); ffmpeg-av1fix is only a Recommends because it fixes the same thing in
+ the players (mpv, VLC), while the browsers bring their own code. The kernel
+ and the browsers are the image's job, so nothing else is dragged in. After
+ installing on a running desktop, log out and back in once.
+ .
+ The iris-vaapi source tree ships in /usr/src/oneplus-erhai-video/iris-vaapi.
+ .
+ 1.3 (2026-10-23): the 1.2 payload ALSO shipped the vendored iris-vaapi's .git
+ directory -- 44 entries: the object store, the hooks and commit signatures with the
+ author's identity -- because that build still ran from a tree carrying the clone
+ metadata.  No code changed (the driver is rebuilt from the same source, byte for
+ byte); the tree is clean and build-video-deb.sh now REFUSES to pack a nested .git.
+ 1.5 (2026-11-17): AV1 hardware decoding.  The driver builds the AV1 frame
+ headers itself (the V4L2 firmware wants them as raw bitstream, the VA-API
+ client gets them as structures) and it kept getting three things wrong on real
+ streams: the tile offsets had to be absolute inside the temporal unit, the
+ sequence header was re-emitted in the middle of playback whenever a later
+ frame flipped a superres/restoration/delta-q flag, and the DPB was rebuilt
+ from a reference map it could not fully recover.  The driver now keeps its own
+ DPB, honours the refresh set the client passes (libva, ffmpeg and chromium were
+ extended to carry it), detects seeks by order hint and survives a lost
+ reference, and refuses 10-bit AV1 instead of decoding it as 8-bit.  Verified on
+ 1080p and 4K AV1: Chromium/Brave (V4L2), mpv and VLC 4 (vaapi) decode on the
+ VPU with no software fallback.  It also implements the legacy
+ vaAcquireBufferHandle/vaReleaseBufferHandle pair, which VLC 3.x probes before
+ it will display a VA-API surface at all.
+ 1.7 (2026-11-17): the driver lives in /usr/lib/aarch64-linux-gnu/dri only.
+ 1.5/1.6 also shipped a copy under /usr/local/lib/<multiarch>/dri because the
+ patched libva was built with that driverdir; libva-av1fix now uses the distro
+ directory, so the second copy (and the Conflicts on the old test package) is
+ gone and a plain apt upgrade is enough.
 
 Package: oneplus-erhai-waydroid-installer
 Version: 0.6
