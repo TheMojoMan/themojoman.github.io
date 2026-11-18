@@ -5,31 +5,31 @@ Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Suite: stonking
 Codename: stonking
-Date: Tue, 17 Nov 2026 11:28:30 +0000
+Date: Wed, 18 Nov 2026 07:39:28 +0000
 Architectures: arm64
 Description: Unofficial PPA for OnePlus Pad 3 (erhai)
 MD5Sum:
  87f6af1b9aa402a6bc651653548c1954 4327 Packages
- b3586d80859432eb9b9f1a057a27ee02 2095 Packages.gz
+ 4cc10d064714d90806ae68f7abb82809 2095 Packages.gz
 SHA1:
  311f53cb2ba7c16454fed48559e17089539249ed 4327 Packages
- a9baea22e92f1b24be05522e53752f617cd6dce4 2095 Packages.gz
+ 3c6362a007a07d70f8dc22f77f757c00e591fb83 2095 Packages.gz
 SHA256:
  4b3bc3121e16cb2420cf26c0bcc3083ee3dbccefe418bc63e4daaad1c7e6e321 4327 Packages
- af7efb5142f1b4f89341b21a32b36dd058ab9e8ea4771d3f60d3cb86357e6441 2095 Packages.gz
+ 80ca49459b161d1799059a0b679be77de9bbdc91f81b212d5b87adafc4d673dc 2095 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmr8Ol4ACgkQZtHcLLi+
-FAr27g//dDrmnWITK+lglHRKHT7Qyft4Ay/aPIDkLvbTr/pcND3dhsMqmXi+tqme
-mT3Y+PugHXAv+lX9uQK0U/DyEP+YvZj1Vjr+kgNlBe9JH6AqRfhNxwb3qCY8cVQo
-g/dbPMaoq1o7lbnUWseEB8D+TGfBt0N1geXc/Pc2WbtB2AwoMb6a+7tiu0sbbDAB
-XBBFBQbhlMceYOIx6OxTABnv2Ozem5iL4HoKiDMwTO7hc+0l4tJTM7ee/mSy9Jvt
-fh89q7FXFOrnLhyiWn0HTPBmh8ncdXTVscmriAi4RdsOktFK+ykw1uvqyFA3LIDj
-JOqCWHFu+THh87/JEe8t4eiY1jBQWZrQiaF325Gwu2P8PuLbL6I0a9Yd0+J5F9+g
-Eee2XKp2iRmjv3Xo+P0Oq17dueGolstPw0aIyTlZWSAS+6Q47RqCMIpiae8y0BRa
-JKBggAs4nr9zEVoD8mRC3YQcURzEkfNVcy6k80PLhESFyQT4gLxDqR0BeodgcN2u
-BxZTfxesO4VysRrudga0ITjbi35DQx5X5rjdKdBi9K6pxvop8FhYV5f6fgyW8HHq
-ksrcEoVn+rT7lMnx8sqoYepHBKmWaDU4jse7eUJIDmirmXolfdxC3OFJzdzKWGOI
-qveKBZXowCYJHUm/LLigOhBiT/tllHQcdASszxhEBEeXQSufkIc=
-=dKjL
+iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmr9VjAACgkQZtHcLLi+
+FAr/VA/9FF2S7e03CuR5EIQpj+HWYXbA2xjncjip+2yXmiHsl3qnyIipRUqWsSrE
+s23uZLEOFzfdWZzmfxyfang6e0YQpwjWuEt5sOErGXioNdvbhXItllf4+XT6TwwU
+spG7qhwKqb0nCjn2NVgzOAnutaWXb0Lb+mTPiJsWJam7u6xUMmWcOn6T2jKLV0ne
+xdvhEinSaMD4eUdJGPLeRhExXGeNB2mMU5O5++ybPUhhgE/aeA6WFDsR3ddVrkDO
+8SsBYkBKLwGDAMGzJBykz0+JNrwxZaaQbN92SDUd9NJm5wD+v78UYtWgLfMc+lbT
+FwNjhG98z8rweST7aoBSGkE/CnNqM+HKiwtNPJA2fxVxAETm7LPqPQ2vAT1qf4mK
+633EQnSA3ebqCJJzQGdQqx0cbJ65jB9pSzcXAN4c58IxqZRyflhqHdevxFj3plqx
+6h/k1j6H3Ep0wEWw7HOYhFoXy1qUcIJSFK7fkDilTIc7wsGsySUPFpki23Luiea2
+/QbiYIbG9lev23wiZ6QW7KsExsY1l+sQ4Q0nH/oHcgXi2hc1/LgLq68cB2djzlg4
+SlVZrwJwCVMDfYN6znr9AceaprIZzfov5mF9EoW+9jAP7PUOnsSGGcbvZIgYVL6y
+hgUjY8x49AoMLEmH/dopm3VYfEOvlvWFfYoCD8ZDC7eGP0TE+kk=
+=NUDz
 -----END PGP SIGNATURE-----
