@@ -5,31 +5,31 @@ Origin: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Label: TheMojoMan OnePlus Pad 3 (erhai) PPA
 Suite: stonking
 Codename: stonking
-Date: Wed, 18 Nov 2026 07:39:28 +0000
+Date: Wed, 18 Nov 2026 08:02:28 +0000
 Architectures: arm64
 Description: Unofficial PPA for OnePlus Pad 3 (erhai)
 MD5Sum:
  87f6af1b9aa402a6bc651653548c1954 4327 Packages
- 4cc10d064714d90806ae68f7abb82809 2095 Packages.gz
+ 599b9c39b33d0eb7a1dbb3359a2fea8f 2095 Packages.gz
 SHA1:
  311f53cb2ba7c16454fed48559e17089539249ed 4327 Packages
- 3c6362a007a07d70f8dc22f77f757c00e591fb83 2095 Packages.gz
+ 8bc658d26c3c7a5d66b7ec1e06af408db70fd5d0 2095 Packages.gz
 SHA256:
  4b3bc3121e16cb2420cf26c0bcc3083ee3dbccefe418bc63e4daaad1c7e6e321 4327 Packages
- 80ca49459b161d1799059a0b679be77de9bbdc91f81b212d5b87adafc4d673dc 2095 Packages.gz
+ ac3cd8d3a1a39b767db7a1a67b8fabec24ca33cba58d9e75d263ce855af05be6 2095 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmr9VjAACgkQZtHcLLi+
-FAr/VA/9FF2S7e03CuR5EIQpj+HWYXbA2xjncjip+2yXmiHsl3qnyIipRUqWsSrE
-s23uZLEOFzfdWZzmfxyfang6e0YQpwjWuEt5sOErGXioNdvbhXItllf4+XT6TwwU
-spG7qhwKqb0nCjn2NVgzOAnutaWXb0Lb+mTPiJsWJam7u6xUMmWcOn6T2jKLV0ne
-xdvhEinSaMD4eUdJGPLeRhExXGeNB2mMU5O5++ybPUhhgE/aeA6WFDsR3ddVrkDO
-8SsBYkBKLwGDAMGzJBykz0+JNrwxZaaQbN92SDUd9NJm5wD+v78UYtWgLfMc+lbT
-FwNjhG98z8rweST7aoBSGkE/CnNqM+HKiwtNPJA2fxVxAETm7LPqPQ2vAT1qf4mK
-633EQnSA3ebqCJJzQGdQqx0cbJ65jB9pSzcXAN4c58IxqZRyflhqHdevxFj3plqx
-6h/k1j6H3Ep0wEWw7HOYhFoXy1qUcIJSFK7fkDilTIc7wsGsySUPFpki23Luiea2
-/QbiYIbG9lev23wiZ6QW7KsExsY1l+sQ4Q0nH/oHcgXi2hc1/LgLq68cB2djzlg4
-SlVZrwJwCVMDfYN6znr9AceaprIZzfov5mF9EoW+9jAP7PUOnsSGGcbvZIgYVL6y
-hgUjY8x49AoMLEmH/dopm3VYfEOvlvWFfYoCD8ZDC7eGP0TE+kk=
-=NUDz
+iQIzBAEBCgAdFiEEVS4RaGS7kJO5Jfj6ZtHcLLi+FAoFAmr9W5UACgkQZtHcLLi+
+FApFDw//Y2MmeALFNuzcZ+mddJ/fAMU2mQGlZLbl7FnVdTitMaVdEhdGaoDM9C65
+y60KwYORWmZDTYKMiD7ViVllQ/7aszwsWoFf//QoAkgNNtj+qalOz+cM3Or2nuP4
+G4Nz0O5InIGabnARL/dyDTnWe6PBcq9AjwUr8jSH46WngzDYE0P8IwfpykwCHKN7
+72EflDmE0anr23Nnnm+iKTbtTKN2yr9XsdySFHGZlxYqky7Fj4yPGhV7rczcQMOQ
+jZR/fY0E+wbsp6a27ijiN1YM8/HbuPnFzghLR7eCLc1zqvceDPI181qZ4OngMFDb
+8VdmDcNEWAMot4K51roBBHX4JBG7Yd7bYC6ftTuyxRriqb7XCSqnHKvYMkWOJ11w
+a1xkSBv3sivj9+jfNIx4dxwZmRlMDXii2RxyNMhGz0XjJogrFY04qw8t4veZrpJg
+ANyDFtitNhVT47eZwJtZQ+crdJY0wnWZOH8xbJ8y8Nb+3KqPcaGssyPgjwoIgoaV
+jWe/wkm9pcrUpuiboGP42VpdhArSXWjJdZorFZDrVkNr5fonkXcHHZDLpc8cHmYa
+GIx1gaoi1KYrB0bEDE0BCJfcUa7oMjjZV2oYUYGozN3xpYLaBdPqZhY2MBWKSZ62
+QYu+lkG2MzPzMkRwSvpzEf+Yq8+mGB60YpIc/cMYMdiFskwLx6U=
+=BieF
 -----END PGP SIGNATURE-----
