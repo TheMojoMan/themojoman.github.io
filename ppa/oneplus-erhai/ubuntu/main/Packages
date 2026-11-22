@@ -3653,6 +3653,31 @@ Description: Firmware blobs for OnePlus Pad 3 (erhai)
  Hexagon NPU (HTP) and is the prerequisite for FastRPC on the compute
  DSP (/dev/fastrpc-cdsp).
 
+Package: oneplus-erhai-firmware
+Version: 1.4
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Filename: ./oneplus-erhai-firmware_1.4_all.deb
+Size: 36348814
+MD5sum: df027ea04bdd34d03b825e954f11ded2
+SHA1: 472cae75c1765ce52980a273b489e9539f96cec9
+SHA256: 7105966be69ba19bdd88d815f6bcafdd95249b462dc020e4cdf57cab3bce97ed
+Description: Firmware blobs for OnePlus Pad 3 (erhai)
+ OxygenOS 16.0.9.400 firmware for the OnePlus Pad 3 (erhai/SM8750):
+ WCN7880 (peach) WLAN, BRAHMA Bluetooth, IPA, the ADSP split image
+ (adsp.mdt + adsp_dtb.mdt) and, since 1.2, the CDSP split image
+ (cdsp.mdt + cdsp.bNN + cdsp_dtb.mdt + cdsp_dtb.bNN) that hosts the
+ Hexagon NPU (HTP) and is the prerequisite for FastRPC on the compute
+ DSP (/dev/fastrpc-cdsp).
+ .
+ Since 1.4 the ath12k firmware set for the mainline WCN7860 radio
+ (ath12k/WCN7860/hw2.0: amss, m3, aux_ucode, qdss.cfg and the board-2/regdb
+ built from this model's own WCN calibration data), which the mainline
+ ath12k driver in the 7.3.4 kernel needs instead of the cnss2/qcacld vendor
+ stack. The WCN7850 set under ath12k/WCN7850 is unchanged.
+
 Package: oneplus-erhai-linux-7.3
 Version: 7.3.0-rc5-sm8750-themojoman+b41
 Architecture: arm64
@@ -4485,6 +4510,43 @@ Description: WCN7880 WiFi bring-up for the OnePlus Pad 3 (erhai)
  because the qcacld firmware never probes UNII-1 (ch36-48) in disconnected
  full-band scans — without this, 5GHz APs on UNII-1 are found only by
  passive beacon luck or after connecting on 2.4GHz first.
+
+Package: oneplus-erhai-wifi
+Version: 1.6
+Architecture: all
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: network-manager, iw, iproute2, oneplus-erhai-firmware (>= 1.4)
+Recommends: kmod
+Filename: ./oneplus-erhai-wifi_1.6_all.deb
+Size: 304150
+MD5sum: d4b13f1d17f99a2cf71057a09ec9c629
+SHA1: 97f69e4acddd6a04740a0d7e9cd8ae5a34ef8228
+SHA256: c5727e150b7f7c65edf4983ad917a06693f0f9da093a6cebba1a8e99b496c258
+Section: net
+Priority: optional
+Description: WCN7860 WiFi policy for the OnePlus Pad 3 (erhai)
+ Selects the mainline ath12k driver for the internal WCN7860 radio: the
+ modprobe policy no longer blacklists ath12k and instead blacklists the
+ cnss2/qcacld vendor stack (cnss2, wlan), so udev binds ath12k_pci to the
+ PCIe endpoint at boot, the firmware from oneplus-erhai-firmware 1.4
+ (ath12k/WCN7860/hw2.0) is downloaded, and NetworkManager takes over the
+ wlp1s0 station as usual. The WCN7880 power calibration that ath12k does
+ itself is untouched by any modprobe option.
+ .
+ Needs the 7.3.4 kernel line at +b6 or newer (the first release with the
+ WCN7860 hw2.0 definition, the pwrctrl pwrseq 110e match and the three
+ PCIe/GCC wake patches); older kernels have no driver for this radio and
+ the ath12k firmware cannot be used by them.
+ .
+ The cnss2/qcacld backend is still shipped but no longer enabled:
+ erhai-wcn-wifi.service, erhai-wcn-holdfloor.service,
+ erhai-wcn-devcd.service, erhai-wifi-discover.service and their scripts
+ (erhai-wcn-wifi.sh, erhai-wcn-recover.sh, save-wcn-devcd.sh,
+ erhai-wifi-discover.sh, wl_drvcmd) plus the qcacld INI
+ (WCNSS_qcom_cfg.ini, scan_mode_6ghz=0) remain on disk for a manual
+ fallback: blacklist ath12k, unblacklist wlan/cnss2 and
+ `systemctl enable --now erhai-wcn-wifi.service`. version 1.5 of this
+ package is the last one that defaults to that backend.
 
 Package: steam
 Version: 1:2.0-3erhai1
