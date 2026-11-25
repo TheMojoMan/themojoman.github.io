@@ -203,6 +203,72 @@ Description: private AV1 VA-API client stack for the erhai players
  (376/600 when the client carries no refresh set), aom-altref 60/60,
  aom-tiles 40/40, 4K 16/16.
 
+Package: oneplus-erhai-av1fix
+Version: 1.2
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libasound2t64, libbsd0, libbz2-1.0, libc6, libdav1d7, libdrm2, libffi8, libgmp10, libgnutls30t64, libhogweed6t64, libidn2-0, liblzma5, libmd0, libnettle8t64, libp11-kit0, libsndio7.0, libtasn1-6, libunistring5, libva-x11-2, libvdpau1, libx11-6, libx11-xcb1, libxau6, libxcb1, libxcb-dri3-0, libxcb-shape0, libxcb-shm0, libxcb-xfixes0, libxdmcp6, libxext6, libxfixes3, libxv1, zlib1g
+Conflicts: libva-av1fix, ffmpeg-av1fix
+Replaces: libva-av1fix, ffmpeg-av1fix
+Filename: ./oneplus-erhai-av1fix_1.2_arm64.deb
+Size: 11594686
+MD5sum: a2d7b535a4d1e4bb6637211fbf30445d
+SHA1: 54419bb71f9048db161e59445351671fbaf3bad2
+SHA256: 76d0b45dafc05677f84f6256259004323e9a41a5cb4755f4a710471187d1bd94
+Section: video
+Priority: optional
+Description: private AV1 VA-API client stack for the erhai players
+ The erhai VA-API driver handles AV1 in two client classes.  Browsers submit
+ whole framed OBUs and the driver parses the encoder's refresh set out of
+ them, so they need nothing extra.  libavcodec (mpv, VLC, ffplay) submits
+ headerless tile payloads, so the refresh set can only reach the driver as
+ data - and VA-API's VADecPictureParameterBufferAV1 has no field for it.
+ .
+ This package carries the two libraries that fill that gap and installs them
+ under /opt/oneplus-erhai-av1fix:
+ . - libva 2.23.0 with the refresh_frame_flags pass-through
+ . - FFmpeg 8.0.1 with the VA-API AV1 refresh set and loop-restoration fixes
+   (built with libdav1d, gnutls/https and the full native codec set)
+ .
+ Nothing is installed into the system library path: Ubuntu keeps owning
+ /usr/lib, so Firefox, Brave, the ffmpeg tools and every other client use the
+ distribution libva/libav*.  The players reach the private stack through a
+ small shim installed at their own absolute path (/usr/bin/vlc, /usr/bin/mpv,
+ /usr/bin/ffplay; the real binary moves to <path>.erhai-orig behind a dpkg
+ diversion), which only prepends /opt/oneplus-erhai-av1fix/lib to
+ LD_LIBRARY_PATH.  A dpkg file trigger installs the shim again after any
+ player install, upgrade or removal, so a newer upstream VLC keeps the fix.
+ .
+ The package also ships the patched va/ headers; build oneplus-erhai-video
+ with PKG_CONFIG_PATH=/opt/oneplus-erhai-av1fix/lib/pkgconfig so the driver
+ sees the refresh-frame fields.  It replaces the old libva-av1fix and
+ ffmpeg-av1fix drop-ins (which shadowed the distribution libraries globally).
+ .
+ 1.1 (2026-11-24): first published release, on top of oneplus-erhai-video 1.15.
+ The libva 2.23.0 + FFmpeg 8.0.1 pair is unchanged from the test builds: FFmpeg
+ is a distribution-style build (VA-API, VDPAU, libdav1d, gnutls), so a player
+ built against it links cleanly, and nothing is installed into /usr/lib.
+ Measured frame for frame against dav1d through the wrappers: t-720p60 600/600
+ (376/600 when the client carries no refresh set), aom-altref 60/60,
+ aom-tiles 40/40, 4K 16/16.
+ .
+ 1.1-test-01 (2026-11-24): the PATH wrappers in /usr/local/bin are gone.  One
+ shim now sits at each player's absolute path, with the real binary moved to
+ <path>.erhai-orig behind a dpkg diversion, so clients that call /usr/bin/mpv
+ or /usr/bin/vlc directly get the private stack too.  A dpkg file trigger
+ reinstalls the shim after any VLC/mpv/ffmpeg install, upgrade or removal, and
+ the postinst reports a player that links a libavcodec.so the private stack
+ does not carry.
+ .
+ 1.2 (2026-11-25): the /usr/local/bin PATH wrappers are replaced by one shim
+ installed at each player's own absolute path (/usr/bin/vlc, /usr/bin/mpv,
+ /usr/bin/ffplay; the real binary behind a dpkg diversion), so a client that
+ calls a player by absolute path gets the private stack too.  A dpkg file
+ trigger installs the shim again after any vlc/mpv/ffmpeg install, upgrade or
+ removal -- that is what keeps the fix when a newer upstream VLC lands -- and
+ the postinst warns when a player links a libavcodec.so the private stack does
+ not carry.
+
 Package: oneplus-erhai-bluetooth
 Version: 2.3
 Architecture: all
@@ -4574,6 +4640,151 @@ Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
  browsers. Measured through the shipped path, frame for frame against dav1d:
  t-720p60 600/600 (376/600 without the client refresh set, i.e. in a player
  without oneplus-erhai-av1fix), LR-heavy 250/250, 4K 16/16, VP9 150/150.
+
+Package: oneplus-erhai-video
+Version: 1.16
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Depends: libva2
+Recommends: oneplus-erhai-av1fix
+Filename: ./oneplus-erhai-video_1.16_arm64.deb
+Size: 564852
+MD5sum: 9da8ff314450abcdaa84d677761d3f03
+SHA1: ef39573fe06a0740c4d45b47d08759cc5097ae4c
+SHA256: 3a261f432592751dd0f0128778d9ffe18788c1856f35be7e32b5e83e10df9dc9
+Section: video
+Priority: optional
+Description: Hardware video decoding for the OnePlus Pad 3 (erhai, SM8750)
+ Userspace stack for the Qualcomm Iris hardware video decoder (the Venus
+ lineage, "Iris Decoder" V4L2 node, qcom_iris kernel module) of the OnePlus
+ Pad 3. Ships the iris-vaapi VA-API driver (iris_drv_video.so) so VA-API
+ clients drive /dev/videoN directly, plus all browser integration:
+ . - /etc/environment.d/55: LIBVA_DRIVER_NAME=iris (libva cannot autodetect
+   the driver on msm platform devices)
+ . - /etc/environment.d/56: MOZ_DISABLE_RDD_SANDBOX=1 (Firefox VA-API decode
+   runs in the RDD process, whose seccomp sandbox blocks /dev/dma_heap)
+ . - /etc/firefox/policies/policies.json: locked VA-API decode prefs
+ . - /usr/local/bin/firefox: PATH-shadowing wrapper that withholds the AV1
+   entrypoint from Firefox (IRIS_VAAPI_AV1=0) while VA-API stays enabled
+ . - /etc/chromium.d/erhai-hw-video: AcceleratedVideoDecoder feature flag
+   (chromium's V4L2VideoDecoder drives the iris node directly, no VA-API)
+ . - /etc/brave/policies/managed/erhai-hwvideo.json: HardwareAccelerationMode
+ . - udev rule giving the video group access to /dev/dma_heap/system
+ Codecs: H.264, HEVC Main/Main10, VP9 Profile 0/2, AV1 Main (8-bit and
+ 10-bit). Chromium
+ (xtradeb) decodes H.264/VP9 via V4L2; Firefox and Brave decode H.264/HEVC
+ Main (and Main10/VP9 P2 where the firmware exposes P010) via VA-API.
+ Needs an erhai kernel with the iris decode-order output property (the 7.2
+ line from +b10 on, or any 7.3-rc* line) for Firefox/Brave; the full erhai
+ image ships it. Browsers need no help at all: they submit framed OBUs and the
+ driver parses the AV1 refresh set out of them. libavcodec (mpv, VLC, ffplay)
+ submits headerless tile payloads instead, so the refresh set can only reach the
+ driver as data, and VA-API has no field for it -- Recommends
+ oneplus-erhai-av1fix carries the two patched libraries that fill it under
+ /opt/oneplus-erhai-av1fix, with wrappers for those three players. Ubuntu still
+ owns /usr/lib, so the ffmpeg tools keep their https/dav1d support and Firefox,
+ Brave and every other client use the distribution libva. The kernel and the
+ browsers are the image's job, so nothing else is dragged in. After installing
+ on a running desktop, log out and back in once.
+ .
+ The iris-vaapi source tree ships in /usr/src/oneplus-erhai-video/iris-vaapi.
+ .
+ 1.3 (2026-10-23): the 1.2 payload ALSO shipped the vendored iris-vaapi's .git
+ directory -- 44 entries: the object store, the hooks and commit signatures with the
+ author's identity -- because that build still ran from a tree carrying the clone
+ metadata.  No code changed (the driver is rebuilt from the same source, byte for
+ byte); the tree is clean and build-video-deb.sh now REFUSES to pack a nested .git.
+ 1.5 (2026-11-17): AV1 hardware decoding.  The driver builds the AV1 frame
+ headers itself (the V4L2 firmware wants them as raw bitstream, the VA-API
+ client gets them as structures) and it kept getting three things wrong on real
+ streams: the tile offsets had to be absolute inside the temporal unit, the
+ sequence header was re-emitted in the middle of playback whenever a later
+ frame flipped a superres/restoration/delta-q flag, and the DPB was rebuilt
+ from a reference map it could not fully recover.  The driver now keeps its own
+ DPB, honours the refresh set the client passes (libva, ffmpeg and chromium were
+ extended to carry it), detects seeks by order hint and survives a lost
+ reference, and refuses 10-bit AV1 instead of decoding it as 8-bit.  Verified on
+ 1080p and 4K AV1: Chromium/Brave (V4L2), mpv and VLC 4 (vaapi) decode on the
+ VPU with no software fallback.  It also implements the legacy
+ vaAcquireBufferHandle/vaReleaseBufferHandle pair, which VLC 3.x probes before
+ it will display a VA-API surface at all.
+ 1.7 (2026-11-17): the driver lives in /usr/lib/aarch64-linux-gnu/dri only.
+ 1.5/1.6 also shipped a copy under /usr/local/lib/<multiarch>/dri because the
+ patched libva was built with that driverdir; libva-av1fix now uses the distro
+ directory, so the second copy (and the Conflicts on the old test package) is
+ gone and a plain apt upgrade is enough.
+ 1.8 (2026-11-17): the driver source is the tree that was measured on the pad,
+ not the later variant that ran AV1 one frame behind and derived the sequence
+ header per picture.  With 1.7 the browsers decoded AV1 on the VPU but presented
+ black frames: a Brave report showed VaapiVideoDecoder at ~52 pictures/s while
+ the compositor received empty pictures.  Same source as the /usr/local build of
+ 2026-11-15 17:48 that renders correctly.
+ 1.9 (2026-11-17): hardware decode no longer needs environment variables.  A
+ browser started from a desktop session that predates the variables ran without
+ LIBVA_DRIVER_NAME and IRIS_VAAPI_AV1, so libva looked for its built-in default
+ driver (msm_drv_video.so), found nothing and the browser fell back to dav1d --
+ software AV1, no VPU.  The package now also installs the driver under that
+ default name (a symlink to iris_drv_video.so) and the driver advertises AV1
+ unless IRIS_VAAPI_AV1=0, which stays as the kill switch.  Hosts that still
+ export the variables keep working unchanged.
+ 1.11 (2026-11-18): the Firefox AV1 kill switch ships.  Since 1.9 the driver
+ advertises AV1 to every client, which includes Firefox -- and Firefox 160
+ mishandles the erhai VPU (its stall-recovery loop ends in
+ NS_ERROR_DOM_MEDIA_FATAL_ERR, and the firmware session churn once wedged the
+ decoder hard enough to reboot the tablet).  The workaround existed only as a
+ hand-written /usr/local/bin/firefox on the development pad, so every
+ installed system still exposed AV1 to Firefox.  The package now ships that
+ wrapper (PATH-shadowing, IRIS_VAAPI_AV1=0, exec of the real binary): Firefox
+ keeps H.264/HEVC/VP9 on the chip and decodes AV1 with dav1d until the Firefox
+ side is fixed.  Also: 10-bit (P010) AV1 decode, the loop-restoration type
+ mismatch that made LR-using films fail to decode, and the per-client
+ restoration type conventions (libavcodec raw syntax vs the DXVA order stock
+ libva clients use) are in the 1.10 driver already.
+ 1.13 (2026-11-19): two decode-path fixes found while chasing a 4K AV1 picture
+ freeze at a VP9->AV1 codec switch.  VA surface ids are now process-wide instead
+ of per-VADisplay: a second VAContext in the same process (Chrome starts one
+ VADisplay per decoder) restarted the id sequence at 1, so the client's
+ id-keyed surface cache handed the compositor stale images of the first pool
+ while the decoder wrote into new buffers it had never imported -- the visible
+ result was a picture that stopped following the stream.  And a VP9 barrier
+ timeout no longer fails vaEndPicture: the driver tries the firmware stall
+ recovery, then serves the target's previous contents for that one frame.
+ Chrome treats the error as a decode failure, destroys the decoder and
+ re-creates it, which is what wedged presentation at the switch ("vaEndPicture
+ failed, VA error: internal decoding error" immediately before the player was
+ recreated).  Both were verified on the pad with 0 failures over a long 4K AV1
+ run.  The freeze itself was Mutter withholding Wayland frame callbacks
+ (oneplus-erhai-mutter +erhai3), not the driver.
+ 1.14 (2026-11-19): a seek restarts the firmware session, but the driver kept
+ its cached copy of the encoder's AV1 sequence header, so the first key frame
+ after the restart was submitted with the sequence header stripped; a fresh
+ firmware session has none, answered VA_STATUS_ERROR_DECODING_ERROR, Chrome
+ destroyed the decoder and the player sat on its loading animation.  The cache
+ is now cleared on every session reset.  AV1 otherwise stays on the synthesized
+ header path of 1.13: driving the firmware with the encoder's own access units
+ (tested as IRIS_AV1_LIFT=1) is not reliable - the firmware answered
+ "internal decoding error" at stream start on a 4K AV1 stream, Chrome fell back
+ to other decoders and YouTube dropped the rendition to 480p.
+ 1.15 (2026-11-24): the AV1 client stack moves to a private prefix, and the
+ driver gains the DPB/sequence-header fixes that were still test-only. The
+ libva/ffmpeg drop-ins used to shadow Ubuntu's libraries for every process:
+ /usr/bin/ffmpeg lost https and libdav1d, VLC 4 failed to link its vdpau
+ plugin. The patched stack now lives in /opt/oneplus-erhai-av1fix (package
+ oneplus-erhai-av1fix) and only the player wrappers (/usr/local/bin/mpv,
+ /usr/local/bin/ffplay, the diverted /usr/bin/vlc) prepend it to
+ LD_LIBRARY_PATH. The driver keeps reading the refresh set and is built against
+ the patched va/ headers that package ships, while its runtime needs only the
+ distribution libva2. Since 1.14 the driver also owns a single AV1 DPB model
+ and parses the sequence header correctly, which is what makes 4K AV1
+ playback -- the case that used to stall or flicker -- come out right in the
+ browsers. Measured through the shipped path, frame for frame against dav1d:
+ t-720p60 600/600 (376/600 without the client refresh set, i.e. in a player
+ without oneplus-erhai-av1fix), LR-heavy 250/250, 4K 16/16, VP9 150/150.
+ 1.16 (2026-11-25): the driver reports the SoC it runs on.  The vendored
+ iris-vaapi still carried the upstream iris1 vendor string, so every VA-API
+ client logged "Qualcomm Iris SM8150 (V4L2)" on the erhai; it is now
+ "Qualcomm Iris SM8750 (V4L2) 0.1.1" (vaQueryVendorString only -- nothing in
+ the driver was SM8150-specific).  No decode change.
 
 Package: oneplus-erhai-video
 Version: 1.4

@@ -416,3 +416,53 @@ Description: Touch-friendly Ptyxis (GNOME terminal) for the OnePlus Pad 3 (erhai
  Package README: /usr/share/oneplus-erhai-ptyxis/README.md
  Source patch:   /usr/share/oneplus-erhai-ptyxis/ptyxis-erhai-touch.patch
 
+Package: vlc
+Version: 4.0.0~git20261125.39866+5589a060d4-0erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 394972
+Depends: libacl1, libaom3, libapparmor1, libarchive13t64, libaribb24-0t64, libasound2t64, libass9, libasyncns0, libatk1.0-0t64, libatk-bridge2.0-0t64, libatomic1, libatspi2.0-0t64, libavahi-client3, libavahi-common3, libavc1394-0, libavcodec62, libavformat62, libavutil60, libb2-1, libblkid1, libbluray3, libbrotli1, libbsd0, libbz2-1.0, libc6, libcairo2, libcairo-gobject2, libcap2, libchromaprint1, libcjson1, libcodec2-1.2, libcom-err2, libcurl3t64-gnutls, libdatrie1, libdav1d7, libdb5.3t64, libdbus-1-3, libdc1394-25, libdecor-0-0, libdouble-conversion3, libdrm2, libduktape207, libdvbpsi10, libdvdnav4, libdvdread8t64, libebml5, libegl1, libepoxy0, libexpat1, libfaad2, libffi8, libflac14, libfluidsynth3, libfontconfig1, libfreetype6, libfribidi0, libgbm1, libgcc-s1, libgcrypt20, libgdk-pixbuf-2.0-0, libgfortran5, libgl1, libglib2.0-0t64, libglvnd0, libglx0, libglycin-2-0, libgme0, libgmp10, libgnutls30t64, libgomp1, libgpg-error0, libgraphite2-3, libgsm1, libgssapi-krb5-2, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0, libgtk-3-0t64, libharfbuzz0b, libhogweed6t64, libhwy1t64, libicu78, libidn12, libidn2-0, libinstpatch-1.0-2, libixml11t64, libjack-jackd2-0, libjansson4, libjpeg-turbo8, libjxl0.11, libk5crypto3, libkate1, libkeyutils1, libkrb5-3, libkrb5support0, liblcms2-2, libldap2, libldb2, liblua5.4-0, liblz4-1, liblzma5, liblzo2-2, libmatroska7, libmbedcrypto16, libmd0, libmd4c0, libmount1, libmp3lame0, libmpg123-0t64, libmtp9t64, libmysofa1, libncursesw6, libnettle8t64, libnfs14, libnghttp2-14, libnorm1t64, libnotify4, libnuma1, libogg0, libopencv-calib3d410, libopencv-core410, libopencv-dnn410, libopencv-features2d410, libopencv-flann410, libopencv-imgproc410, libopencv-objdetect410, libopengl0, libopenjp2-7, libopenmpt0t64, libopenmpt-modplug1, libopus0, liborc-0.4-0t64, libp11-kit0, libpango-1.0-0, libpangocairo-1.0-0, libpangoft2-1.0-0, libpcre2-16-0, libpcre2-8-0, libpgm-5.3-0t64, libpipewire-0.3-0t64, libpixman-1-0, libpng16-16t64, libprotobuf32t64, libprotobuf-lite32t64, libproxy1v5, libpsl5t64, libpulse0, libqt6core6t64, libqt6dbus6, libqt6gui6, libqt6network6, libqt6opengl6, libqt6qml6, libqt6qmlmeta6, libqt6qmlmodels6, libqt6qmlworkerscript6, libqt6quick6, libqt6widgets6, librabbitmq4, librav1e0.8, libraw1394-11, libreadline8t64, libresid-builder0c2a, librist4, librsvg2-2, librtmp1, libsamplerate0, libsasl2-2, libsdl3-0, libseccomp2, libsecret-1-0, libselinux1, libsharpyuv0, libshine3, libshout3, libsidplay2, libsmbclient0, libsnappy1v5, libsndfile1, libsndio7.0, libsodium23, libsoxr0, libspatialaudio0t64, libspeex1, libspeexdsp1, libsrt1.5-gnutls, libssh2-1t64, libssh-4, libssl3t64, libstdc++6, libsvtav1enc2, libswresample6, libswscale9, libsystemd0, libtag2, libtalloc2, libtasn1-6, libtbb12, libtdb1, libtevent0t64, libthai0, libtheora1, libtheoradec2, libtheoraenc2, libtinfo6, libtwolame0, libudev1, libudfread3, libunibreak6, libunistring5, libupnp17t64, libusb-1.0-0, libva2, libva-drm2, libva-wayland2, libva-x11-2, libvdpau1, libvncclient1, libvorbis0a, libvorbisenc2, libvorbisfile3, libvpx12, libwayland-client0, libwayland-cursor0, libwayland-egl1, libwbclient0, libwebp7, libwebpmux3, libx11-6, libx11-xcb1, libx264-165, libx265-215, libxau6, libxcb1, libxcb-composite0, libxcb-damage0, libxcb-dri3-0, libxcb-keysyms1, libxcb-randr0, libxcb-render0, libxcb-shm0, libxcb-xfixes0, libxcb-xkb1, libxcomposite1, libxcursor1, libxdamage1, libxdmcp6, libxext6, libxfixes3, libxi6, libxinerama1, libxkbcommon0, libxkbcommon-x11-0, libxml2-16, libxpm4, libxrandr2, libxrender1, libxres1, libxss1, libxtst6, libxvidcore4, libxxhash0, libzmq5, libzstd1, libzvbi0t64, ocl-icd-libopencl1, samba-libs, vlc, zlib1g
+Recommends: oneplus-erhai-av1fix
+Conflicts: libvlc5, libvlccore9, libvlc-bin, vlc-bin, vlc-data, vlc-l10n,
+ vlc-plugin-access-extra, vlc-plugin-base, vlc-plugin-jack, vlc-plugin-notify,
+ vlc-plugin-qt, vlc-plugin-samba, vlc-plugin-skins2,
+ vlc-plugin-video-output, vlc-plugin-video-splitter, vlc-plugin-visualization
+Breaks: libvlc5, libvlccore9, libvlc-bin, vlc-bin, vlc-data, vlc-l10n,
+ vlc-plugin-access-extra, vlc-plugin-base, vlc-plugin-jack, vlc-plugin-notify,
+ vlc-plugin-qt, vlc-plugin-samba, vlc-plugin-skins2,
+ vlc-plugin-video-output, vlc-plugin-video-splitter, vlc-plugin-visualization
+Replaces: libvlc5, libvlccore9, libvlc-bin, vlc-bin, vlc-data, vlc-l10n,
+ vlc-plugin-access-extra, vlc-plugin-base, vlc-plugin-jack, vlc-plugin-notify,
+ vlc-plugin-qt, vlc-plugin-samba, vlc-plugin-skins2,
+ vlc-plugin-video-output, vlc-plugin-video-splitter, vlc-plugin-visualization
+Filename: ./vlc_4.0.0~git20261125.39866+5589a060d4-0erhai1_arm64.deb
+Size: 13966536
+MD5sum: 797606327944deb1e187929cf2b25b72
+SHA1: 9a208757e3e4bb167aa66eb905782d37874896f1
+SHA256: ea52ca3957775031461cfcb567fdf7b7c3b6bcdebb0f43ee1aab903383460a57
+Section: video
+Priority: optional
+Description: VLC media player 4 for the OnePlus Pad 3 (erhai, SM8750)
+ VLC 4 built from the upstream git tree with the erhai VA-API stack: VA-API
+ decoding through the Iris driver (H.264, HEVC, VP9, AV1), Wayland/X11 output
+ and the Qt interface.  The tree is built with
+ --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --enable-vaapi
+ --enable-avcodec --disable-kde, so plugins live in
+ /usr/lib/aarch64-linux-gnu/vlc/plugins.
+ .
+ The package is versioned as 4.0.0~git<date>.<commits>+<sha>-0erhai<N> on
+ purpose: a later 4.0.0/4.0.x from VideoLAN or Ubuntu sorts higher and upgrades
+ over it, while it still outranks Ubuntu's 3.0.23.  It carries no wrapper of
+ its own -- oneplus-erhai-av1fix owns that: a dpkg-diverted shim at
+ /usr/bin/vlc puts the private libva/libavcodec in front of the player, and its
+ file trigger reinstalls the shim after any VLC upgrade.
+ .
+ This is a monolithic packaging of the VLC tree: no separate vlc-data,
+ vlc-bin or plugin packages, and therefore Breaks/Replaces on Ubuntu's vlc 3
+ set.  A VLC 4 from the VideoLAN archive supersedes it normally.
+ .
+ 4.0.0~git20261125.39866+5589a060d4-0erhai1 (2026-11-25): first release.  The
+ AV1 refresh-set fix reaches VLC through oneplus-erhai-av1fix 1.2, whose dpkg
+ file trigger re-installs the /usr/bin/vlc shim after every VLC upgrade, so a
+ newer upstream VLC keeps the fix without this package doing anything.
+
