@@ -1,3 +1,115 @@
+Package: libegl-mesa0
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 488
+Depends: libgbm1 (= 27.0.0~devel.git234733.g8df830aa844-1erhai1), mesa-libgallium (= 27.0.0~devel.git234733.g8df830aa844-1erhai1), libc6 (>= 2.38), libdrm2 (>= 2.4.125-1), libexpat1 (>= 2.0.1), libwayland-client0 (>= 1.24.0), libx11-6, libx11-xcb1, libxcb-dri3-0 (>= 1.13), libxcb-present0, libxcb-randr0 (>= 1.3), libxcb-shm0, libxcb-xfixes0, libxcb1 (>= 1.6)
+Provides: libegl-vendor
+Filename: ./libegl-mesa0_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 132284
+MD5sum: 9497bb3b9ab11a9678773104e2af689d
+SHA1: 783b4734b733d307291db254993c8c65de85267d
+SHA256: b4230ce6c8b76caa703949d4ed1d2e79192c483c455282d322e78c6f2e58f6d4
+Section: libs
+Priority: optional
+Description: free implementation of the EGL API -- Mesa vendor library (erhai, from git)
+ In-place replacement for Ubuntu's libegl-mesa0, rebuilt from mesa git for the
+ OnePlus Pad 3 (erhai).
+
+Package: libgbm1
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 220
+Depends: mesa-libgallium (= 27.0.0~devel.git234733.g8df830aa844-1erhai1), libc6 (>= 2.38), libdrm2 (>= 2.4.125-1), libexpat1 (>= 2.0.1)
+Filename: ./libgbm1_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 41112
+MD5sum: e8f73a4d98e67d770ef03871d766c6e8
+SHA1: 4d5b0b836c685c47b54c42ccca01e4318b8c407f
+SHA256: 3cba9883f8f3c169d17be0493caf96a5241af13ae095f0435beb69fb76b8161f
+Section: libs
+Priority: optional
+Description: free implementation of the Generic Buffer Manager API -- runtime (erhai, from git)
+ GBM is a generic buffer manager API used by the Mesa DRI drivers.
+ This is the in-place replacement for Ubuntu's libgbm1, rebuilt from mesa git
+ for the OnePlus Pad 3 (erhai) so the Adreno 830 is supported.
+
+Package: libgl1-mesa-dri
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 58164
+Depends: libgbm1 (= 27.0.0~devel.git234733.g8df830aa844-1erhai1), libvulkan1, libllvmspirvlib22.1, libc6 (>= 2.34)
+Replaces: oneplus-erhai-mesa (<< 27.0.0~devel.git234733.g8df830aa844-1erhai1), mesa-vulkan-drivers (<< 27.0.0~devel.git234733.g8df830aa844-1erhai1)
+Filename: ./libgl1-mesa-dri_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 18098590
+MD5sum: f4221bfc9c4aa4ea638afc01166b7293
+SHA1: fc0e941689a532bf00d4ef56910096ce9339397b
+SHA256: f539b7b8153131e0f69600a18e522da92ee113faf2ba0b77f32637248721614c
+Section: libs
+Priority: optional
+Description: free implementation of the OpenGL API -- DRI modules (erhai, from git)
+ In-place replacement for Ubuntu's libgl1-mesa-dri, rebuilt from mesa git for
+ the OnePlus Pad 3 (erhai).  Also carries the rusticl OpenCL ICD + runtime
+ (Adreno 830 GPU compute).
+
+Package: libglx-mesa0
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 408
+Depends: libgl1-mesa-dri, mesa-libgallium (= 27.0.0~devel.git234733.g8df830aa844-1erhai1), libc6 (>= 2.38), libdrm2 (>= 2.4.125-1), libexpat1 (>= 2.0.1), libx11-6 (>= 2:1.4.99.1), libx11-xcb1, libxcb-dri3-0, libxcb-glx0 (>= 1.8), libxcb-present0, libxcb-shm0, libxcb-xfixes0, libxcb1, libxext6, libxxf86vm1 (>= 1:1.1.4)
+Breaks: glx-diversions (<< 0.8.4~), libopengl-perl (<< 0.6704+dfsg-2)
+Provides: libglx-vendor
+Filename: ./libglx-mesa0_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 126300
+MD5sum: efbe30ed29df377003c1ed0b48dd9af1
+SHA1: ba5e758d4dd70512a60ca60fdd8e692fbd54a350
+SHA256: 23490a1fa63ef77bd57e607bd27c6f254026f9b46df906e875eaadd92598022b
+Section: libs
+Priority: optional
+Description: free implementation of the OpenGL API -- GLX vendor library (erhai, from git)
+ In-place replacement for Ubuntu's libglx-mesa0, rebuilt from mesa git for the
+ OnePlus Pad 3 (erhai).
+
+Package: mesa-libgallium
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 20140
+Depends: libc6 (>= 2.43), libdrm-amdgpu1 (>= 2.4.125-1), libdrm2 (>= 2.4.125-1), libelf1t64 (>= 0.142), libexpat1 (>= 2.0.1), libgcc-s1 (>= 3.0), libllvm22 (>= 1:22.1.0), libsensors5 (>= 1:3.5.0), libstdc++6 (>= 11), libx11-xcb1, libxcb-dri3-0 (>= 1.13), libxcb-present0, libxcb-randr0, libxcb-sync1, libxcb-xfixes0, libxcb1 (>= 1.9.2), libxshmfence1, libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.3.4)
+Breaks: mesa-va-drivers (<< 25.2.8-3), mesa-vdpau-drivers (<< 25.2.8-3)
+Replaces: mesa-va-drivers (<< 25.2.8-3), mesa-vdpau-drivers (<< 25.2.8-3)
+Provides: libglapi-mesa, mesa-va-drivers, mesa-vdpau-drivers, va-driver
+Filename: ./mesa-libgallium_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 6092556
+MD5sum: 915e4e91adadc662324db9d203b569f7
+SHA1: b78af574f699bd9d596f06a6dbfe91be52fc635f
+SHA256: 9404bdbf1d0f2bf7a004a8419646cee9b854588b0bb6257f24c4f43d75c1ce73
+Section: libs
+Priority: optional
+Description: shared infrastructure for Mesa drivers (erhai, from git)
+ In-place replacement for Ubuntu's mesa-libgallium, rebuilt from mesa git for
+ the OnePlus Pad 3 (erhai).  Carries the freedreno/llvmpipe/zink gallium core.
+
+Package: mesa-vulkan-drivers
+Version: 27.0.0~devel.git234733.g8df830aa844-1erhai1
+Architecture: arm64
+Maintainer: TheMojoMan <themojoman@gmx.net>
+Installed-Size: 20368
+Depends: libvulkan1, libc6 (>= 2.43), libdisplay-info3 (>= 0.3.0), libdrm-amdgpu1 (>= 2.4.125-1), libdrm2 (>= 2.4.125-1), libelf1t64 (>= 0.142), libexpat1 (>= 2.0.1), libgcc-s1 (>= 4.2), libllvm22 (>= 1:22.1.0), libpng16-16t64 (>= 1.6.46), libstdc++6 (>= 13.1), libwayland-client0 (>= 1.24.0), libx11-xcb1, libxcb-dri3-0 (>= 1.17.0), libxcb-present0 (>= 1.17.0), libxcb-randr0 (>= 1.13), libxcb-shm0, libxcb-sync1, libxcb-xfixes0, libxcb1 (>= 1.9.2), libxshmfence1, libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.3.4)
+Provides: vulkan-icd
+Filename: ./mesa-vulkan-drivers_27.0.0~devel.git234733.g8df830aa844-1erhai1_arm64.deb
+Size: 5732914
+MD5sum: d1a87f4f3758af6c7b2bd5bad241b7b9
+SHA1: afc4e5bd6ad2352e0eeaaabdab4b9533ad981cfb
+SHA256: bbecf255c210ae19b0899e76b4643c4875e737bc736259d1ef78d446d43f077a
+Section: graphics
+Priority: optional
+Description: Mesa Vulkan graphics drivers (erhai, from git)
+ In-place replacement for Ubuntu's mesa-vulkan-drivers: turnip (freedreno
+ Vulkan 1.4) + lavapipe for the OnePlus Pad 3 (erhai).
+
 Package: oneplus-erhai-nautilus
 Version: 0.4
 Architecture: arm64
